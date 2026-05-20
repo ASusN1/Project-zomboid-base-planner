@@ -1,5 +1,6 @@
 const grid = document.getElementById('grid');
 const size = 12;
+let zoom = 1;
 
 function createGrid() {
     for (let x = 0; x < size; x++) {
@@ -15,3 +16,12 @@ function createGrid() {
 }
 
 createGrid();
+
+window.addEventListener('wheel', (e) => {
+    if (e.deltaY < 0) {
+        zoom += 0.1;
+    } else {
+        zoom -= 0.1;
+    }
+    grid.style.transform = `rotateX(60deg) rotateZ(45deg) scale(${zoom})`;
+});

@@ -19,7 +19,7 @@ body {
     gap:2px;
     width: 720px;
     height:720px;
-    transform:rotateX(60deg) rotateZ(45deg);
+    transform:rotateX(60deg) rotateZ(45deg) scale(1);
     transform-style: preserve-3d;
 }
 
