@@ -1,0 +1,26 @@
+Must have:
+1) Grid system: users will able to palce furniture and other items onto the grid 
+2) Building Functionalty: Able to place down wall/Floor 
+3) Use actual item sprite from project zomboid 
+4) Grid system: a) Custome plat plain: user can create a flat plain ( nothing prebuild) then build from scrach 
+                b) Pre build : get the spirte of the house in pz (Ex: firestation in rosewood --> then able to edit what inside /outside of that ( so basicly a premade base --> user then can add or destroy))
+5) search bar: Searchable sidebar with categorized items (Floors, Walls, Furniture, Appliances, etc.) loaded from the Project Zomboid item list.
+6) Drag-and-Drop Placement: Select an item and place it on the grid with snap-to-grid alignment.
+7) Multi-Tile Support: Correct placement and preview for objects that occupy more than one tile (e.g., beds, fridges, tables).
+8) Data base : store the user base info ( what they place/what they change). The name of their base ( instead of untitled) 
+             b) create an account : when user create accotunt stuff : user user name --> library : list of project they created 
+9) Shareable design links ( other user can view the thihng wihtoug sign in )
+
+
+-------------------------------------
+function must have 
+- control z : redo the previos action 
+- delete --> delete certain items 
+- save the base design 
+- maybe add an export the base design into png like sketchup 
+
+------------------------------------------
+quailibity of life stuff add later 
+- Material and resource estimator (counts planks, nails, skill level. tools needed).
+- place more obejct that are not in the furniture section : Ex: m16 model or smt 
+- ollision and overlap highlighting during placement Ex: if place apple on table, apple on table not on the sperate block 
