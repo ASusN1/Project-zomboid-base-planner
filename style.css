@@ -1,0 +1,39 @@
+* {
+    margin: 0 ; 
+    padding:0 ;
+    box-sizing:border-box; 
+}
+
+body {
+    min-height: 100%;
+    background: #f0f0f0;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+}
+
+.iso-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /*create 12 columns*/
+    gap:2px;
+    width: 720px;
+    height:720px;
+    transform:rotateX(60deg) rotateZ(45deg);
+    transform-style: preserve-3d;
+}
+
+.tile{
+    width:60px;
+    height:60px;
+    background: blue;
+    border: 2px solid #fff;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color:aqua;
+ 
+    font-weight:bold;
+    font-size:13px;
+    
+}
