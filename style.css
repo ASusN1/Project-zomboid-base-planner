@@ -10,16 +10,21 @@ body {
     display: flex; 
     align-items: center;
     justify-content: center;
-    overflow: hidden; 
+    overflow: hidden;
+    position: relative;
 }
 
 .iso-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -360px;
+    margin-top: -360px;
     display: grid;
     grid-template-columns: repeat(12, 1fr); /*create 12 columns*/
     gap:2px;
     width: 720px;
     height:720px;
-    transform:rotateX(60deg) rotateZ(45deg) scale(1);
     transform-style: preserve-3d;
 }
 

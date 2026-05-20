@@ -1,6 +1,15 @@
 const grid = document.getElementById('grid');
 const size = 12;
 let zoom = 1;
+let offsetX = 0;
+let offsetY = 0;
+let isCameraDragging = false;
+let startX = 0;
+let startY = 0;
+
+function updateTransform() {
+    grid.style.transform = `translate(${offsetX}px, ${offsetY}px) rotateX(60deg) rotateZ(45deg) scale(${zoom})`;
+}
 
 function createGrid() {
     for (let x = 0; x < size; x++) {
@@ -13,15 +22,47 @@ function createGrid() {
             grid.appendChild(tile);
         }
     }
+    updateTransform();
 }
 
 createGrid();
 
+//zoom 
 window.addEventListener('wheel', (e) => {
+    e.preventDefault();
     if (e.deltaY < 0) {
         zoom += 0.1;
     } else {
         zoom -= 0.1;
     }
-    grid.style.transform = `rotateX(60deg) rotateZ(45deg) scale(${zoom})`;
+    zoom = Math.max(0.1, zoom);
+    updateTransform();
+});
+
+//drag camera 
+window.addEventListener('mousedown', (e) => {
+    isCameraDragging = true;
+    startX= e.clientX;
+    startY = e.clientY;
+
+    document.body.style.cursor= 'grabbing';
+});
+
+window.addEventListener('mouseup', (e) => {
+    isCameraDragging = false;
+    document.body.style.cursor= 'default';
+});
+
+window.addEventListener('mousemove', (e) => {
+    if (!isCameraDragging) return;
+    const dx = e.clientX- startX;
+    const dy = e.clientY- startY;
+
+    offsetX += dx;
+    offsetY += dy;
+
+    startX = e.clientX;
+    startY = e.clientY;
+
+    updateTransform();
 });
