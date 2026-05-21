@@ -37,8 +37,20 @@ body {
     align-items: center;
     justify-content: center;
     color:aqua;
- 
     font-weight:bold;
     font-size:13px;
-    
+
+    cursor:pointer;
+    transition: all 0.25s ease; 
+    user-select: none;    
+}
+
+/* Hover effect - Red border  */
+.tile:hover {
+    border-color: red; 
+    background-color: lightgreen;
+    color: blue;
+    box-shadow: 0 0 0 3px red;
+    transform: scale(1.12);
+    z-index: 10; 
 }
