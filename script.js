@@ -8,7 +8,7 @@ let startX = 0;
 let startY = 0;
 
 function updateTransform() {
-    grid.style.transform = `translate(${offsetX}px, ${offsetY}px) rotateX(60deg) rotateZ(45deg) scale(${zoom})`;
+    grid.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${zoom}) rotateX(60deg) rotateZ(45deg) `;
 }
 
 function createGrid() {
@@ -27,15 +27,35 @@ function createGrid() {
 
 createGrid();
 
-//zoom 
+//zoom to center
+//window.addEventListener('wheel', (e) => {
+    //e.preventDefault();
+  //  if (e.deltaY < 0) {
+  //      zoom += 0.1;
+    //} else {
+   //     zoom -= 0.1;
+  //  }
+   // zoom = Math.max(0.1, zoom);
+  //  updateTransform();
+//});
+
+//Zoom toward user mouse cursor 
 window.addEventListener('wheel', (e) => {
     e.preventDefault();
+
+    let delta;
     if (e.deltaY < 0) {
-        zoom += 0.1;
+        delta = 0.1;
     } else {
-        zoom -= 0.1;
+        delta = -0.1;
     }
-    zoom = Math.max(0.1, zoom);
+
+    const newZoom = Math.max(0.1, zoom + delta);
+
+    offsetX = e.clientX - (e.clientX - offsetX) * (newZoom / zoom);
+    offsetY = e.clientY - (e.clientY - offsetY) * (newZoom / zoom);
+
+    zoom = newZoom;
     updateTransform();
 });
 
