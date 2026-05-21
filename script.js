@@ -27,7 +27,7 @@ function createGrid() {
 
 createGrid();
 
-//zoom 
+//zoom to the cneter og grid
 window.addEventListener('wheel', (e) => {
     e.preventDefault();
     if (e.deltaY < 0) {
