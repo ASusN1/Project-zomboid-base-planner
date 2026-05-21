@@ -8,21 +8,35 @@ body {
     min-height: 100%;
     background: #f0f0f0;
     display: flex; 
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
 }
 
+.sidebar{
+    width:400px;
+    min-width:220px;
+    height:100vh;
+    background:yellow;
+    border-right:1px solid #ccc;
+    padding:20px;
+    overflow-y:auto;
+}
+
+.view-container{
+    flex:1;
+    position:relative;
+    overflow: hidden;
+    background:black;
+
+}
 .iso-container {
     position: absolute;
-    left: 50%;
+    left: 10%;
     top: 50%;
     margin-left: -360px;
     margin-top: -360px;
     display: grid;
     grid-template-columns: repeat(12, 1fr); /*create 12 columns*/
-    gap:2px;
     width: 720px;
     height:720px;
     transform-style: preserve-3d;
