@@ -66,3 +66,22 @@ window.addEventListener('mousemove', (e) => {
 
     updateTransform();
 });
+
+function openItems(evt, itemName) {
+    //declare all variables 
+    var i, tabconnect, tablinks;
+    // get all elelment with class contnetn and hide them
+    tabconnect = document.getElementsByClassName("tabcontent");
+    for (i =0; i < tabconnect.length; i++) {
+        tabconnect[i].style.display = "none"; //not sure what this mean but will check later 
+    }
+    // get all element with class tablinks and remove the class active
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i =  0; i< tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace("active", "");
+    }
+
+    // show current tabs , add active class to the btn 
+    document.getElementById(itemName).style.display = "block"; // tester later if this block can be repalce with just text 
+    evt.currentTarget.className += " active";
+}

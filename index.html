@@ -9,13 +9,49 @@
     <body>
         <div class ="sidebar"> 
             <h1>Zomboid base builder</h1>
-            <p>Testing</p>
             <div class = "topnav">
                 <a class = active href = "#home">Home</a>
                 <a href = "#about">About</a>
                 <a href = "#contact">Contact</a>
                 <input type ="text" placeholder = "Search..">
+
+                <div class ="items-category">   <!-- Use tabs similar to w3 school-->
+                    <h2>Item Category</h2>
+                    <!-- tab links-->
+                    <button class = "tablinks" onclick = "openItems(event, 'Furniture')">Furniture</button>
+                    <button class = "tablinks" onclick = "openItems(event, 'Walls')">Walls</button>
+                    <button class = "tablinks" onclick = "openItems(event, 'Floors')">Floors</button>
+                    <button class = "tablinks" onclick = "openItems(event, 'Doors')">Doors</button>
+                    <button class = "tablinks" onclick = "openItems(event, 'Windows')">Windows</button>
+                </div>
+
+                <div id = "Furniture" class = "tabcontent">
+                    <h3>Furniture</h3>
+                    <p>Place holder. Use the actual data from the game ( prob get from wiki)</p>
+                </div>
+
+                <div id = "Walls" class = "tabcontent">
+                    <h3>Walls</h3>
+                    <p>Place holder. Use the actual data from the game ( prob get from wiki)</p>
+                </div>
+
+                <div id = "Floors" class = "tabcontent">
+                    <h3>Floors</h3>
+                    <p>Place holder. Use the actual data from the game ( prob get from wiki)</p>
+                </div>
+
+                <div id = "Doors" class = "tabcontent">
+                    <h3>Doors</h3>
+                    <p>Place holder. Use the actual data from the game ( prob get from wiki)</p>
+                </div>
+
+                <div id = "Windows" class = "tabcontent">
+                    <h3>Windows</h3>
+                    <p>Place holder. Use the actual data from the game ( prob get from wiki)</p>
+                </div>
+
         </div>
+
         </div>
         <div class ='view-container'>
             <div class = "iso-container" id = "grid"></div>
