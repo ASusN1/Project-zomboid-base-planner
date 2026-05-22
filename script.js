@@ -1,4 +1,5 @@
 const grid = document.getElementById('grid');
+const viewContainer = document.querySelector('.view-container');
 const size = 12;
 let zoom = 1;
 let offsetX = 0;
@@ -28,7 +29,7 @@ function createGrid() {
 createGrid();
 
 //zoom to the cneter og grid
-window.addEventListener('wheel', (e) => {
+viewContainer.addEventListener('wheel', (e) => {
     e.preventDefault();
     if (e.deltaY < 0) {
         zoom += 0.1;
@@ -40,20 +41,21 @@ window.addEventListener('wheel', (e) => {
 });
 
 //drag camera 
-window.addEventListener('mousedown', (e) => {
+viewContainer.addEventListener('mousedown', (e) => {
     isCameraDragging = true;
     startX= e.clientX;
     startY = e.clientY;
-
     document.body.style.cursor= 'grabbing';
 });
 
-window.addEventListener('mouseup', (e) => {
-    isCameraDragging = false;
-    document.body.style.cursor= 'default';
+document.addEventListener('mouseup', (e) => {
+    if (isCameraDragging) {
+        isCameraDragging = false;
+        document.body.style.cursor = 'default';
+    }
 });
 
-window.addEventListener('mousemove', (e) => {
+document.addEventListener('mousemove', (e) => {
     if (!isCameraDragging) return;
     const dx = e.clientX- startX;
     const dy = e.clientY- startY;
@@ -67,6 +69,15 @@ window.addEventListener('mousemove', (e) => {
     updateTransform();
 });
 
+//stop drag when mouse leave grid area ( prob create a btn like blender that allow drag) 
+viewContainer.addEventListener('mouseleave',() => { 
+    if (isCameraDragging) {
+        isCameraDragging = false;
+        document.body.style.cursor = 'default';
+    }
+})
+
+//For the tab system 
 function openItems(evt, itemName) {
     //declare all variables 
     var i, tabconnect, tablinks;
