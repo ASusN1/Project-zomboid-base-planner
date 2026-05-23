@@ -93,24 +93,34 @@ function switchCategory(evt, itemName) {
     }
 
     // show current tabs , add active class to the btn 
-    document.getElementById(itemName).style.display = "block"; // tester later if this block can be repalce with just text 
+    document.getElementById(itemName).style.display = "grid"; // tester later if this block can be repalce with just text 
     evt.currentTarget.className += " active";
 }
-// will put in docker or smt since this not suppose to be in the js code since it going to be long
-const itemDatabase = {
-    Wall :[
-        { name: 'Brick Wall', color: '#B22222' },
-        { name: 'Stone Wall', color: '#808080' },
-        { name: 'Wooden Wall', color: '#8B4513' }
-    ],
-    Floor: [
-        { name: 'Wooden Floor', color: '#DEB887' },
-        { name: 'Marble Floor', color: '#F5F5F5' },
-        { name: 'Tile Floor', color: '#D3D3D3' }
-    ],
-    Furniture: [
-        { name: 'Chair', color: '#8B4513' },
-        { name: 'Table', color: '#DEB887' }
-    ]
-}
-//----------------------------------------------------
+
+function loadCateoryItems (){ 
+    for (const categoryType in itemDatabase) {
+        const panelContainer = document.getElementById(categoryType);
+
+        if (!panelContainer) continue;
+        panelContainer.innerHTML = ''; // Clear existing items
+
+        //Access spepcif clist of items for each category
+        itemDatabase[categoryType].forEach(item => {
+            const cardElement = document.createElement('div');
+            cardElement.className ="item-card";
+
+            const colorBlock = document.createElement("div");
+            colorBlock.className = "item-color-preview";
+            colorBlock.style.backgroundColor = item.color;
+
+            cardElement.appendChild(colorBlock);
+
+            const textLabel = document.createElement('span');
+            textLabel.innerText = item.name; // Later mod this file or smt
+            cardElement.appendChild(textLabel);
+
+            panelContainer.appendChild(cardElement);
+
+        });
+    }
+}loadCateoryItems();
