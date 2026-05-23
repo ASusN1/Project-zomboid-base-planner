@@ -7,6 +7,7 @@ let offsetY = 0;
 let isCameraDragging = false;
 let startX = 0;
 let startY = 0;
+let selectedItem = null; 
 
 function updateTransform() {
     grid.style.transform = `translate(${offsetX}px, ${offsetY}px) rotateX(60deg) rotateZ(45deg) scale(${zoom})`;
@@ -19,6 +20,13 @@ function createGrid() {
             tile.classList.add('tile');
 
             tile.textContent = `${x},${y}`;
+            
+            // change color of selected tile to the color of the items ( Later change to png of the itm from pz) 
+            tile.addEventListener('click', () => {
+                if (selectedItem) {
+                    tile.style.backgroundColor = selectedItem.color;
+                }
+            });
 
             grid.appendChild(tile);
         }
@@ -36,7 +44,7 @@ viewContainer.addEventListener('wheel', (e) => {
     } else {
         zoom -= 0.1;
     }
-    zoom = Math.max(0.1, zoom);
+    zoom = Math.max(0.1, Math.min(zoom,2)); //limit zoom
     updateTransform();
 });
 
@@ -77,7 +85,7 @@ viewContainer.addEventListener('mouseleave',() => {
     }
 })
 
-//For the tab system 
+//For the category system 
 function switchCategory(evt, itemName) {
     //declare all variables 
     var i, tabconnect, tablinks;
@@ -97,6 +105,7 @@ function switchCategory(evt, itemName) {
     evt.currentTarget.className += " active";
 }
 
+// load the item from database to the panel
 function loadCateoryItems (){ 
     for (const categoryType in itemDatabase) {
         const panelContainer = document.getElementById(categoryType);
@@ -119,8 +128,19 @@ function loadCateoryItems (){
             textLabel.innerText = item.name; // Later mod this file or smt
             cardElement.appendChild(textLabel);
 
+            // Set items card to active when pressed 
+            cardElement.addEventListener('click', () => {
+                selectedItem = item; 
+
+                document.querySelectorAll('.item-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
+                cardElement.classList.add('active');
+                console.log(selectedItem); // for testing later remove this ( print selectd item)
+            });
             panelContainer.appendChild(cardElement);
 
         });
     }
-}loadCateoryItems();
+}
+loadCateoryItems();
