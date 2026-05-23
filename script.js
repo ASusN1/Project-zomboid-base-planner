@@ -133,7 +133,7 @@ function loadCateoryItems (){
                 selectedItem = item; 
 
                 document.querySelectorAll('.item-card').forEach(card => {
-                    card.classList.remove('selected');
+                    card.classList.remove('active');
                 });
                 cardElement.classList.add('active');
                 console.log(selectedItem); // for testing later remove this ( print selectd item)
