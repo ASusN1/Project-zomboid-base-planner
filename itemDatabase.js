@@ -1,4 +1,4 @@
-// later will put in docker or smt since this not suppose to be in the js code since it going to be long
+// This just a testing data base before the actual tile / items 
 const itemDatabase = {
     Walls :[
         { name: 'Brick Wall', color: '#B22222' },
