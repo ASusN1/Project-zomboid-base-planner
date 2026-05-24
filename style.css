@@ -70,12 +70,30 @@ body {
 }
 
 /*show what inside each category */
+.item-category-content {
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+}
+
+.items-scroll-container {
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+}
+
 .tabcontent {
     display: none; 
     padding: 15px 0; 
     border-top: none; 
     grid-template-columns: repeat(3, 1fr); /* rmeember to add the scroll bar) */
     gap: 12px;
+    transform: translateY(0);
+    transition: transform 0.05s linear;
+}
+
+.tabcontent.active {
+    display: grid;
 }
 /* the item box thingy*/
 .item-card { 

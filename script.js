@@ -92,7 +92,8 @@ function switchCategory(evt, itemName) {
     // get all elelment with class contnetn and hide them
     tabconnect = document.getElementsByClassName("tabcontent");
     for (i =0; i < tabconnect.length; i++) {
-        tabconnect[i].style.display = "none"; //not sure what this mean but will check later 
+        tabconnect[i].classList.remove("active");
+        tabconnect[i].style.transform = "translateY(0)";
     }
     // get all element with class tablinks and remove the class active
     tablinks = document.getElementsByClassName("tablinks");
@@ -101,8 +102,9 @@ function switchCategory(evt, itemName) {
     }
 
     // show current tabs , add active class to the btn 
-    document.getElementById(itemName).style.display = "grid"; // tester later if this block can be repalce with just text 
+    document.getElementById(itemName).classList.add("active");
     evt.currentTarget.className += " active";
+    scrollState.scrollOffset = 0;
 }
 
 // load the item from database to the panel
@@ -144,3 +146,23 @@ function loadCateoryItems (){
     }
 }
 loadCateoryItems();
+
+// Simple mouse wheel scroll
+const scrollContainer = document.querySelector('.item-category-content');
+let scrollState = { scrollOffset: 0 };
+const SCROLL_STEP = 40;
+
+scrollContainer.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const activeTab = document.querySelector('.tabcontent.active');
+    if (!activeTab) return;
+    
+    const containerHeight = scrollContainer.clientHeight;
+    const contentHeight = activeTab.scrollHeight;
+    const maxScroll = Math.max(0, contentHeight - containerHeight);
+    
+    scrollState.scrollOffset += e.deltaY > 0 ? SCROLL_STEP : -SCROLL_STEP;
+    scrollState.scrollOffset = Math.max(0, Math.min(scrollState.scrollOffset, maxScroll));
+    
+    activeTab.style.transform = `translateY(-${scrollState.scrollOffset}px)`;
+});

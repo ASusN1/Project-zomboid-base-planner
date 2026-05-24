@@ -8,7 +8,6 @@ const itemDatabase = {
         { name: 'Metal Wall', color: '#A9A9A9' },
         { name: 'Glass Wall', color: '#87CEEB' },
         { name: 'Reinforced Wall', color: '#556B2F' },
-        { name: 'Plywood Wall', color: '#CD853F' }
     ],
     Floors: [
         { name: 'Wooden Floor', color: '#DEB887' },
@@ -18,7 +17,23 @@ const itemDatabase = {
         { name: 'Metal Floor', color: '#708090' },
         { name: 'Carpet Floor', color: '#8B0000' },
         { name: 'Gravel Floor', color: '#BC8F8F' },
-        { name: 'Steel Plating', color: '#36454F' }
+        { name: 'Steel Plating', color: '#36454F' },
+        { name: 'Dark Oak Floor', color: '#5C4033' },
+        { name: 'Pine Wood Floor', color: '#CFA66B' },
+        { name: 'Black Marble Floor', color: '#2F2F2F' },
+        { name: 'White Marble Floor', color: '#FAFAFA' },
+        { name: 'Granite Floor', color: '#696969' },
+        { name: 'Ceramic Tile Floor', color: '#E0E0E0' },
+        { name: 'Slate Floor', color: '#4B4F54' },
+        { name: 'Brick Floor', color: '#B22222' },
+        { name: 'Sandstone Floor', color: '#C2B280' },
+        { name: 'Mosaic Floor', color: '#B0C4DE' },
+        { name: 'Rusty Metal Floor', color: '#8B4513' },
+        { name: 'Industrial Grate Floor', color: '#556B2F' },
+        { name: 'Rubber Floor', color: '#2E2E2E' },
+        { name: 'Vinyl Floor', color: '#DCDCDC' },
+        { name: 'Ice Floor', color: '#BFEFFF' },
+        { name: 'Snow Floor', color: '#FFFFFF' },
     ],
     Furniture: [
         { name: 'Chair', color: '#8B4513' },
