@@ -1,1 +1,5 @@
 The project is a web-based base-building planner inspired by Project Zomboid that allows users to design, customize, and share their own bases using the game’s actual item sprites. The system will feature a snap-to-grid building editor where users can place walls, floors, furniture, appliances, and other objects onto either a completely empty custom map or prebuilt locations imported from the game, such as the Rosewood Fire Station. Users will be able to drag-and-drop items, edit interiors and exteriors, support multi-tile objects, and manage projects through accounts with saved base libraries and shareable links. Core functionality includes undo/redo controls, deletion tools, saving systems, searchable categorized asset sidebars, and optional PNG export support. Future quality-of-life features may include material/resource estimators, advanced object placement, and collision or overlap highlighting for more realistic object positioning
+
+
+
+All of the items tile - picture are not by me 
