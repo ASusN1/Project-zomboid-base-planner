@@ -1,13 +1,16 @@
 const grid = document.getElementById('grid');
 const viewContainer = document.querySelector('.view-container');
-const size = 12;
+const size = 12; // Later add a feature to change the grid size
 let zoom = 1;
 let offsetX = 0;
 let offsetY = 0;
 let isCameraDragging = false;
 let startX = 0;
 let startY = 0;
+
+
 let selectedItem = null; 
+let currentToolusing = 'place'; // default tool is place
 
 function updateTransform() {
     grid.style.transform = `translate(${offsetX}px, ${offsetY}px) rotateX(60deg) rotateZ(45deg) scale(${zoom})`;
@@ -22,13 +25,17 @@ function createGrid() {
             tile.textContent = `${x},${y}`;
             
             // change color of selected tile to the color of the items ( Later change to png of the itm from pz) 
+            // Tool feature here (delete,redo,undo,place ( place = default )
             tile.addEventListener('click', () => {
-                if (selectedItem) {
+                if (currentToolusing === 'delete') {
+                    tile.style.backgroundColor = '';
+                } else if (selectedItem && currentToolusing === 'place') {
                     tile.style.backgroundColor = selectedItem.color;
                 }
             });
 
             grid.appendChild(tile);
+            
         }
     }
     updateTransform();
