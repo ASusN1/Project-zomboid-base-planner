@@ -40,6 +40,7 @@ body {
     width: 720px;
     height:720px;
     transform-style: preserve-3d;
+    cursor: pointer;
 }
 
 .tile{
@@ -67,6 +68,7 @@ body {
     box-shadow: 0 0 0 3px red;
     transform: scale(1.12);
     z-index: 10; 
+    cursor:pointer
 }
 
 /*show what inside each category */

@@ -74,13 +74,13 @@ viewContainer.addEventListener('mousedown', (e) => {
     isCameraDragging = true;
     startX= e.clientX;
     startY = e.clientY;
-    document.body.style.cursor= 'grabbing';
+    viewContainer.style.cursor = 'grabbing';
 });
 
 document.addEventListener('mouseup', (e) => {
     if (isCameraDragging) {
         isCameraDragging = false;
-        document.body.style.cursor = 'default';
+        viewContainer.style.cursor = 'default';
     }
 });
 
@@ -102,7 +102,7 @@ document.addEventListener('mousemove', (e) => {
 viewContainer.addEventListener('mouseleave',() => { 
     if (isCameraDragging) {
         isCameraDragging = false;
-        document.body.style.cursor = 'default';
+        viewContainer.style.cursor = 'default';
     }
 })
 
