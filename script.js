@@ -12,6 +12,9 @@ let startY = 0;
 let selectedItem = null; 
 let currentToolusing = 'place'; // default tool is place
 
+let undoListItem = [];
+let redoListItem = [];
+
 function updateTransform() {
     grid.style.transform = `translate(${offsetX}px, ${offsetY}px) rotateX(60deg) rotateZ(45deg) scale(${zoom})`;
 }
@@ -27,10 +30,21 @@ function createGrid() {
             // change color of selected tile to the color of the items ( Later change to png of the itm from pz) 
             // Tool feature here (delete,redo,undo,place ( place = default )
             tile.addEventListener('click', () => {
-                if (currentToolusing === 'delete') {
-                    tile.style.backgroundColor = '';
-                } else if (selectedItem && currentToolusing === 'place') {
-                    tile.style.backgroundColor = selectedItem.color;
+                const previousColor = tile.style.backgroundColor; // Store the previous color for undo
+                let newColor = previousColor; // Default to previous color if no change
+
+                if (currentToolusing ==='delete'){
+                    newColor = '';
+                }else if (currentToolusing === 'place' && selectedItem) {
+                    newColor = selectedItem.color;
+                }else { 
+                    return;
+                }
+
+                if (newColor !== previousColor) {
+                    tile.style.backgroundColor = newColor;
+                    undoListItem.push({ tile, previousColor,newColor });
+                    redoListItem = [];
                 }
             });
 
