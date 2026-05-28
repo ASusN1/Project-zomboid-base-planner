@@ -8,7 +8,6 @@ searchBar.addEventListener('input', () => {
 
     document.querySelectorAll('.item-card').forEach(card => {
         const name = card.querySelector('span').innerText.toLowerCase();
-        card.style.display = name.includes(underscore_items_input) ? '' : 'none';
         if (name.includes(underscore_items_input)) {
             itemFound = true;
             card.style.display = '';
@@ -16,15 +15,15 @@ searchBar.addEventListener('input', () => {
         else {
             card.style.display = 'none';
         }
-
-        if (underscore_items_input !== '') {
-            if (!itemFound) {
-                console.log(searchBar.value.trim() + ' not found');
-            }else {
-                console.log(searchBar.value.trim() + ' found');
-            }
-        }
     });
+     
+    if (underscore_items_input !== '') {
+        if (!itemFound) {
+            console.log( searchBar.value.trim() + "No items found");
+        }else {
+            console.log( searchBar.value.trim() + "Items found");
+        }
+    }
 });
 
 searchBar.addEventListener('keydown', (e) => {
