@@ -4,9 +4,26 @@ searchBar.addEventListener('input', () => {
     const underscore_items_input = searchBar.value.trim().toLowerCase();
     console.log(underscore_items_input);
 
+    let itemFound = false;
+
     document.querySelectorAll('.item-card').forEach(card => {
         const name = card.querySelector('span').innerText.toLowerCase();
         card.style.display = name.includes(underscore_items_input) ? '' : 'none';
+        if (name.includes(underscore_items_input)) {
+            itemFound = true;
+            card.style.display = '';
+        }
+        else {
+            card.style.display = 'none';
+        }
+
+        if (underscore_items_input !== '') {
+            if (!itemFound) {
+                console.log(searchBar.value.trim() + ' not found');
+            }else {
+                console.log(searchBar.value.trim() + ' found');
+            }
+        }
     });
 });
 

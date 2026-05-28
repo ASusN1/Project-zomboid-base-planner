@@ -94,4 +94,4 @@ const itemDatabase = {
         { name: 'Floor Spikes', color: '#8B0000' },
         { name: 'Barbed Wire', color: '#696969' }
     ]
-}
+};
