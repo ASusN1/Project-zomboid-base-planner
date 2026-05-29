@@ -14,13 +14,13 @@ Must have:
 
 -------------------------------------
 function must have 
-- control z : redo the previos action 
-- delete --> delete certain items 
+- control z : redo the previos action ( done)
+- delete --> delete certain items (kinda done- work for the flat tile)
 - save the base design 
 - maybe add an export the base design into png like sketchup 
 
 ------------------------------------------
 quailibity of life stuff add later 
 - Material and resource estimator (counts planks, nails, skill level. tools needed).
-- place more obejct that are not in the furniture section : Ex: m16 model or smt 
+- place more obejct that are not in the furniture section : Ex: m16 model or smt ( these are 3D will add the latest)
 - ollision and overlap highlighting during placement Ex: if place apple on table, apple on table not on the sperate block 
