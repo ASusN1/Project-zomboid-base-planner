@@ -1,6 +1,10 @@
 const grid = document.getElementById('grid');
 const viewContainer = document.querySelector('.view-container');
-const size = 12; // Later add a feature to change the grid size
+const gridSizeInput = document.getElementById('gridSizeInput');
+
+let size = Math.max(12, parseInt(gridSizeInput.value) || 12); // default to 12 if invalid input
+if (size <12) size = 12; // force min height/width = 12*12 
+
 let zoom = 1;
 let offsetX = 0;
 let offsetY = 0;
@@ -20,6 +24,9 @@ function updateTransform() {
 }
 
 function createGrid() {
+    grid.innerHTML = ''; // Clear existing grid when user change the grid size
+    
+    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     for (let x = 0; x < size; x++) {
         for (let y = 0; y < size; y++) {
             const tile = document.createElement('div');
@@ -54,6 +61,16 @@ function createGrid() {
     }
     updateTransform();
 }
+gridSizeInput.addEventListener('change', () => {
+    size = Math.max(12, parseInt(gridSizeInput.value) || 12); // default to 12 if invalid input
+    gridSizeInput.value = size; 
+
+    //Reset items list 
+    undoListItem = [];
+    redoListItem = [];
+
+    createGrid();
+});
 
 createGrid();
 

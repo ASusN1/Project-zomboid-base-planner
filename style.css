@@ -36,9 +36,8 @@ body {
     margin-left: -360px;
     margin-top: -360px;
     display: grid;
-    grid-template-columns: repeat(12, 1fr); /*create 12 columns*/
-    width: 720px;
-    height:720px;
+    min-width: 720px;
+    min-height: 720px;
     transform-style: preserve-3d;
     cursor: pointer;
 }
@@ -142,4 +141,9 @@ body {
 .tools-bar button:hover {
     background: lightgreen;
     border-color: green;
+}
+
+.change-grid_size {
+    width: 100%;
+    font-size:14px;
 }
