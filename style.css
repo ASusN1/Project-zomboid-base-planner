@@ -126,7 +126,6 @@ body {
     flex-direction: column;
     gap: 10px; 
     left: 50%;
-    position:flex;
     background: yellow;
 }
 

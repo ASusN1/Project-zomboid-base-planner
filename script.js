@@ -1,17 +1,7 @@
-const grid = document.getElementById('grid');
-const viewContainer = document.querySelector('.view-container');
 const gridSizeInput = document.getElementById('gridSizeInput');
 
 let size = Math.max(12, parseInt(gridSizeInput.value) || 12); // default to 12 if invalid input
 if (size <12) size = 12; // force min height/width = 12*12 
-
-let zoom = 1;
-let offsetX = 0;
-let offsetY = 0;
-let isCameraDragging = false;
-let startX = 0;
-let startY = 0;
-
 
 let selectedItem = null; 
 let currentToolusing = 'place'; // default tool is place
@@ -19,9 +9,7 @@ let currentToolusing = 'place'; // default tool is place
 let undoListItem = [];
 let redoListItem = [];
 
-function updateTransform() {
-    grid.style.transform = `translate(${offsetX}px, ${offsetY}px) rotateX(60deg) rotateZ(45deg) scale(${zoom})`;
-}
+
 
 function createGrid() {
     grid.innerHTML = ''; // Clear existing grid when user change the grid size
@@ -73,55 +61,6 @@ gridSizeInput.addEventListener('change', () => {
 });
 
 createGrid();
-
-//zoom to the cneter og grid
-viewContainer.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    if (e.deltaY < 0) {
-        zoom += 0.1;
-    } else {
-        zoom -= 0.1;
-    }
-    zoom = Math.max(0.1, Math.min(zoom,2)); //limit zoom
-    updateTransform();
-});
-
-//drag camera 
-viewContainer.addEventListener('mousedown', (e) => {
-    isCameraDragging = true;
-    startX= e.clientX;
-    startY = e.clientY;
-    viewContainer.style.cursor = 'grabbing';
-});
-
-document.addEventListener('mouseup', (e) => {
-    if (isCameraDragging) {
-        isCameraDragging = false;
-        viewContainer.style.cursor = 'default';
-    }
-});
-
-document.addEventListener('mousemove', (e) => {
-    if (!isCameraDragging) return;
-    const dx = e.clientX- startX;
-    const dy = e.clientY- startY;
-
-    offsetX += dx;
-    offsetY += dy;
-
-    startX = e.clientX;
-    startY = e.clientY;
-
-    updateTransform();
-});
-
-//stop drag when mouse leave grid area ( prob create a btn like blender that allow drag) 
-viewContainer.addEventListener('mouseleave',() => { 
-    if (isCameraDragging) {
-        isCameraDragging = false;
-        viewContainer.style.cursor = 'default';
-    }
-})
 
 //For the category system 
 function switchCategory(evt, itemName) {
