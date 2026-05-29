@@ -38,6 +38,7 @@ document.addEventListener('mouseup', (e) => {
         isCameraDragging = false;
     viewContainer.style.cursor = 'default';
     }
+
 });
 
 //drag camera (mousemove) ( actual movemnet)
@@ -64,3 +65,4 @@ viewContainer.addEventListener('mouseleave', () => {
         viewContainer.style.cursor = 'default';
     }
 });
+
