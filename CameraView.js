@@ -9,7 +9,7 @@ let startX = 0;
 let startY = 0;
 
 function updateTransform() {
-    grid.style.transform = `translate(${offsetX}px, ${offsetY}px) rotateX(60deg) rotateZ(45deg) scale(${zoom})`;
+    grid.style.transform = `translate(${offsetX}px, ${offsetY}px) rotateX(60deg) rotateZ(45deg) scale3d(${zoom}, ${zoom}, ${zoom})`;
 }
 
 //zom to center of the grid 

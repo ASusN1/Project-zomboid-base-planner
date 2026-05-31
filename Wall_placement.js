@@ -1,13 +1,14 @@
 const wall_tile_height_small = 60; // work on this first the other later 
-const wall_tile_height_medium = 120;
-const wall_tile_height_large = 180;
-
+const wall_tile_height_medium = 120; // work on this later
+const wall_tile_height_large = 180; // work on this later
 
 //Set the up the dericiton of the wall 
 const direction_of_wall_tile = { 
     NS : 'NS', // top + bottom of the tile
     EW : 'EW' // left + right of the tile
 }
+
+
 
 //let currentWallDirection = direction_of_wall_tile.NS; // default wall direction
 let currentWallDirection = direction_of_wall_tile.EW;
