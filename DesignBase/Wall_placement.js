@@ -15,8 +15,8 @@ const direction_of_wall_tile = {
 
 
 
-//let currentWallDirection = direction_of_wall_tile.NS; // default wall direction
-let currentWallDirection = direction_of_wall_tile.EW;
+let currentWallDirection = direction_of_wall_tile.NS; // default wall direction
+//let currentWallDirection = direction_of_wall_tile.EW;
 
 function createWallTile(color, direction_of_wall_tile,height) {
     const wall = document.createElement("div");
