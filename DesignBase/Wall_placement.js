@@ -15,16 +15,24 @@ const direction_of_wall_tile = {
 
 
 
-let currentWallDirection = direction_of_wall_tile.NS; // default wall direction
-//let currentWallDirection = direction_of_wall_tile.EW;
+//let currentWallDirection = direction_of_wall_tile.NS; // default wall direction
+let currentWallDirection = direction_of_wall_tile.EW;
 
 function createWallTile(color, direction_of_wall_tile,height) {
     const wall = document.createElement("div");
-
     wall.classList.add('wall-face', 'wall-direction-' + direction_of_wall_tile);
-    
     wall.style.backgroundColor = color; 
-    wall.style.height = (wallHeights[height] ?? wall_tile_height_small) + 'px'; // set height based on the wall's height property, default to small if not specified
+    
+    const px = (wallHeights[height] ?? wall_tile_height_small) + 'px';
+
+    if (direction_of_wall_tile == "EW") {
+        wall.style.width =px;
+        wall.style.height = '60px';
+    } else {
+        wall.style.height =px;
+        //wall.style.width = '60px';
+    }
+
     return wall;
 }
 

@@ -162,7 +162,7 @@ body {
     border-bottom: 2px solid #000;
 }
 .wall-direction-EW {
-    transform-origin: 0 50%;
+    transform-origin: 0 0;
     transform: rotateY(-90deg);
     border-right: 2px solid #000;
 }
