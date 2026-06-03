@@ -40,3 +40,14 @@ undoButton.addEventListener('click', () => {
     action.tile.style.backgroundColor = action.previousColor;
     redoListItem.push(action); // update 
 });
+
+// Place wall diretion, swith betwen ns and ew 
+const placeDirectionButotn = document.getElementById('placeDirectionButton');
+
+placeDirectionButton.addEventListener('click', () => {
+    currentWallDirection = currentWallDirection === direction_of_wall_tile.NS 
+    ? direction_of_wall_tile.EW 
+    : direction_of_wall_tile.NS; // switch between NS and EW
+    placeDirectionButton.textContent = 'Place Direction: ' + currentWallDirection; 
+    console.log('Place direction switched to: ' + currentWallDirection);
+});
