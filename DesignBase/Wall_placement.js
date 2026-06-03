@@ -1,6 +1,6 @@
 const wall_tile_height_small = 60; // work on this first the other later 
-const wall_tile_height_medium = 120; // work on this later
-const wall_tile_height_large = 180; // work on this later
+const wall_tile_height_medium = 90; // work on this later
+const wall_tile_height_large = 120; // work on this later
 
 const wallHeights = {
     small: wall_tile_height_small,
@@ -9,14 +9,17 @@ const wallHeights = {
 }
 //Set the up the dericiton of the wall 
 const direction_of_wall_tile = { 
-    NS : 'NS', // top + bottom of the tile
-    EW : 'EW' // left + right of the tile
+    N : 'N',
+    E : 'E',
+    W : 'W',
+    S : 'S'
 }
 
+const directionOrientationOrder = ['N', 'E', 'S', 'W']; 
 
 
-//let currentWallDirection = direction_of_wall_tile.NS; // default wall direction
-let currentWallDirection = direction_of_wall_tile.EW;
+//let currentWallDirection = direction_of_wall_tile.N; // default wall direction
+let currentWallDirection = direction_of_wall_tile.N; // default wall direction
 
 function createWallTile(color, direction_of_wall_tile,height) {
     const wall = document.createElement("div");
@@ -24,14 +27,7 @@ function createWallTile(color, direction_of_wall_tile,height) {
     wall.style.backgroundColor = color; 
     
     const px = (wallHeights[height] ?? wall_tile_height_small) + 'px';
-
-    if (direction_of_wall_tile == "EW") {
-        wall.style.width =px;
-        wall.style.height = '60px';
-    } else {
-        wall.style.height =px;
-        //wall.style.width = '60px';
-    }
+    wall.style.height = px
 
     return wall;
 }

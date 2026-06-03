@@ -42,12 +42,11 @@ undoButton.addEventListener('click', () => {
 });
 
 // Place wall diretion, swith betwen ns and ew 
-const placeDirectionButotn = document.getElementById('placeDirectionButton');
+const placeDirectionButton = document.getElementById('placeDirectionButton');
 
 placeDirectionButton.addEventListener('click', () => {
-    currentWallDirection = currentWallDirection === direction_of_wall_tile.NS 
-    ? direction_of_wall_tile.EW 
-    : direction_of_wall_tile.NS; // switch between NS and EW
+    const currentOrientation = directionOrientationOrder.indexOf(currentWallDirection);
+    currentWallDirection = directionOrientationOrder[(currentOrientation + 1) % directionOrientationOrder.length]; // cycle through the directions
     placeDirectionButton.textContent = 'Place Direction: ' + currentWallDirection; 
     console.log('Place direction switched to: ' + currentWallDirection);
 });
