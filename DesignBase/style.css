@@ -146,7 +146,6 @@ body {
     width: 100%;
     font-size:14px;
 }
-
 .wall-face {
     position: absolute;
     top:0;
@@ -155,20 +154,6 @@ body {
     pointer-events: none;
     opacity:0.9;
 }
-
-/*.wall-direction-NS {
-    transform-origin: 50% 0;
-    transform: rotateX(90deg);
-    border-bottom: 2px solid #000;
-}*/
-
-/*
-.wall-direction-EW {
-    transform-origin: 0 0;
-    transform: rotateY(-90deg);
-    border-right: 2px solid #000;
-}
-*/
 
 .wall-direction-N {
     top: 0; left: 0; 
@@ -184,15 +169,15 @@ body {
 }
 
 .wall-direction-W {
-    left: 0; top:0; 
-    transform-origin: 0 50%;
-    transform: rotateY(-90deg);
+    left: auto; right: 0; top: 0;
+    transform-origin: 100% 50%;
+    transform: rotateY(90deg);
     border-left: 2px solid #000;
 }
 
 .wall-direction-E {
     left: 0; top:0; 
-    transform-origin: 100% 50%;
-    transform: rotateY(90deg);
+    transform-origin: 0 50%;
+    transform: rotateY(-90deg);
     border-right: 2px solid #000;
 }

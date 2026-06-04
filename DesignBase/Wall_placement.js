@@ -27,7 +27,14 @@ function createWallTile(color, direction_of_wall_tile,height) {
     wall.style.backgroundColor = color; 
     
     const px = (wallHeights[height] ?? wall_tile_height_small) + 'px';
-    wall.style.height = px
+
+    if (direction_of_wall_tile === 'E' || direction_of_wall_tile === 'W') {
+        wall.style.width = px;
+        wall.style.height = '100%';
+    } else {
+        wall.style.width = '100%';
+        wall.style.height = px;
+    }
 
     return wall;
 }
