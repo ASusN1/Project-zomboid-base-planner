@@ -26,11 +26,14 @@ function createGrid() {
                 const previousColor = tile.style.backgroundColor; // Store the previous color for undo
                 let newColor = previousColor; // Default to previous color if no change
 
-                if (currentToolusing ==='delete'){
+                if (currentToolusing === 'delete') {
                     newColor = '';
-                }else if (currentToolusing === 'place' && selectedItem) {
+                } else if (currentToolusing === 'place' && selectedItem) {
+                    if (selectedItem.type === 'wall') {
+                        return;
+                    }
                     newColor = selectedItem.color;
-                }else {
+                } else {
                     return;
                 }
 
