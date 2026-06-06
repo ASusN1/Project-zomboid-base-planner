@@ -57,11 +57,20 @@ function prepareWallPlacement() {
 
     allTiles.forEach(tile => {
         tile.addEventListener('click', () => {
-            if (currentToolusing != 'place') return; // only place wall if the current tool is 'place'
-            if (!selectedItem) return; // ensure an item is selected before placing a wall
-            if (selectedItem.type !== 'wall') return; // only place wall if the selected item is a wall
+            if (currentToolusing === 'place') {
+                if (!selectedItem) return; // ensure an item is selected before placing a wall
+                if (selectedItem.type !== 'wall') return; // only place wall if the selected item is a wall
+            
 
             placeWallTile(tile, selectedItem.color, currentWallDirection, selectedItem.height); // place the wall on the clicked tile
+            }
+            //Delete wall if the delete tool is selecte
+            else if (currentToolusing === 'delete') {
+                const wallToDelete = tile.querySelector(".wall-direction-"+ currentWallDirection);
+                if (wallToDelete) {
+                    wallToDelete.remove(); // remove the wall if it exists
+                }
+            }
         });
     });
 }
