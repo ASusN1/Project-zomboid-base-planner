@@ -75,7 +75,7 @@ const itemDatabase = {
         { name: 'Wall Lamp', color: '#FFA500' }
     ],
     Storage: [
-        { name: 'Storage Crate', color: '#8B4513',  type: 'cube', cube_width: 1, cube_height: 1, cube_depth: 1 },
+        { name: 'Storage Crate', color: '#8B4513',  type: 'cube', x: 1, y: 1, z: 1 },
         { name: 'Metal Locker', color: '#708090' },
         { name: 'Shelf Unit', color: '#DEB887' },
         { name: 'Gun Safe', color: '#2F4F4F' },

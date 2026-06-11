@@ -181,3 +181,30 @@ body {
     transform: rotateY(-90deg);
     border-right: 2px solid #000;
 }
+
+.cube {
+    position: absolute;
+    left: 50% ; 
+    top: 50%;
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.cube-face {
+    position: absolute;
+    opacity: 0.9;
+    border: 2px solid #000;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+
+}
+
+/*top face of the cube - rember to make this cube placemetn placeable on top, the total z = 3 */
+.cube-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-style: preserve-3d;
+    pointer-events: none;
+}

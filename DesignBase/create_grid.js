@@ -18,7 +18,9 @@ function createGrid() {
         for(let y = 0; y < size; y++) {
             const tile = document.createElement('div');
             tile.classList.add('tile');
-
+            //get the 
+            tile.dataset.x = x;
+            tile.dataset.y = y;
             tile.textContent = `${x},${y}`;
 
             //change color of the selected tile with the color of the tile ( later must change to Gras_land.png)
@@ -27,9 +29,36 @@ function createGrid() {
                 let newColor = previousColor; // Default to previous color if no change
 
                 if (currentToolusing === 'delete') {
+                    // remove the cube if exists , later must change so that it will remove the cube from highest (z = 3 ( max height) 
+                    const tx = tile.dataset.x;
+                    const ty = tile.dataset.y;
+                    if (window.tileOwner && window.cubeRegistry) {
+                        const ownerKey = window.tileOwner.get(`${tx},${ty}`);
+                        if (ownerKey && window.cubeRegistry.has(ownerKey)) {
+                            const cube = window.cubeRegistry.get(ownerKey);
+                            // remove all rendered elements
+                            cube.elements.forEach(({ el, parent }) => {
+                                try { el.remove(); } catch (e) {}
+                            });
+                            // clear floor and tileOwner entries
+                            cube.tiles.forEach(t => {
+                                if (!t) return;
+                                t.style.backgroundColor = '';
+                                window.tileOwner.delete(`${t.dataset.x},${t.dataset.y}`);
+                            });
+                            window.cubeRegistry.delete(ownerKey);
+                            return; // done
+                        }
+                    }
+                    // fallback: remove any tiny marker placed on tile
+                    const existingCube = tile.querySelector('.cube-object');
+                    if (existingCube) existingCube.remove();
                     newColor = '';
                 } else if (currentToolusing === 'place' && selectedItem) {
                     if (selectedItem.type === 'wall') {
+                        return;
+                    } else if (selectedItem.type === 'cube') {
+                        placeCubeOnGrid(tile, selectedItem);
                         return;
                     }
                     newColor = selectedItem.color;
