@@ -76,12 +76,12 @@ const itemDatabase = {
     ],
     Storage: [
         { name: 'Storage Crate', color: '#8B4513',  type: 'cube', x: 1, y: 1, z: 1 },
-        { name: 'Metal Locker', color: '#708090' },
-        { name: 'Shelf Unit', color: '#DEB887' },
-        { name: 'Gun Safe', color: '#2F4F4F' },
-        { name: 'Food Container', color: '#A0522D' },
-        { name: 'Ammo Box', color: '#556B2F' },
-        { name: 'Weapon Rack', color: '#696969' },
+        { name: 'Metal Locker', color: '#708090', type: 'cube', x: 1, y: 1, z: 2 }, /* 1 by 1 cube but 2 tall*/
+        { name: 'Shelf Unit', color: '#DEB887', type: 'cube', x: 1, y: 1, z: 3 }, /* 1 by 1 cube but 3 tall*/
+        { name: 'Gun Safe', color: '#2F4F4F', type: 'cube', x: 2, y: 1, z: 1 }, /* 2 by 1 cube 1 tall */ /*later use for rotate*/ /*A1 */
+        { name: 'Food Container', color: '#A0522D', type: 'cube', x: 1, y:2, z:1 }, /* 1 by 2 cube but 1 tall */ /*later use for rotate*/ /*A2 */
+        { name: 'Ammo Box', color: '#556B2F', type: 'cube', x: 2, y: 2, z: 2 }, /* 2 by 2 cube but 2 tall */ /*later use for rotate*/ /*B */
+        { name: 'Weapon Rack', color: '#696969', type: 'cube', x: 3, y: 1, z: 2 }, /* 3 by 1 cube but 2 tall */ /*later use for rotate*/ /*C1*/
         { name: 'Medical Cabinet', color: '#FFB6C1' }
     ],
     Traps: [

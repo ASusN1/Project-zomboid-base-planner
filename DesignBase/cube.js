@@ -61,7 +61,7 @@ function placeCubeOnGrid(anchorTile, item) {
             // NS walls: front face when dx === 0, back face when dx === CubeWidthX-1
             if (dx === 0 || dx === CubeWidthX - 1) {
                 const ns = document.createElement('div');
-                ns.className = 'wall-face wall-direction-N';
+                ns.className = 'cube-face-ns';
                 ns.style.cssText = `background:${colorNS};height:${wallH}px;`;
                 t.appendChild(ns);
                 elements.push({ el: ns, parent: t });
@@ -70,7 +70,7 @@ function placeCubeOnGrid(anchorTile, item) {
             // EW walls: front face when dy === 0, back face when dy === CubeHeightY-1
             if (dy === 0 || dy === CubeHeightY - 1) {
                 const ew = document.createElement('div');
-                ew.className = 'wall-face wall-direction-E';
+                ew.className = 'cube-face-ew';
                 ew.style.cssText = `background:${colorEW};height:${wallH}px;`;
                 t.appendChild(ew);
                 elements.push({ el: ew, parent: t });

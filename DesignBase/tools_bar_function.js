@@ -50,3 +50,9 @@ placeDirectionButton.addEventListener('click', () => {
     placeDirectionButton.textContent = 'Place Direction: ' + currentWallDirection; 
     console.log('Place direction switched to: ' + currentWallDirection);
 });
+
+//rotate object tool ( later add shortcut key for this tool)
+const rotateObjectButton = document.getElementById('rotateButton');
+rotateObjectButton.addEventListener('click', () => {
+    console.log('Rotate object tool selected');
+});
