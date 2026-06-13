@@ -71,7 +71,7 @@ function placeCubeOnGrid(anchorTile, item) {
             if (dy === 0 || dy === CubeHeightY - 1) {
                 const ew = document.createElement('div');
                 ew.className = 'cube-face-ew';
-                ew.style.cssText = `background:${colorEW};height:${wallH}px;`;
+                ew.style.cssText = `background:${colorEW};width: ${wallH}px;height:${TILESIZE}px;`;
                 t.appendChild(ew);
                 elements.push({ el: ew, parent: t });
             }
