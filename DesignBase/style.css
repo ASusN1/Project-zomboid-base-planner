@@ -228,6 +228,6 @@ body {
     opacity:0.9; 
     box-sizing:border-box;
     transform-origin: 0 50%;
-    transform:rotateY(90deg);
+    transform:rotateY(-90deg);
     border-right:2px solid #000;
 }
