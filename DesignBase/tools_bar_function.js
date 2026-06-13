@@ -56,3 +56,34 @@ const rotateObjectButton = document.getElementById('rotateButton');
 rotateObjectButton.addEventListener('click', () => {
     console.log('Rotate object tool selected');
 });
+
+document.addEventListener('keydown', (event) => {
+    if (event.target.closest('input, textarea')) {
+        console.log('Key press ignored in input or textarea');
+        return; // Ignore key presses when typing in input or textarea
+    }
+        
+
+    const key = event.key.toLowerCase();
+    if ((event.ctrlKey || event.actionKey) && key === 'z') {
+        console.log("UNdo button pressed : ctrl + z");
+        event.preventDefault(); // Prevent default undo behavior
+        undoButton.click(); // Trigger the undo button click event
+    } 
+
+    else if ((event.ctrlKey || event.actionKey) && key === 'y') {
+        console.log("Redo button pressed : ctrl + y");
+        event.preventDefault(); // Prevent default redo behavior
+        redoButton.click(); // Trigger the redo button click event
+    }
+
+    else if (key === 'd') {
+        console.log("Delete tool shortcut key pressed : d");
+        deleteButton.click(); // Trigger the delete button click event
+    }
+
+    else if (key === 'p') {
+        console.log("Place tool shortcut key pressed : p");
+        placeButton.click(); // Trigger the place button click event
+    }
+});
