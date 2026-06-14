@@ -57,6 +57,8 @@ rotateObjectButton.addEventListener('click', () => {
     console.log('Rotate object tool selected');
 });
 
+
+// short cut stuff 
 document.addEventListener('keydown', (event) => {
     if (event.target.closest('input, textarea')) {
         console.log('Key press ignored in input or textarea');

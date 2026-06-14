@@ -230,3 +230,15 @@ body {
     transform:rotateY(-90deg);
     border-right:2px solid #000;
 }
+
+.floor-layer-changer {
+    width: 400px; 
+    height: 200px; 
+    background-color: white;  
+    margin: 0 auto;
+}
+
+.layer-toolbar {
+    display: flex;
+    justify-content: space-between;
+}
