@@ -68,7 +68,10 @@ function createGrid() {
 
                 if (newColor !== previousColor) {
                     tile.style.backgroundColor = newColor;
-                    undoListItem.push({tile, previousColor, newColor});
+                    undoListItem.push({
+                        undo() { tile.style.backgroundColor = previousColor; },
+                        redo() { tile.style.backgroundColor = newColor; },
+                    })
                     redoListItem = [];
                 }
             });

@@ -41,15 +41,15 @@ function placeCubeOnGrid(anchorTile, item) {
     const ownedTiles = [];
 
     // create 4 side wall, then the top and bottom of the cube ( later rember to change to png or smt)
+    const prevFloorColors = new Map(); // to store previous floor colors for undo
     for (let dx = 0; dx < CubeWidthX; dx++) {
         for (let dy = 0; dy < CubeHeightY; dy++) {
             const t = getTileAt(ax + dx, ay + dy);
             if (!t) continue;
 
             // Record previous colour for undo stack, then tint the floor
-            const prevBg = t.style.backgroundColor;
+            prevFloorColors.set(t, t.style.backgroundColor);
             t.style.backgroundColor = colorFloor;
-            if (window.undoListItem) window.undoListItem.push({ tile: t, previousColor: prevBg, newColor: colorFloor });
 
             // Top cap lifted by wallH so it appears above tile surface
             const top = document.createElement('div');
@@ -89,7 +89,7 @@ function placeCubeOnGrid(anchorTile, item) {
     elements.push({ el: anchorMarker, parent: anchorTile });
 
     // Register the placed cube so it can be removed as a unit later
-    cubeRegistry.set(key, {
+    const cubeData ={
         x: ax,
         y: ay,
         z: az,
@@ -99,10 +99,25 @@ function placeCubeOnGrid(anchorTile, item) {
         color,
         elements,
         tiles: ownedTiles
-    });
+    };
+    cubeRegistry.set (key, cubeData);
 
-    // Clear redo stack if present
-    if (window.redoListItem) window.redoListItem = [];
+    window.undoListItem.push({ 
+        undo() {
+            cubeData.elements.forEach(({el}) => el.remove());
+            cubeData.tiles.forEach(t => {
+                t.style.backgroundColor = prevFloorColors.get(t) ?? '';
+                CubeOnTheTile.delete(`${t.dataset.x},${t.dataset.y}`);
+            });
+            cubeRegistry.delete(key);
+        },
+        redo() { 
+            placeCubeOnGrid(anchorTile, item);
+        }
+    })
+    window.redoListItem = [];
+
+
 }
 function getTileAt(x, y) {
     // prefer dataset if present

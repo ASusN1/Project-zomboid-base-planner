@@ -21,23 +21,23 @@ placeButton.addEventListener('click', () => {
     currentToolusing = 'place';
 });
 
-//redo tool ( redo last action) ( Ctrl Y)  ( basicly reverse of undo tool)
+
 const redoButton = document.getElementById('redoButton');
 redoButton.addEventListener('click', () => {
     console.log('Redo tool selected');
     if (redoListItem.length === 0) return; // No actions to redo
     const action = redoListItem.pop(); // Get the last action from the redo list
-    action.tile.style.backgroundColor = action.newColor;
+    action.redo();
     undoListItem.push(action); // update undo list with the redone action
 });
 
-// undo tool ( undo last action) ( Ctrl Z)
+
 const undoButton = document.getElementById('undoButton');
 undoButton.addEventListener('click', () => {
     console.log('Undo tool selected');
     if (undoListItem.length === 0) return; // No actions to undo
     const action = undoListItem.pop(); // Get the last action from the undo list 
-    action.tile.style.backgroundColor = action.previousColor;
+    action.undo();
     redoListItem.push(action); // update 
 });
 
