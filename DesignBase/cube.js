@@ -14,11 +14,11 @@ function shadeColor(hex, amount) {
     return '#' + [r,g,b].map(v => v.toString(16).padStart(2,'0')).join('');
 }
 
-function placeCubeOnGrid(anchorTile, item) {
+function placeCubeOnGrid(anchorTile, item, baseZ = 0 ) {
     // get the psotion of the cube ( like the grid thingy) 
     const ax = parseInt(anchorTile.dataset.x); 
     const ay = parseInt(anchorTile.dataset.y); 
-    const az = 0;
+    const az = baseZ;
 
     // get the cube size from itemdatabase.js 
     const CubeWidthX = item.X ?? item.x ?? 1; // 
@@ -26,7 +26,8 @@ function placeCubeOnGrid(anchorTile, item) {
     const CubeDepthZ = item.Z ?? item.z ?? 1; // 
 
     const color = item.color || item.colorN || '#C8A87A'; // base colour fallback
-    const wallH = CubeDepthZ * TILESIZE; 
+    const wallH = CubeDepthZ * TILESIZE;
+    const baseOffsetpx = az * TILESIZE; // how much to lift the cube above the tile surface based on its Z level
     const key = `${ax},${ay},${az}`;
 
     if (cubeRegistry.has(key)) return; // don't place two cubes at same anchor
@@ -47,14 +48,31 @@ function placeCubeOnGrid(anchorTile, item) {
             const t = getTileAt(ax + dx, ay + dy);
             if (!t) continue;
 
-            // Record previous colour for undo stack, then tint the floor
-            prevFloorColors.set(t, t.style.backgroundColor);
-            t.style.backgroundColor = colorFloor;
+        // only paint color if first cube, the above cube wont change color
+            if (az === 0) { 
+                prevFloorColors.set(t, t.style.backgroundColor);
+                t.style.backgroundColor = colorFloor;
+            }
 
             // Top cap lifted by wallH so it appears above tile surface
             const top = document.createElement('div');
             top.className = 'cube-top';
-            top.style.cssText = `width:${TILESIZE}px;height:${TILESIZE}px;background:${colorTop};transform:translateZ(${wallH}px);`;
+            top.style.cssText = `width:${TILESIZE}px;height:${TILESIZE}px;background:${colorTop};transform:translateZ(${wallH+ baseOffsetpx}px);`;
+            
+            // the bottom cube's top will act like a grid place cube on top 
+            top.dataset.x = ax + dx; 
+            top.dataset.y = ay + dy; 
+            top.dataset.z = az + CubeDepthZ;
+            top.classList.add('cube-stack-target');
+            
+            top.addEventListener('click', (e) => {
+                e.stopPropagation(); // prevent tile click
+                if ( window.currentToolusing === 'place' && window.selectedItem && window.selectedItem.type ==='cube') {
+                    const stackHeight = parseInt(top.dataset.z, 10);
+                    placeCubeOnTopOfEachOther(top,window.selectedItem, stackHeight);
+                }
+            });
+
             t.appendChild(top);
             elements.push({ el: top, parent: t });
 
@@ -62,7 +80,7 @@ function placeCubeOnGrid(anchorTile, item) {
             if (dx === 0 || dx === CubeWidthX - 1) {
                 const ns = document.createElement('div');
                 ns.className = 'cube-face-ns';
-                ns.style.cssText = `background:${colorNS};height:${wallH}px;`;
+                ns.style.cssText = `--baseZ:${baseOffsetpx}px;background:${colorNS};height:${wallH}px;`;
                 t.appendChild(ns);
                 elements.push({ el: ns, parent: t });
             }
@@ -71,12 +89,12 @@ function placeCubeOnGrid(anchorTile, item) {
             if (dy === 0 || dy === CubeHeightY - 1) {
                 const ew = document.createElement('div');
                 ew.className = 'cube-face-ew';
-                ew.style.cssText = `background:${colorEW};width: ${wallH}px;height:${TILESIZE}px;`;
+                ew.style.cssText = `--baseZ:${baseOffsetpx}px;background:${colorEW};width: ${wallH}px;height:${TILESIZE}px;`;
                 t.appendChild(ew);
                 elements.push({ el: ew, parent: t });
             }
 
-            CubeOnTheTile.set(`${ax + dx},${ay + dy}`, key);
+            CubeOnTheTile.set(`${ax + dx},${ay + dy}, ${az}`, key);
             ownedTiles.push(t);
         }
     }
@@ -85,7 +103,8 @@ function placeCubeOnGrid(anchorTile, item) {
     const anchorMarker = document.createElement('div');
     anchorMarker.className = 'cube-object';
     anchorMarker.style.cssText = 'position:absolute;pointer-events:none;left:0;top:0;width:1px;height:1px;';
-    anchorTile.appendChild(anchorMarker);
+    anchorMarker.dataset.z = az; // store z level for stack placement
+    (ownedTiles[0] || anchorTile).appendChild(anchorMarker);
     elements.push({ el: anchorMarker, parent: anchorTile });
 
     // Register the placed cube so it can be removed as a unit later
@@ -95,10 +114,11 @@ function placeCubeOnGrid(anchorTile, item) {
         z: az,
         cubeH: CubeHeightY,
         cubeD: CubeDepthZ,
-        cubeZ: CubeWidthX,
+        cubeW: CubeWidthX,
         color,
         elements,
-        tiles: ownedTiles
+        tiles: ownedTiles,
+        key
     };
     cubeRegistry.set (key, cubeData);
 
@@ -106,19 +126,41 @@ function placeCubeOnGrid(anchorTile, item) {
         undo() {
             cubeData.elements.forEach(({el}) => el.remove());
             cubeData.tiles.forEach(t => {
-                t.style.backgroundColor = prevFloorColors.get(t) ?? '';
-                CubeOnTheTile.delete(`${t.dataset.x},${t.dataset.y}`);
+                if (az ===0 ) {
+                    t.style.backgroundColor = prevFloorColors.get(t) ?? ''
+                }
+                CubeOnTheTile.delete(`${t.dataset.x},${t.dataset.y}, ${az}`);
             });
             cubeRegistry.delete(key);
         },
         redo() { 
-            placeCubeOnGrid(anchorTile, item);
+            placeCubeOnGrid(anchorTile, item,baseZ);
         }
-    })
+    });
     window.redoListItem = [];
-
-
 }
+
+function placeCubeOnTopOfEachOther(anchorTile, item, height) {
+    const CubeDepthZ = item.Z ?? item.z ?? 1; 
+
+    if ( height + CubeDepthZ > 3) { 
+        console.warn('Cannot place cube: exceeds maximum height limit');
+        return;
+    }
+    placeCubeOnGrid(anchorTile, item, height);
+}
+
+function getTopCubeAt(tile) {
+    let top = null; 
+    for (const cube of cubeRegistry.values()) {
+        if (cube.tiles.includes(tile) && (!top || cube.z > top.z)) {
+            top = cube;
+        }
+    } 
+    return top; 
+}
+window.getTopCubeAt = getTopCubeAt;
+
 function getTileAt(x, y) {
     // prefer dataset if present
     const byData = document.querySelector(`.tile[data-x="${x}"][data-y="${y}"]`);
