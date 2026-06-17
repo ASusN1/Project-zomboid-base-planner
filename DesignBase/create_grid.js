@@ -21,7 +21,8 @@ function createGrid() {
             //get the 
             tile.dataset.x = x;
             tile.dataset.y = y;
-            tile.textContent = `${x},${y}`;
+            tile.dataset.z = 0; // default z level for grid tile
+            tile.textContent = `${x},${y}, ${tile.dataset.z}`; // for debugging, shows coordinates on tile
 
             //change color of the selected tile with the color of the tile ( later must change to Gras_land.png)
             tile.addEventListener('click', () => {

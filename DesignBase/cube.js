@@ -64,6 +64,7 @@ function placeCubeOnGrid(anchorTile, item, baseZ = 0 ) {
             top.dataset.y = ay + dy; 
             top.dataset.z = az + CubeDepthZ;
             top.classList.add('cube-stack-target');
+            top.textContent = `${top.dataset.x},${top.dataset.y}, ${top.dataset.z}`; // for debugging, shows coordinates on top face
             
             top.addEventListener('click', (e) => {
                 e.stopPropagation(); // prevent tile click
