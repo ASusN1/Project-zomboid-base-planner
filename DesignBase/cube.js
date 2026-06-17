@@ -20,6 +20,8 @@ function placeCubeOnGrid(anchorTile, item, baseZ = 0 ) {
     const ay = parseInt(anchorTile.dataset.y); 
     const az = baseZ;
 
+    if (cubeCollisionCheck(anchorTile, item, baseZ)) return;
+
     // get the cube size from itemdatabase.js 
     const CubeWidthX = item.X ?? item.x ?? 1; // 
     const CubeHeightY = item.Y ?? item.y ?? 1; // 
@@ -172,6 +174,27 @@ function getTileAt(x, y) {
         if ((t.dataset.x === String(x) && t.dataset.y === String(y)) || t.textContent.trim() === `${x},${y}`) return t;
     }
     return null;
+}
+
+// Prevent cube placing within each other 
+const cubeCollisionCheck = (anchorTile, item, az= 0 ) => {
+    let collision = false;
+    const ax = parseInt(anchorTile.dataset.x);
+    const ay = parseInt(anchorTile.dataset.y);
+
+    const CubeWidthX = item.X ?? item.x ?? 1;
+    const CubeHeightY = item.Y ?? item.y ?? 1;
+
+    for (let dx = 0; dx < CubeWidthX; dx++) {
+        for (let dy = 0; dy < CubeHeightY; dy++) {
+            if (CubeOnTheTile.has(`${ax + dx},${ay + dy}, ${az}`)) {
+                console.log('Collision detected at', ax + dx, ay + dy, az, 'for cube at', ax, ay, az);
+                return collision = true;
+            }
+        }
+    }
+    console.log('No collision detected for cube at', ax, ay, az);
+    return collision = false;
 }
 
 window.cubeRegistry = cubeRegistry;
