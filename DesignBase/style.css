@@ -242,3 +242,17 @@ body {
     display: flex;
     justify-content: space-between;
 }
+
+.Layer-list {
+    height: 150px;
+    overflow-y: auto;
+    border: 1px solid black;
+}
+
+.Layer-list-item {
+    padding: 5px;
+    cursor: pointer;
+}
+.Layer-list-item.active {
+    background-color: lightblue;
+}
