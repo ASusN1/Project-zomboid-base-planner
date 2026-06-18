@@ -7,9 +7,15 @@ let offsetY = 0;
 let isCameraDragging = false;
 let startX = 0;
 let startY = 0;
+let transformFrame = null;
 
 function updateTransform() {
-    grid.style.transform = `translate(${offsetX}px, ${offsetY}px) rotateX(60deg) rotateZ(45deg) scale3d(${zoom}, ${zoom}, ${zoom})`;
+    if (transformFrame !== null) return;
+
+    transformFrame = requestAnimationFrame(() => {
+        transformFrame = null;
+        grid.style.transform = `translate(${offsetX}px, ${offsetY}px) rotateX(60deg) rotateZ(45deg) scale3d(${zoom}, ${zoom}, ${zoom})`;
+    });
 }
 
 //zom to center of the grid 

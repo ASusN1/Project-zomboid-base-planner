@@ -8,10 +8,10 @@ deleteButton.addEventListener('click', () => {
     selectedItem = null; // Clear selected item when delete tool is selected
 
     //Clear selected item 
-    document.querySelectorAll('.item-card').forEach(card => {
-        card.classList.remove('active');
-
-    });
+    if (window.activeItemCard) {
+        window.activeItemCard.classList.remove('active');
+        window.activeItemCard = null;
+    }
 });
 
 const placeButton = document.getElementById('placeButton');

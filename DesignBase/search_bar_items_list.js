@@ -1,13 +1,13 @@
 const searchBar = document.getElementById('searchBar');
+const itemCards = Array.from(document.querySelectorAll('.item-card'));
 
 searchBar.addEventListener('input', () => {
     const underscore_items_input = searchBar.value.trim().toLowerCase();
-    console.log(underscore_items_input);
 
     let itemFound = false;
 
-    document.querySelectorAll('.item-card').forEach(card => {
-        const name = card.querySelector('span').innerText.toLowerCase();
+    itemCards.forEach(card => {
+        const name = card.dataset.searchName || '';
         if (name.includes(underscore_items_input)) {
             itemFound = true;
             card.style.display = '';
@@ -16,7 +16,7 @@ searchBar.addEventListener('input', () => {
             card.style.display = 'none';
         }
     });
-     
+
     if (underscore_items_input !== '') {
         if (!itemFound) {
             console.log( searchBar.value.trim() + "No items found");
@@ -28,7 +28,6 @@ searchBar.addEventListener('input', () => {
 
 searchBar.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-        const underscore_items_input = searchBar.value.trim().toLowerCase();
-        console.log(underscore_items_input);
+        console.log(searchBar.value.trim().toLowerCase());
     }
 });

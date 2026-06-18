@@ -32,6 +32,7 @@ function loadCateoryItems (){
         itemDatabase[categoryType].forEach(item => {
             const cardElement = document.createElement('div');
             cardElement.className ="item-card";
+            cardElement.dataset.searchName = item.name.toLowerCase();
 
             const colorBlock = document.createElement("div");
             colorBlock.className = "item-color-preview";
@@ -47,9 +48,10 @@ function loadCateoryItems (){
             cardElement.addEventListener('click', () => {
                 selectedItem = item; 
 
-                document.querySelectorAll('.item-card').forEach(card => {
-                    card.classList.remove('active');
-                });
+                if (window.activeItemCard) {
+                    window.activeItemCard.classList.remove('active');
+                }
+                window.activeItemCard = cardElement;
                 cardElement.classList.add('active');
                 console.log(selectedItem); // for testing later remove this ( print selectd item)
             });
