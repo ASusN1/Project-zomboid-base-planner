@@ -1,6 +1,7 @@
 window.floorLayers = [{
     name: 'Layer 0',
     gridHTML: '',
+    gridSize: 12, //default grid size for new layers
     cubeRegistry: new Map(),
     CubeOnTheTile: new Map(), 
     undoListItem: [],
@@ -18,6 +19,8 @@ const deleteLayer = document.getElementById('deleteLayer');
 function saveCurrentLayerData() { 
     const current = floorLayers[currentLayerIndex];
     current.gridHTML = grid.innerHTML; 
+    current.gridSize = size;
+
     current.cubeRegistry= window.cubeRegistry;
     current.CubeOnTheTile = window.CubeOnTheTile;
     current.undoListItem = window.undoListItem;
@@ -27,6 +30,11 @@ function saveCurrentLayerData() {
 function loadLayerData(index) {
     const Loadlayer = floorLayers[index];
     grid.innerHTML = Loadlayer.gridHTML;
+    size = Loadlayer.gridSize;
+
+    gridSizeInput.value = Loadlayer.gridSize; // Update the input field to reflect the loaded layer's grid size
+    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+
     window.cubeRegistry = Loadlayer.cubeRegistry;
     window.CubeOnTheTile = Loadlayer.CubeOnTheTile;
     window.undoListItem = Loadlayer.undoListItem;
@@ -65,6 +73,7 @@ addNewLayer.addEventListener('click', () => {
     const newLayer = {
         name: `Layer ${floorLayers.length}`,
         gridHTML: '',
+        gridSize: 12, // default grid size for new layers
         cubeRegistry: new Map(),
         CubeOnTheTile: new Map(),
         undoListItem: [],
@@ -78,6 +87,7 @@ addNewLayer.addEventListener('click', () => {
     window.tileOwner = newLayer.CubeOnTheTile;
     window.undoListItem = newLayer.undoListItem;
     window.redoListItem = newLayer.redoListItem;
+    window.size = newLayer.gridSize;
     createGrid();
     renderLayerList();
 });
