@@ -25,10 +25,15 @@ function saveCurrentLayerData() {
     current.CubeOnTheTile = window.CubeOnTheTile;
     current.undoListItem = window.undoListItem;
     current.redoListItem = window.redoListItem;
+
+    console.log('[SAVE] Layer ' + currentLayerIndex + ' saved — gridSize: ' + current.gridSize + ', tiles: ' + grid.querySelectorAll('.tile').length);
 }
 
 function loadLayerData(index) {
     const Loadlayer = floorLayers[index];
+
+    console.log('[LOAD] Switching to Layer ' + index + ' (' + Loadlayer.name + ') — gridSize: ' + Loadlayer.gridSize);
+
     grid.innerHTML = Loadlayer.gridHTML;
     size = Loadlayer.gridSize;
 
@@ -43,6 +48,7 @@ function loadLayerData(index) {
     grid.querySelectorAll('.tile').forEach(tile=> {
         attachTileClickListener(tile); 
     });
+    prepareWallPlacement();
 }
 
 
@@ -58,6 +64,7 @@ function renderLayerList() {
         item.dataset.layerIndex = i; 
 
         item.addEventListener('click', () => {
+            console.log(`[SWITCH] From Layer ${currentLayerIndex} → Layer ${i}`);
             saveCurrentLayerData();
             currentLayerIndex = i;
             loadLayerData(i);
@@ -69,6 +76,7 @@ function renderLayerList() {
 }
 
 addNewLayer.addEventListener('click', () => {
+    console.log('[NEW LAYER] Creating Layer ' + floorLayers.length + ', current size: ' + size);
     saveCurrentLayerData();
     const newLayer = {
         name: `Layer ${floorLayers.length}`,
@@ -89,10 +97,15 @@ addNewLayer.addEventListener('click', () => {
     window.redoListItem = newLayer.redoListItem;
     window.size = newLayer.gridSize;
     createGrid();
+
+    console.log('[NEW LAYER] Layer ' + currentLayerIndex + ' created — tiles after createGrid: ' + grid.querySelectorAll('.tile').length);
+
+    prepareWallPlacement();
     renderLayerList();
 });
 
 deleteLayer.addEventListener('click', () => {
+    console.log('[DELETE] Deleting Layer ' + currentLayerIndex);
     if (floorLayers.length <= 1) return;
 
     floorLayers.splice(currentLayerIndex, 1);
