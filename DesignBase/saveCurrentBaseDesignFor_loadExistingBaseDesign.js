@@ -99,3 +99,124 @@ function downloadBaseDesignAsJson() {
 }
 
 window.downloadBaseDesignAsJson = downloadBaseDesignAsJson;
+
+// Load design when input from Home.html
+function rebuildLayerOnGrid(savedLayerData) {
+    for (const [tileCoords, tileContent] of Object.entries(savedLayerData.tiles || {})) {
+        const [x,y] = tileCoords.split(','); 
+        const tile = document.querySelector(`.tile[data-x="${x}"][data-y="${y}"]`);
+        if (!tile) continue;
+
+        if (tileContent.floor) tile.style.backgroundColor = tileContent.floor;
+
+        (tileContent.walls || []).forEach(wallInfo => { 
+            placeWallTile(tile,wallInfo.color, wallInfo.direction, wallInfo.height);
+        });
+    }
+
+    (savedLayerData.cubes || []).forEach(cubeInfo => {
+        const tile = document.querySelector(`.tile[data-x="${cubeInfo.x}"][data-y="${cubeInfo.y}"]`);
+        if (!tile) return;
+        const itemObject = { 
+            color: cubeInfo.color, 
+            x: cubeInfo.w, 
+            y: cubeInfo.h, 
+            z: cubeInfo.d, 
+            type: 'cube' 
+        };
+        placeItemOnTile(tile, itemObject, cubeInfo.z);
+    });
+}
+
+//applies the save deising for builder and redirect to builder page
+function applyDesignToBuilder(saveData) { 
+    document.getElementById('designBaseName').textContent = saveData.designName || 'My Base';
+
+    const activeLayerIndex = Math.min(saveData.currentLayerIndex || 0 , saveData.layers.length -1);
+
+    const layerBuildOrder = saveData.layers.map((_,i) => i).filter(i => i !== activeLayerIndex); //build all layers except the active layer first, then build the active layer last
+    layerBuildOrder.push(activeLayerIndex); 
+
+    window.floorLayers = saveData.layers.map(savedLayer => ({ 
+        name: savedLayer.name,
+        gridSize: savedLayer.gridSize,
+        gridHTML: '', // will be generated when the layer is activated
+        CubeOnTheTile: new Map(),
+        cubeRegistry: new Map(), 
+        undoListItem: [], 
+        redoListItem: [], 
+    }));
+
+    layerBuildOrder.forEach(i => {
+        const savedLayerData = saveData.layers[i];
+        const freshLayer = window.floorLayers[i];
+
+        window.cubeRegistry.clear(); 
+        window.CubeOnTheTile.clear(); 
+
+        window.size = savedLayerData.gridSize; 
+        createGrid(); 
+        rebuildLayerOnGrid(savedLayerData);
+
+        freshLayer.gridHTML = grid.innerHTML;
+
+        window.cubeRegistry.forEach((v,k) => freshLayer.cubeRegistry.set(k,v));
+        window.CubeOnTheTile.forEach((v,k) => freshLayer.CubeOnTheTile.set(k,v));
+
+        window.undoListItem.length = 0;
+        window.redoListItem.length = 0;
+    });
+
+    window.currentLayerIndex = activeLayerIndex;
+    loadLayerData(activeLayerIndex); 
+    renderLayerList(); 
+
+    console.log('Base design loaded into builder:', saveData);
+}
+
+function loadBaseDesignFromJson() {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.json';
+
+    fileInput.addEventListener('change', () => { 
+        const selectedFile = fileInput.files[0];
+        if (!selectedFile) return;
+
+        const fileReader = new FileReader();
+        fileReader.onload = (e) => {
+            try { 
+                const saveData = JSON.parse(e.target.result);
+                if(!saveData || !saveData.layers) {
+                    console.warn("invalid save file format ( must be json")
+                    return; 
+                }
+
+                applyDesignToBuilder(saveData);
+            } catch (error) {
+                console.error("Error parsing JSON file:", error);
+            }
+        };
+        fileReader.readAsText(selectedFile);
+    });
+    fileInput.click();
+}
+
+window.addEventListener('load', () => {
+    const pending = localStorage.getItem('pendingBaseDesign');
+    if (!pending) return; 
+
+    localStorage.removeItem('pendingBaseDesign'); 
+
+    try { 
+        const saveData = JSON.parse(pending);
+        if(!saveData || !saveData.layers) {
+            console.warn("invalid save file format ( must be json");
+                return; 
+        }
+            applyDesignToBuilder(saveData);
+        } catch (error) {
+            console.error("Error parsing pending base design JSON:", error);
+        }
+    
+})
