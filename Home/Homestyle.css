@@ -39,6 +39,56 @@
     flex-direction: column;
 }
 
-.home-main-content-grid{ 
-    
+.home-main-content-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr; 
+    gap: 30px; 
+    flex-grow:1; 
+}
+
+.card-design { 
+    background-color: lightgray;
+    border: 2px solid #ddd;
+    display:flex; 
+    flex-direction: column;
+    width: 260px;
+    height: 360px; 
+    overflow: hidden;
+}
+
+.card-preview-area { 
+    flex: 1.2; 
+    background-color: gray; 
+    border-bottom: 2px solid #ddd;
+}
+
+.card-info-area { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.info-label { 
+    font-size: 14px;
+    color: black; 
+    margin: 0; 
+    text-transform: uppercase;
+}
+
+.card-preview-picture { 
+    flex: 1.2; 
+    border-bottom: 2px solid #ddd;
+    overflow: hidden; 
+    position: relative;
+}
+
+.card-preview-picture img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    object-position: center;
+    display: block;
 }

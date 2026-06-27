@@ -1,8 +1,8 @@
 const gridSizeInput = document.getElementById('gridSizeInput'); 
 
 // defult grid size = 12*12 (if input <12 --> change to 12) 
-window.size = Math.max(parseInt(gridSizeInput.value) || 12); // default to 12 if invalid input
-//if (size <12) size = 12; // force min height/width = 12*12 
+window.size = Math.max(parseInt(gridSizeInput.value) || 12);
+if (window.size > 100) window.size = 100; 
 
 window.selectedItem = null; 
 window.currentToolusing = 'place'; // default tool is place
