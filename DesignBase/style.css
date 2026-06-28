@@ -36,8 +36,6 @@ body {
     margin-left: -360px;
     margin-top: -360px;
     display: grid;
-    min-width: 720px;
-    min-height: 720px;
     transform-style: preserve-3d;
     cursor: pointer;
 }
@@ -45,8 +43,10 @@ body {
 .tile{
     width:60px;
     height:60px;
-    background: blue;
-    border: 2px solid #fff;
+    background: url("../testing/New_Piskel.png") center/cover no-repeat;
+    border:none;
+    outline:2px solid #fff;
+    outline-offset:-1px;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -63,8 +63,8 @@ body {
 
 /* Hover effect - Red border  */
 .tile:hover {
-    border-color: red; 
-    background-color: lightgreen;
+    outline-color: red; 
+    background-color:rgba(204, 255, 205, 0.2);
     color: blue;
     transform: scale(1.12);
     z-index: 10; 
