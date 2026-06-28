@@ -43,7 +43,7 @@ body {
 .tile{
     width:60px;
     height:60px;
-    background: url("../testing/New_Piskel.png") center/cover no-repeat;
+    background: url("../tiles_picture/Gras_land_square.png") center/cover no-repeat;
     border:none;
     outline:2px solid #fff;
     outline-offset:-1px;
