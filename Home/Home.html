@@ -23,16 +23,25 @@
             <main class = "home-main-content">
                 <h1>Welcome to the Home Page</h1>
 
-                <div class = "card-design" onclick = "openDesignCard('../testing/Stuff.json')">
-                    <div class = "card-preview-picture">
-                        <img src = "../image.png" alt = "Card Preview Image">
+                <div class = "card-row">
+
+                    <div class = "card-design" onclick = "openDesignCard('../testing/Stuff.json')">
+                        <div class = "card-preview-picture">
+                            <img src = "../image.png" alt = "Card Preview Image">
+                        </div>
+
+                        <div class = "card-info-area">
+                            <p class =  "info-label">Name: My Design</p>
+                            <p class = "info-label">Description: This is a sample design description.</p>
+                        </div>
                     </div>
 
-                    <div class = "card-info-area">
-                        <p class =  "info-label">Name: My Design</p>
-                        <p class = "info-label">Description: This is a sample design description.</p>
-                    </div>
+                <div class = "card-design" id = "addNewCardButton"> 
+                    <a href = "../DesignBase/index.html">
+                        <span class = "plus-symbol">+   </span>
+                    </a>
                 </div>
+
 
             </main>
         </div>

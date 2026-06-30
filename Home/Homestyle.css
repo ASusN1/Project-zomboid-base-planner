@@ -92,3 +92,25 @@
     object-position: center;
     display: block;
 }
+
+.card-row{ 
+    display: flex; 
+    gap: 30px; 
+    flex-wrap: wrap;
+}
+#addNewCardButton { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    cursor: pointer;
+}
+
+.plus-symbol { 
+    font-size: 80px; 
+    color: #888; 
+    font-weight: bold;
+}
+
+#addNewCardButton:hover .plus-symbol { 
+    color: #333; 
+}
