@@ -67,13 +67,13 @@ document.addEventListener('keydown', (event) => {
         
 
     const key = event.key.toLowerCase();
-    if ((event.ctrlKey || event.actionKey) && key === 'z') {
+    if ((event.ctrlKey) && key === 'z') {
         console.log("UNdo button pressed : ctrl + z");
         event.preventDefault(); // Prevent default undo behavior
         undoButton.click(); // Trigger the undo button click event
     } 
 
-    else if ((event.ctrlKey || event.actionKey) && key === 'y') {
+    else if ((event.ctrlKey) && key === 'y') {
         console.log("Redo button pressed : ctrl + y");
         event.preventDefault(); // Prevent default redo behavior
         redoButton.click(); // Trigger the redo button click event
