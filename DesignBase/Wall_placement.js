@@ -21,11 +21,25 @@ const directionOrientationOrder = ['N', 'E', 'S', 'W'];
 //let currentWallDirection = direction_of_wall_tile.N; // default wall direction
 let currentWallDirection = direction_of_wall_tile.N; // default wall direction
 
-function createWallTile(color, direction_of_wall_tile,height) {
+function createWallTile(color, direction_of_wall_tile,height, name) {
     const wall = document.createElement("div");
     wall.classList.add('wall-face', 'wall-direction-' + direction_of_wall_tile);
-    wall.style.backgroundColor = color; 
-    
+    wall.style.backgroundColor = color; // still keep if no sprite yet
+
+    const spritePath = getWallSpritePath(height, name, direction_of_wall_tile);
+
+    if (spritePath) { 
+        const testImg = new Image();
+        testImg.onload = () => { 
+            wall.style.backgroundImage = `url("${spritePath}")`;
+            wall.style.backgroundSize = 'cover';
+        };
+        testImg.onerror = () => { // run if image fails to load
+            console.error("Failed to load sprite image at path: " + spritePath);
+        };
+        testImg.src = spritePath; // start loading the image
+    }
+
     const px = (wallHeights[height] ?? wall_tile_height_small) + 'px';
 
     if (direction_of_wall_tile === 'E' || direction_of_wall_tile === 'W') {
@@ -40,7 +54,7 @@ function createWallTile(color, direction_of_wall_tile,height) {
 }
 
 // place/remove wall on tile
-function placeWallTile(tile,color,direction_of_wall_tile, height) {
+function placeWallTile(tile,color,direction_of_wall_tile, height,name) {
     const existingWall = tile.querySelector(".wall-direction-" + direction_of_wall_tile);
 
     if (existingWall) {
@@ -48,7 +62,7 @@ function placeWallTile(tile,color,direction_of_wall_tile, height) {
         return;
     }
 
-    const newWall = createWallTile(color, direction_of_wall_tile, height);
+    const newWall = createWallTile(color, direction_of_wall_tile, height,name);
     tile.appendChild(newWall); // add the new wall to the tile
 }
 
@@ -62,7 +76,7 @@ function prepareWallPlacement() {
                 if (selectedItem.type !== 'wall') return; // only place wall if the selected item is a wall
             
 
-            placeWallTile(tile, selectedItem.color, currentWallDirection, selectedItem.height); // place the wall on the clicked tile
+            placeWallTile(tile, selectedItem.color, currentWallDirection, selectedItem.height, selectedItem.name); // place the wall on the clicked tile
             }
             //Delete wall if the delete tool is selecte
             else if (currentToolusing === 'delete') {

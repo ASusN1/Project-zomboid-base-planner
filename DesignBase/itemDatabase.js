@@ -3,7 +3,7 @@ const itemDatabase = {
     Walls :[
         { name: 'Brick Wall', color: '#B22222' , type: 'wall', height: 'small'},
         { name: 'Stone Wall', color: '#808080' , type: 'wall', height: 'medium'},
-        { name: 'Wooden Wall', color: '#8B4513' , type: 'wall', height: 'large'},
+        { name: 'Wood_Wall_level_3', color: '#8B4513' , type: 'wall', height: 'large'},
         { name: 'Concrete Wall', color: '#696969' , type: 'wall'},
         { name: 'Metal Wall', color: '#A9A9A9' , type: 'wall'},
         { name: 'Glass Wall', color: '#87CEEB' , type: 'wall'},

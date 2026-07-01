@@ -1,0 +1,1 @@
+const medium_wall_sprite_data = [];

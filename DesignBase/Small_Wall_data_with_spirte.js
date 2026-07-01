@@ -1,0 +1,1 @@
+const small_wall_sprite_data = [];

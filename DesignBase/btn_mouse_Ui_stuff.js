@@ -37,6 +37,17 @@ function loadCateoryItems (){
             colorBlock.className = "item-color-preview";
             colorBlock.style.backgroundColor = item.color;
 
+            // if item = wall + has spirte --> use spirte instead of color 
+            if(item.type === 'wall' && typeof getWallSpritePath === 'function') {
+                const previewSpritePath = getWallSpritePath(item.height, item.name, 'N') // use N as preview pic 
+
+                if (previewSpritePath) {
+                    colorBlock.style.backgroundImage = `url("${previewSpritePath}")`;
+                    colorBlock.style.backgroundSize = 'cover';
+                    colorBlock.style.backgroundColor = ''; 
+                }
+            }
+
             cardElement.appendChild(colorBlock);
 
             const textLabel = document.createElement('span');
