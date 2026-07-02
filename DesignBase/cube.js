@@ -14,6 +14,25 @@ function shadeColor(hex, amount) {
     return '#' + [r,g,b].map(v => v.toString(16).padStart(2,'0')).join('');
 }
 
+function applyCubeSprite(el, itemName, face, fallbackColor) {
+    const spritePath = window.getCubeSpritePath? window.getCubeSpritePath(itemName, face) : null;
+    if(!spritePath) {
+        el.style.background = fallbackColor; 
+        return; 
+    }
+
+    const img = new Image();
+
+    img.onload = () => {
+        el.style.backgroundImage = `url(${spritePath})`;
+        el.style.backgroundSize = 'cover';
+    };
+    img.onerror = () => {
+        el.style.background = fallbackColor;
+    };
+    img.src = spritePath;
+}
+
 function placeCubeOnGrid(anchorTile, item, baseZ = 0 ) {
     // get the psotion of the cube ( like the grid thingy) 
     const ax = parseInt(anchorTile.dataset.x); 
@@ -53,13 +72,14 @@ function placeCubeOnGrid(anchorTile, item, baseZ = 0 ) {
         // only paint color if first cube, the above cube wont change color
             if (az === 0) { 
                 prevFloorColors.set(t, t.style.backgroundColor);
-                t.style.backgroundColor = colorFloor;
+                applyCubeSprite(t, item.name, 'bottom', colorFloor);
             }
 
             // Top cap lifted by wallH so it appears above tile surface
             const top = document.createElement('div');
             top.className = 'cube-top';
-            top.style.cssText = `width:${TILESIZE}px;height:${TILESIZE}px;background:${colorTop};transform:translateZ(${wallH+ baseOffsetpx}px);`;
+            top.style.cssText = `width:${TILESIZE}px;height:${TILESIZE}px;transform:translateZ(${wallH+ baseOffsetpx}px);`;
+            applyCubeSprite(top, item.name, 'top', colorTop);
             
             // the bottom cube's top will act like a grid place cube on top 
             top.dataset.x = ax + dx; 
@@ -83,7 +103,8 @@ function placeCubeOnGrid(anchorTile, item, baseZ = 0 ) {
             if (dx === 0 || dx === CubeWidthX - 1) {
                 const ns = document.createElement('div');
                 ns.className = 'cube-face-ns';
-                ns.style.cssText = `--baseZ:${baseOffsetpx}px;background:${colorNS};height:${wallH}px;`;
+                ns.style.cssText = `--baseZ:${baseOffsetpx}px;height:${wallH}px;`;
+                applyCubeSprite(ns, item.name, 'S', colorNS);
                 t.appendChild(ns);
                 elements.push({ el: ns, parent: t });
             }
@@ -92,7 +113,8 @@ function placeCubeOnGrid(anchorTile, item, baseZ = 0 ) {
             if (dy === 0 || dy === CubeHeightY - 1) {
                 const ew = document.createElement('div');
                 ew.className = 'cube-face-ew';
-                ew.style.cssText = `--baseZ:${baseOffsetpx}px;background:${colorEW};width: ${wallH}px;height:${TILESIZE}px;`;
+                ew.style.cssText = `--baseZ:${baseOffsetpx}px;width: ${wallH}px;height:${TILESIZE}px;`;
+                applyCubeSprite(ew, item.name, 'E', colorEW);
                 t.appendChild(ew);
                 elements.push({ el: ew, parent: t });
             }
