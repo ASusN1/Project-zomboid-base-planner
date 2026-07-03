@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login_page.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <form id = "loginForm" class = "login-box">
+
+            <h1>Zomboid Base Builder</h1>
+            <h2>Login/Sign Up</h2>
+
+            <label for  ="emailInput">Email</label>
+            <input type = "email" id = "email" placeholder="you@example.com" required>
+
+            <label for  ="passwordInput">Password</label>
+            <input type = "password" id = "passwordInput" placeholder="Password" required>
+
+            <button type = "loginbtn" id = "loginButton">Log In</button>
+
+            <p id = "authMessage"></p>
+        </form>
+    </div>
+
+    <script src = "authentication.js"></script>
+</body>
+</html>
