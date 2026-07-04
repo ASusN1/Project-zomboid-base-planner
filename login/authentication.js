@@ -1,5 +1,6 @@
 const loginForm = document.getElementById('loginForm');
 const authMessage = document.getElementById('authMessage');
+const signUpButton = document.getElementById('signUpButton');
 
 loginForm.addEventListener("submit", async (event) => {
     event.preventDefault(); // stop page from reloading 
@@ -22,4 +23,22 @@ loginForm.addEventListener("submit", async (event) => {
     authMessage.textContent = "Login successful"; 
     window.location.href = "../Home/Home.html"; 
 });
+// sign  up 
+signUpButton.addEventListener('click', async () => {
+    const emailValue = document.getElementById('email').value;
+    const passwordValue = document.getElementById('passwordInput').value;
 
+    authMessage.textContent = "Creating account...";
+
+    const { data, error } = await window.sb.auth.signUp({
+        email: emailValue,
+        password: passwordValue
+    });
+
+    if (error) {
+        authMessage.textContent = error.message;
+        return; 
+    }
+
+    authMessage.textContent = "Account created successfully. Please check your email to confirm your account.";
+});
