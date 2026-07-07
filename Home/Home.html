@@ -36,17 +36,6 @@
 
                 <div class = "card-row">
 
-                    <div class = "card-design" onclick = "openDesignCard('../testing/Stuff.json')">
-                        <div class = "card-preview-picture">
-                            <img src = "../image.png" alt = "Card Preview Image">
-                        </div>
-
-                        <div class = "card-info-area">
-                            <p class =  "info-label">Name: My Design</p>
-                            <p class = "info-label">Description: This is a sample design description.</p>
-                        </div>
-                    </div>
-
                 <div class = "card-design" id = "addNewCardButton"> 
                     <a href = "../DesignBase/index.html">
                         <span class = "plus-symbol">+   </span>
@@ -57,7 +46,9 @@
             </main>
         </div>
 
+        <script type = "module" src = "../sb_stuff/supabase_client.js"></script>
         <script src ="loadExistingBaseDesign.js"></script>
         <script src = "load_info_from_JSON_for_display_at_home_main_content.js"></script>
+        <script src = "load_base_design_from_sb.js"></script>
     
         </body>
