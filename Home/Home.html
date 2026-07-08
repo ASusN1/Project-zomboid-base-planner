@@ -9,7 +9,12 @@
     <body>
         <div class = "content-grid-layout">
 
-            <aside class = "Navigation-side-bar"></aside>
+            <aside class = "Navigation-side-bar">
+                <div class = "side-bar-buttons-container">
+                    <button class = "sidebar-btn-active"> Your Designs </button>
+                    <button class = "sidebar-btn"> Community Design </button>
+                </div>
+            </aside>
 
             <aside class = "top-create-upload-bar">
                  <div class = 'home-sidebar-button'>
@@ -22,7 +27,7 @@
                 <div class = "user-icon-container"> 
                     <a href = "../login/login.html">
                         <div class = "user-avatar">
-                            <svg viewBox = "0 0 24 24" fill = "none" xmlns = "http://www.w3.org/2000/svg">
+                            <svg id = "defaultAvatar"viewBox = "0 0 24 24" fill = "none" xmlns = "http://www.w3.org/2000/svg">
                                 <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="#555555"/>
                             </svg>
                             <img id = "UserAvatarIMG" alt = "Account" style = "display:none">
@@ -47,6 +52,8 @@
         </div>
 
         <script type = "module" src = "../sb_stuff/supabase_client.js"></script>
+        <script type = "module" src = "../login/updateUserAvatarAsSignIN.js"></script>
+        
         <script src ="loadExistingBaseDesign.js"></script>
         <script src = "load_info_from_JSON_for_display_at_home_main_content.js"></script>
         <script src = "load_base_design_from_sb.js"></script>

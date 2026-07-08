@@ -144,3 +144,30 @@
     height: 100%;
     object-fit:conver; 
 }
+
+.side-bar-buttons-container { 
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    margin-top: 20px;
+}
+
+.sidebar-btn {
+    width: 100%; 
+    font-size: 16px; 
+    text-align: center; 
+    background-color: transparent;
+    color: gray; 
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.sidebar-btn:hover {
+    background-color: #f0f0f0; 
+    color: black; 
+}
+
+.sidebar-btn.active { 
+    background-color: lightgreen;
+    color: black;
+}

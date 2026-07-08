@@ -3,6 +3,7 @@ async function updateUserAvatarAsSignIN() {
     const UserAvatarIMG = document.getElementById('UserAvatarIMG');
 
     if (!defaultAvatar || !UserAvatarIMG) return; 
+    console.log("element found", defaultAvatar, UserAvatarIMG);
 
     const { data, error} = await window.sb.auth.getUser(); 
 
@@ -14,10 +15,17 @@ async function updateUserAvatarAsSignIN() {
     }
 
     const currentUser = data.user;
-    const avataUrl = currentUser.user_metadata && currentUser.user_metadata.avatar_url; // check if supabase if this user has a avatar img saved
 
-    if (avataUrl) {
-        UserAvatarIMG.src = avataUrl;
+    const profileResult = await window.sb 
+    .from('profiles')
+    .select('avatar_url')
+    .eq('id', currentUser.id)
+    .single();
+    
+    const avatarUrl = profileResult.data && profileResult.data.avatar_url; // check if supabase if this user has a avatar img saved
+    console.log('profile result', profileResult);
+    if (avatarUrl) {
+        UserAvatarIMG.src = avatarUrl;
         defaultAvatar.style.display = 'none';
         UserAvatarIMG.style.display = '';
     }else{ 
