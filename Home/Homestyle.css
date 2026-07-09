@@ -175,3 +175,17 @@ css.side-bar-buttons-container {
     border-left: 3px solid #1a73e8;
     font-weight: 700;
 }
+
+.sidebar-logo { 
+    height: 70px; 
+    display: flex; 
+    align-items: center;
+    padding-left: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.sidebar-logo-text { 
+    font-size: 18px; 
+    font-weight: 700; 
+    color: black;
+}
