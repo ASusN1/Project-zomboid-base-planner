@@ -189,3 +189,53 @@ css.side-bar-buttons-container {
     font-weight: 700; 
     color: black;
 }
+
+.main-content-row { 
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#toggleViewBtn { 
+    cursor: pointer; 
+    background: white; 
+    font-size: 14px; 
+}
+
+#toggleViewBtn:hover { 
+    background-color: #e8f0fe; 
+    color: #1a73e8;
+    border-color: #1a73e8;
+}
+
+.card-row.list-view { 
+    flex-direction: column;
+    gap: 0; 
+}
+
+.card-row.list-view .card-design { 
+    flex-direction: row;
+    width: 100%; 
+    height: 70px; 
+    border: none; 
+    border-bottom: 1px solid #ddd;
+}
+
+.card-row.list-view .card-preview-picture { 
+    width: 70px; 
+    height: 70px; 
+    flex: none; 
+    border-bottom: none; 
+    border-right: 1px solid #ddd;
+}
+
+.card-row.list-view .card-info-area { 
+    flex-direction: row;
+    align-items: center;
+    gap: 20px; 
+} 
+
+.card-row.list-view #addNewCardButton{ 
+    display: none; 
+}
