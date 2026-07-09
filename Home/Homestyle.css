@@ -18,7 +18,6 @@
     grid-column: 1; 
     background-color: white; 
     border-right: 1px solid #ddd;
-    padding: 20px;
 }
 
 .top-create-upload-bar { 
@@ -145,29 +144,34 @@
     object-fit: cover;
 }
 
-.side-bar-buttons-container { 
+css.side-bar-buttons-container {
     display: flex;
     flex-direction: column;
-    gap: 15px; 
-    margin-top: 20px;
+    padding-top: 10px;
 }
 
 .sidebar-btn {
     width: 100%; 
-    font-size: 16px; 
-    text-align: center; 
-    background-color: transparent;
-    color: gray; 
+    height: 48px; 
+    font-size: 15px;
+    text-align: left; 
+    padding-left: 20px;
+    background-color: transparent; 
+    border: none;
+    border-left: 3px solid transparent;
+    color: #444; 
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    font-weight: 500;
 }
 
 .sidebar-btn:hover {
-    background-color: #f0f0f0; 
-    color: black; 
+    background-color: #e8f0fe;
+    color: #1a73e8; 
 }
 
-.sidebar-btn.active { 
-    background-color: lightgreen;
-    color: black;
+.sidebar-btn.active {
+    background-color: #e8f0fe;
+    color: #1a73e8; 
+    border-left: 3px solid #1a73e8;
+    font-weight: 700;
 }

@@ -11,8 +11,8 @@
 
             <aside class = "Navigation-side-bar">
                 <div class = "side-bar-buttons-container">
-                    <button class = "sidebar-btn-active"> Your Designs </button>
-                    <button class = "sidebar-btn"> Community Design </button>
+                    <button class = "sidebar-btn active" id = "yourDesignsBtn"> Your Designs </button>
+                    <button class = "sidebar-btn" id = "communityDesignsBtn"> Community Design </button>
                 </div>
             </aside>
 
@@ -53,6 +53,8 @@
 
         <script type = "module" src = "../sb_stuff/supabase_client.js"></script>
         <script type = "module" src = "../login/updateUserAvatarAsSignIN.js"></script>
+
+        <script src = "sidebar_switch_active.js"></script>
         
         <script src ="loadExistingBaseDesign.js"></script>
         <script src = "load_info_from_JSON_for_display_at_home_main_content.js"></script>
