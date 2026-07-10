@@ -18,7 +18,6 @@
     grid-column: 1; 
     background-color: white; 
     border-right: 1px solid #ddd;
-    padding: 20px;
 }
 
 .top-create-upload-bar { 
@@ -91,4 +90,152 @@
     object-fit: cover; 
     object-position: center;
     display: block;
+}
+
+.card-row{ 
+    display: flex; 
+    gap: 30px; 
+    flex-wrap: wrap;
+}
+#addNewCardButton { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    cursor: pointer;
+}
+
+.plus-symbol { 
+    font-size: 80px; 
+    color: #888; 
+    font-weight: bold;
+}
+
+#addNewCardButton:hover .plus-symbol { 
+    color: #333; 
+}
+
+.user-icon-container { 
+    margin-left: auto; 
+    display:flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.user-avatar { 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.user-avatar:hover { 
+    background-color: red;
+}
+
+.user-avatar:active { 
+    transform: scale(0.95);
+}
+
+.user-avatar svg,
+.user-avatar img { 
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+css.side-bar-buttons-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.sidebar-btn {
+    width: 100%; 
+    height: 48px; 
+    font-size: 15px;
+    text-align: left; 
+    padding-left: 20px;
+    background-color: transparent; 
+    border: none;
+    border-left: 3px solid transparent;
+    color: #444; 
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.sidebar-btn:hover {
+    background-color: #e8f0fe;
+    color: #1a73e8; 
+}
+
+.sidebar-btn.active {
+    background-color: #e8f0fe;
+    color: #1a73e8; 
+    border-left: 3px solid #1a73e8;
+    font-weight: 700;
+}
+
+.sidebar-logo { 
+    height: 70px; 
+    display: flex; 
+    align-items: center;
+    padding-left: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.sidebar-logo-text { 
+    font-size: 18px; 
+    font-weight: 700; 
+    color: black;
+}
+
+.main-content-row { 
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#toggleViewBtn { 
+    cursor: pointer; 
+    background: white; 
+    font-size: 14px; 
+}
+
+#toggleViewBtn:hover { 
+    background-color: #e8f0fe; 
+    color: #1a73e8;
+    border-color: #1a73e8;
+}
+
+.card-row.list-view { 
+    flex-direction: column;
+    gap: 0; 
+}
+
+.card-row.list-view .card-design { 
+    flex-direction: row;
+    width: 100%; 
+    height: 70px; 
+    border: none; 
+    border-bottom: 1px solid #ddd;
+}
+
+.card-row.list-view .card-preview-picture { 
+    width: 70px; 
+    height: 70px; 
+    flex: none; 
+    border-bottom: none; 
+    border-right: 1px solid #ddd;
+}
+
+.card-row.list-view .card-info-area { 
+    flex-direction: row;
+    align-items: center;
+    gap: 20px; 
+} 
+
+.card-row.list-view #addNewCardButton{ 
+    display: none; 
 }
