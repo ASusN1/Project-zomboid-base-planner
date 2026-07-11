@@ -30,12 +30,12 @@ function createWallTile(color, direction_of_wall_tile,height, name) {
     const spritePath = getWallSpritePath(height, name, direction_of_wall_tile);
 
     if (spritePath) { 
+        wall.style.backgroundImage = `url(${spritePath})`;
+        wall.style.backgroundSize = 'cover'; // ensure the sprite covers the entire wall tile
+
         const testImg = new Image();
-        testImg.onload = () => { 
-            wall.style.backgroundImage = `url("${spritePath}")`;
-            wall.style.backgroundSize = 'cover';
-        };
         testImg.onerror = () => { // run if image fails to load
+            wall.style.backgroundImage = ''; // remove the background image if it fails to load
             console.error("Failed to load sprite image at path: " + spritePath);
         };
         testImg.src = spritePath; // start loading the image
