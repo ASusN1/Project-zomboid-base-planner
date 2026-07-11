@@ -34,7 +34,8 @@ function extractTilesFromBaseDesign (containerEl, cubeOnTheTileMap) {
                 savedTileContent.walls.push({ 
                     direction: wallDirection,
                     color: wall.style.backgroundColor, 
-                    height: heightOfObject[heightINPixels] || 'small'
+                    height: heightOfObject[heightINPixels] || 'small',
+                    name: wall.dataset.itemName
                 });
             });
         }
@@ -110,7 +111,7 @@ function rebuildLayerOnGrid(savedLayerData) {
         if (tileContent.floor) tile.style.backgroundColor = tileContent.floor;
 
         (tileContent.walls || []).forEach(wallInfo => { 
-            placeWallTile(tile,wallInfo.color, wallInfo.direction, wallInfo.height);
+            placeWallTile(tile,wallInfo.color, wallInfo.direction, wallInfo.height, wallInfo.name);
         });
     }
 

@@ -16,7 +16,7 @@ body {
     width:500px;
     min-width:220px;
     height:100vh;
-    background:yellow;
+    background: transparent;
     border-right:1px solid #ccc;
     padding:20px;
     overflow-y:auto;
@@ -27,7 +27,7 @@ body {
     flex:1;
     position:relative;
     overflow: hidden;
-    background:black;
+    background: #2C2D2D;
 
 }
 .iso-container {
@@ -127,12 +127,12 @@ body {
     flex-direction: column;
     gap: 10px; 
     left: 50%;
-    background: yellow;
+    background: transparent;
 }
 
 .tools-bar button{
     background: white;
-    border: 2px solid yellow;
+    border: 2px solid;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.25s ease;
@@ -264,7 +264,7 @@ body {
     left: 0; 
     width: 200px;
     height: 50px;
-    background-color: yellow;
+    background-color: white;
     display:flex; 
     align-items: center;
     z-index: 100; 

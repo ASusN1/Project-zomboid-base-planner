@@ -25,6 +25,7 @@ function createWallTile(color, direction_of_wall_tile,height, name) {
     const wall = document.createElement("div");
     wall.classList.add('wall-face', 'wall-direction-' + direction_of_wall_tile);
     wall.style.backgroundColor = color; // still keep if no sprite yet
+    wall.dataset.itemName = name;
 
     const spritePath = getWallSpritePath(height, name, direction_of_wall_tile);
 

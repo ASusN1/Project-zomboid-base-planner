@@ -9,7 +9,7 @@ function rebuildLayerOnGrid(savedLayerData) {
         if (tileContent.floor) tile.style.backgroundColor = tileContent.floor; // repaint floor color
 
         (tileContent.walls || []).forEach(wallInfo => {
-            placeWallTile(tile, wallInfo.color, wallInfo.direction, wallInfo.height); // replace each wall
+            placeWallTile(tile, wallInfo.color, wallInfo.direction, wallInfo.height, wallInfo.name); // replace each wall
         });
     }
 
