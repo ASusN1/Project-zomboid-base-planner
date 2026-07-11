@@ -1,5 +1,6 @@
 async function exportBaseDesignAsPicture() { 
     
+    document.querySelector(".sidebar").style.display = "none"; // hide sidebar
     document.querySelector(".tools-bar").style.display = "none"; // hide tools bar
     document.querySelector(".base-design-name").style.display = "none"; // hide base design name
 
@@ -25,7 +26,7 @@ async function exportBaseDesignAsPicture() {
 
     stream.getTracks().forEach(track => track.stop()); // stop the stream
 
-    
+    document.querySelector(".sidebar").style.display = ""; // show sidebar
     document.querySelector(".tools-bar").style.display = ""; // show tools bar
     document.querySelector(".base-design-name").style.display = ""; // show base design name
 
