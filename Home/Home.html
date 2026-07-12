@@ -43,18 +43,32 @@
             <main class = "home-main-content">
                 <div class = "main-content-row">
                     <h1>Welcome to the Home Page</h1>
-                    <button id = "toggleViewBtn">Toggle View</button>
+                    <div class = "top-right-main-buttons">
+                        <button id = "toggleViewBtn">Toggle View</button>
+                        <button id = "deleteCardBtn">Delete Card</button>
+                    </div>
                 </div>
-            
+
                 <div class = "card-row" id = "cardRow">
 
                 <div class = "card-design" id = "addNewCardButton"> 
                     <a href = "../DesignBase/index.html">
-                        <span class = "plus-symbol">+   </span>
+                        <span class = "plus-symbol">+</span>
                     </a>
                 </div>
 
                 </div>
+
+                <div class = "delete-confirmation" id = "deleteConfirmation">
+                    <div class = "delete-confirm-box">
+                        <p id = "deleteConfirmText">Delete selected design</p>
+                        <div class = "delete-confirm-buttons">
+                            <button id = "confirmDeleteBtn">Confirm</button>
+                            <button id = "cancelDeleteBtn">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
 
 
             </main>
@@ -68,5 +82,6 @@
         <script src ="loadExistingBaseDesign.js"></script>
         <script src = "load_info_from_JSON_for_display_at_home_main_content.js"></script>
         <script src = "load_base_design_from_sb.js"></script>
+        <script src = "delete_base_design_from_sb.js"></script>
     
         </body>

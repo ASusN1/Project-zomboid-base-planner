@@ -21,6 +21,8 @@ function timeProjectUpdated(timestampString) {
 function buildCardFromDesignData(designRow) {
     const cardEl = document.createElement('div');
     cardEl.className = 'card-design';
+    
+    cardEl.dataset.designId = designRow.id; 
 
     const previewEl = document.createElement('div');
     previewEl.className = 'card-preview-picture';
@@ -43,6 +45,9 @@ function buildCardFromDesignData(designRow) {
     cardEl.appendChild(infoEl);
 
     cardEl.addEventListener('click', () => {
+        if (window.isDeleteSelectMode) {
+            return; // if in delete select mode, base buidler wont be open 
+        }
         localStorage.setItem("pendingBaseDesign", JSON.stringify(designRow.design_data));
         window.location.href = '../DesignBase/index.html';
     });
