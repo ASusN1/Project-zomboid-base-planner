@@ -1,6 +1,10 @@
+if (!window.cubeRegistry) {
+    window.cubeRegistry = new Map(); // key: "x,y,z" -> value: cubeData
+}
 
-const cubeRegistry = new Map();
-const CubeOnTheTile = new Map();
+if (!window.CubeOnTheTile) {
+    window.CubeOnTheTile = new Map(); // key: "x,y,z" -> value: cubeKey
+}
 
 const TILESIZE = 58;
 
@@ -51,7 +55,7 @@ function placeCubeOnGrid(anchorTile, item, baseZ = 0 ) {
     const baseOffsetpx = az * TILESIZE; // how much to lift the cube above the tile surface based on its Z level
     const key = `${ax},${ay},${az}`;
 
-    if (cubeRegistry.has(key)) return; // don't place two cubes at same anchor
+    if (window.cubeRegistry.has(key)) return; // don't place two cubes at same anchor
 
     // for now just use EW and NS side since if added both 4 wall cannot see clearly 
     const colorTop   = shadeColor(color, +55); 
@@ -119,7 +123,7 @@ function placeCubeOnGrid(anchorTile, item, baseZ = 0 ) {
                 elements.push({ el: ew, parent: t });
             }
 
-            CubeOnTheTile.set(`${ax + dx},${ay + dy}, ${az}`, key);
+            window.CubeOnTheTile.set(`${ax + dx},${ay + dy}, ${az}`, key);
             ownedTiles.push(t);
         }
     }
@@ -145,7 +149,7 @@ function placeCubeOnGrid(anchorTile, item, baseZ = 0 ) {
         tiles: ownedTiles,
         key
     };
-    cubeRegistry.set (key, cubeData);
+    window.cubeRegistry.set (key, cubeData);
 
     window.undoListItem.push({ 
         undo() {
@@ -154,9 +158,9 @@ function placeCubeOnGrid(anchorTile, item, baseZ = 0 ) {
                 if (az ===0 ) {
                     t.style.backgroundColor = prevFloorColors.get(t) ?? ''
                 }
-                CubeOnTheTile.delete(`${t.dataset.x},${t.dataset.y}, ${az}`);
+                window.CubeOnTheTile.delete(`${t.dataset.x},${t.dataset.y}, ${az}`);
             });
-            cubeRegistry.delete(key);
+            window.cubeRegistry.delete(key);
         },
         redo() { 
             placeCubeOnGrid(anchorTile, item,baseZ);
@@ -177,7 +181,7 @@ function placeCubeOnTopOfEachOther(anchorTile, item, height) {
 
 function getTopCubeAt(tile) {
     let top = null; 
-    for (const cube of cubeRegistry.values()) {
+    for (const cube of window.cubeRegistry.values()) {
         if (cube.tiles.includes(tile) && (!top || cube.z > top.z)) {
             top = cube;
         }
@@ -219,6 +223,6 @@ const cubeCollisionCheck = (anchorTile, item, az= 0 ) => {
     return collision = false;
 }
 
-window.cubeRegistry = cubeRegistry;
-window.tileOwner = CubeOnTheTile;
-window.CubeOnTheTile = CubeOnTheTile;
+window.cubeRegistry = window.cubeRegistry || new Map();
+window.tileOwner = window.CubeOnTheTile || new Map();
+window.CubeOnTheTile = window.CubeOnTheTile || new Map();

@@ -23,6 +23,10 @@ function saveCurrentLayerData() {
 
     current.cubeRegistry= window.cubeRegistry;
     current.CubeOnTheTile = window.CubeOnTheTile;
+
+    current.cubeRegistry = new Map(window.cubeRegistry); // update for after user create new card--> still update 
+    current.CubeOnTheTile = new Map(window.CubeOnTheTile);
+
     current.undoListItem = window.undoListItem;
     current.redoListItem = window.redoListItem;
 
