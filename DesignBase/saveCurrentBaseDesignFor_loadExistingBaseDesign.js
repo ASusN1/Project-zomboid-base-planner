@@ -87,7 +87,8 @@ function downloadBaseDesignAsJson() {
 
         return { name: layer.name, gridSize: layer.gridSize, tiles: savedTiles, cubes: savedCubes }; //return layer saved data
     });
-    const saveData = {designName, layers: savedLayers}; // assmble the final save data object
+    const NameForBase = document.getElementById("designBaseName");
+    const saveData = {designName, layers: savedLayers, projectId:NameForBase.dataset.projectId}; // assmble the final save data object
 
     const blob = new Blob([JSON.stringify(saveData, null, 2)], { type: 'application/json' });
 
@@ -131,7 +132,14 @@ function rebuildLayerOnGrid(savedLayerData) {
 
 //applies the save deising for builder and redirect to builder page
 function applyDesignToBuilder(saveData) { 
-    document.getElementById('designBaseName').textContent = saveData.designName || 'My Base';
+    const nameEl = document.getElementById('designBaseName');
+    nameEl.textContent = saveData.designName || "My Base";
+
+    if (saveData.projectId) { 
+        nameEl.dataset.projectId = saveData.projectId;
+    }else {
+        delete nameEl.dataset.projectId;
+    }
 
     const activeLayerIndex = Math.min(saveData.currentLayerIndex || 0 , saveData.layers.length -1);
 

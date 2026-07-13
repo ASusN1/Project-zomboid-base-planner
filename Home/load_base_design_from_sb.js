@@ -48,7 +48,8 @@ function buildCardFromDesignData(designRow) {
         if (window.isDeleteSelectMode) {
             return; // if in delete select mode, base buidler wont be open 
         }
-        localStorage.setItem("pendingBaseDesign", JSON.stringify(designRow.design_data));
+        const designDataWithId = { ...designRow.design_data, projectId: designRow.id };
+        localStorage.setItem("pendingBaseDesign", JSON.stringify(designDataWithId));
         window.location.href = '../DesignBase/index.html';
     });
     return cardEl; 
