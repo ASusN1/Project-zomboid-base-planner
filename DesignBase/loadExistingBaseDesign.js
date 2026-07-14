@@ -17,7 +17,7 @@ function rebuildLayerOnGrid(savedLayerData) {
     (savedLayerData.cubes || []).forEach(cubeInfo => {
         const tile = document.querySelector('.tile[data-x="' + cubeInfo.x + '"][data-y="' + cubeInfo.y + '"]');
         if (!tile) return;
-        const itemObject = { color: cubeInfo.color, x: cubeInfo.w, y: cubeInfo.h, z: cubeInfo.d, type: 'cube' };
+        const itemObject = { color: cubeInfo.color, x: cubeInfo.w, y: cubeInfo.h, z: cubeInfo.d, name: cubeInfo.name, type: 'cube' };
         placeCubeOnGrid(tile, itemObject, cubeInfo.z); // replace each cube
     });
 }

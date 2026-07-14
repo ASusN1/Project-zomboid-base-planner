@@ -21,18 +21,18 @@ function shadeColor(hex, amount) {
 function applyCubeSprite(el, itemName, face, fallbackColor) {
     const spritePath = window.getCubeSpritePath? window.getCubeSpritePath(itemName, face) : null;
     if(!spritePath) {
-        el.style.background = fallbackColor; 
+        el.style.background = fallbackColor; // no sprite --> use color
         return; 
     }
 
+    el.style.backgroundImage = `url(${spritePath})`;
+    el.style.backgroundSize = 'cover';
+
     const img = new Image();
 
-    img.onload = () => {
-        el.style.backgroundImage = `url(${spritePath})`;
-        el.style.backgroundSize = 'cover';
-    };
     img.onerror = () => {
         el.style.background = fallbackColor;
+        el.style.backgroundImage = ""; 
     };
     img.src = spritePath;
 }

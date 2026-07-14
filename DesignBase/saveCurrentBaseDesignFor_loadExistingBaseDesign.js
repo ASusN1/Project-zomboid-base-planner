@@ -126,6 +126,7 @@ function rebuildLayerOnGrid(savedLayerData) {
             x: cubeInfo.w, 
             y: cubeInfo.h, 
             z: cubeInfo.d, 
+            name: cubeInfo.name,
             type: 'cube' 
         };
         placeItemOnTile(tile, itemObject, cubeInfo.z);
