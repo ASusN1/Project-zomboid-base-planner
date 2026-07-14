@@ -62,6 +62,7 @@ function readCubeDataFromBaseDesign (cubeRegistryMap) {
             d: cube.cubeD,
 
             color: cube.color, 
+            name: cube.name,
         });
     });
     return savedCube;
@@ -120,6 +121,7 @@ function rebuildLayerOnGrid(savedLayerData) {
         const tile = document.querySelector(`.tile[data-x="${cubeInfo.x}"][data-y="${cubeInfo.y}"]`);
         if (!tile) return;
         const itemObject = { 
+            name: cubeInfo.name,
             color: cubeInfo.color, 
             x: cubeInfo.w, 
             y: cubeInfo.h, 

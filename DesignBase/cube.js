@@ -145,6 +145,7 @@ function placeCubeOnGrid(anchorTile, item, baseZ = 0 ) {
         cubeD: CubeDepthZ,
         cubeW: CubeWidthX,
         color,
+        name: item.name,
         elements,
         tiles: ownedTiles,
         key
