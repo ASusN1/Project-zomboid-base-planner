@@ -54,12 +54,18 @@ function attachTileClickListener(tile) {
         }
 
         if (newColor !== previousColor) {
+            tile.style.backgroundImage = "none";
             tile.style.backgroundColor = newColor;
             window.undoListItem.push({
-                undo() { tile.style.backgroundColor = previousColor; },
-                redo() { tile.style.backgroundColor = newColor; },
+                undo(){ 
+                    tile.style.backgroundColor = previousColor;
+                    if (!previousColor) tile.style.backgroundImage = "";
+                },
+                redo(){
+                    tile.style.backgroundImage = "none";
+                    tile.style.backgroundColor = newColor;
+                },
             });
-            window.redoListItem.length = 0;
         }
     });
 }
