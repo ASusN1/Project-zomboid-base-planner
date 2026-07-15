@@ -61,11 +61,33 @@ async function saveDesignToSupabase() {
         NameForBase.dataset.projectId = projectId; 
     }
 
+    const screenshotBlob = await window.captureBaseDesingScreenShootForPreviewImgCard(); // capture screenshot of the design for preview image
+    const previewPath = user.id + "/" + projectId + ".png"; // path to save the preview image in Supabase storage
+
+    const uploadResult = await window.sb.storage
+    .from('design-previews')
+    .upload(previewPath, screenshotBlob, { upsert: true, contentType: 'image/png' });
+    console.log("uploadResult:", uploadResult);
+
+    const uploadError = uploadResult.error; // pull error from result
+
+    if ( uploadError ) {
+        alert("Error getting the image for preview: " + uploadError.message);
+        return; 
+    }
+
+    const publicUrlResult = window.sb.storage
+        .from('design-previews')
+        .getPublicUrl(previewPath);
+
+    const previewUrl = publicUrlResult.data.publicUrl; // get the public URL of the uploaded image
+
     const rowToSave= { 
         id: projectId,
         user_id: user.id,
         name: saveData.designName,
-        design_data: saveData
+        design_data: saveData,
+        preview_url: previewUrl
     };
 
     const upsetResult = await window.sb

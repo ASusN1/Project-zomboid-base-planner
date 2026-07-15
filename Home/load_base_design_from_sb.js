@@ -27,6 +27,13 @@ function buildCardFromDesignData(designRow) {
     const previewEl = document.createElement('div');
     previewEl.className = 'card-preview-picture';
 
+    if (designRow.preview_url) { // only addd preview if the image url exists
+        const previewImg = document.createElement('img');
+        previewImg.src = designRow.preview_url;
+        previewImg.alt = "Design preview";
+        previewEl.appendChild(previewImg);
+    } 
+
     const infoEl = document.createElement('div');
     infoEl.className = 'card-info-area';
 
@@ -66,7 +73,7 @@ async function loadBaseDesignsFromSupabase() {
     } 
     const queryResult = await window.sb
     .from('designs')
-    .select("id, name, updated_at, design_data")
+    .select("id, name, updated_at, design_data, preview_url")
 
     .eq('user_id', user.id) // only pull the base designs for the current user
     .order("updated_at", { ascending: false }); // order by most recently updated first
