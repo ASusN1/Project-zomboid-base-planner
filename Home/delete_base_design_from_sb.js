@@ -70,7 +70,19 @@ confirmDeleteBtn.addEventListener('click', async () => {
     deleteConfirmation.style.display = 'none';
 
     const idsToDelete = Array.from(selectedDesignIds);
+    const userResult = await window.sb.auth.getUser(); //get cureernt user 
+    const user = userResult.data.user;
 
+    const previewPathsToDelete = idsToDelete.map(id => user.id + "/" + id + ".jpg");
+
+    const storageDeleteResult = await window.sb.storage
+        .from('design-preview-card-picture')
+        .remove(previewPathsToDelete);
+    
+    if (storageDeleteResult.error) {
+        console.error('Error deleting preview images:', storageDeleteResult.error.message);
+        return
+    }
     const deleteResult = await window.sb
         .from('designs')
         .delete()
