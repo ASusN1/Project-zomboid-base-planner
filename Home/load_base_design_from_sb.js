@@ -45,8 +45,19 @@ function buildCardFromDesignData(designRow) {
     updatedEl.className = 'info-label';
     updatedEl.textContent = designRow.updated_at ? timeProjectUpdated(designRow.updated_at) : "No update time available";
 
+    const shareBtn = document.createElement('button');
+    shareBtn.className = 'top-bar-btn';
+    shareBtn.textContent = 'Share to Community';
+    shareBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // prevent card click event
+        shareDesignToCommunity(designRow.id); // call the function to share the design
+    });
+
+
+
     infoEl.appendChild(nameEl);
     infoEl.appendChild(updatedEl);
+    infoEl.appendChild(shareBtn);
 
     cardEl.appendChild(previewEl);
     cardEl.appendChild(infoEl);
