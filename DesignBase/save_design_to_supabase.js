@@ -65,7 +65,7 @@ async function saveDesignToSupabase() {
     const previewPath = user.id + "/" + projectId + ".png"; // path to save the preview image in Supabase storage
 
     const uploadResult = await window.sb.storage
-    .from('design-previews')
+    .from('design-preview-card-picture')
     .upload(previewPath, screenshotBlob, { upsert: true, contentType: 'image/png' });
     console.log("uploadResult:", uploadResult);
 
@@ -77,7 +77,7 @@ async function saveDesignToSupabase() {
     }
 
     const publicUrlResult = window.sb.storage
-        .from('design-previews')
+        .from('design-preview-card-picture')
         .getPublicUrl(previewPath);
 
     const previewUrl = publicUrlResult.data.publicUrl; // get the public URL of the uploaded image
