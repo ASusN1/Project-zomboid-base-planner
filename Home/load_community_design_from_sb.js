@@ -1,6 +1,6 @@
 const communityCardRowContainer = document.getElementById("communityCardRow");
 
-function buildCommunityDesignCard(designData, author_user_name) {
+function buildCommunityDesignCard(designRow, author_user_name) {
     const cardEl = document.createElement("div");
 
     cardEl.className = " card-design"; // reuse the card style
@@ -39,9 +39,9 @@ async function loadCOmmunityDesignsFromSupabase() {
     //get the public desing + author name 
     const queryResult = await window.sb
         .from("designs")
-        .select("id, name, design_data, user_id, profiles(user_name)")
+        .select("id, name, design_data, user_id, profiles(username)")
         .eq("is_public", true) // only community designs
-        .order("update_at", { ascending: false }); // newest first 
+        .order("updated_at", { ascending: false }); // newest first 
     
     const rows= queryResult.data;
     const error = queryResult.error;
@@ -55,7 +55,7 @@ async function loadCOmmunityDesignsFromSupabase() {
 
     for(let i = 0 ; i< rows.length; i++) {
         const designRow = rows[i];
-        const author_user_name = designRow.profiles && desigRow.profiles.user_name;
+        const author_user_name = designRow.profiles && designRow.profiles.username;
         const cardEl = buildCommunityDesignCard(designRow, author_user_name);
         communityCardRowContainer.appendChild(cardEl);
     }
