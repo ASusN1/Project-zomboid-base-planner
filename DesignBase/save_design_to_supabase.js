@@ -64,11 +64,11 @@ async function saveDesignToSupabase() {
     const rawScreenshotBlob = await window.captureBaseDesingScreenShootForPreviewImgCard(); // capture screenshot of the design for preview image
     const screenshotBlob = await window.compressImageForPreview(rawScreenshotBlob); // compress the screenshot for preview image
 
-    const previewPath = user.id + "/" + projectId + ".png"; // path to save the preview image in Supabase storage
+   const previewPath = user.id + "/" + projectId + ".jpg"  // path to save the preview image in Supabase storage
 
     const uploadResult = await window.sb.storage
     .from('design-preview-card-picture')
-    .upload(previewPath, screenshotBlob, { upsert: true, contentType: 'image/png' });
+    .upload(previewPath, screenshotBlob, { upsert: true, contentType: 'image/jpeg' });
     console.log("uploadResult:", uploadResult);
 
     const uploadError = uploadResult.error; // pull error from result
