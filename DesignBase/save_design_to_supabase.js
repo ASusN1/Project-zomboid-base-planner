@@ -82,7 +82,8 @@ async function saveDesignToSupabase() {
         .from('design-preview-card-picture')
         .getPublicUrl(previewPath);
 
-    const previewUrl = publicUrlResult.data.publicUrl; // get the public URL of the uploaded image
+    const timestampForNewPreviewImage = Date.now();
+    const previewUrl = publicUrlResult.data.publicUrl + "?t=" + timestampForNewPreviewImage; // get the public URL of the uploaded image
 
     const rowToSave= { 
         id: projectId,

@@ -1,6 +1,7 @@
 const loginForm = document.getElementById('loginForm');
 const authMessage = document.getElementById('authMessage');
 const signUpButton = document.getElementById('signUpButton');
+const allowedCharacter = /^[a-zA-Z0-9_]+$/; // regex for allowed characters in username
 
 loginForm.addEventListener("submit", async (event) => {
     event.preventDefault(); // stop page from reloading 
