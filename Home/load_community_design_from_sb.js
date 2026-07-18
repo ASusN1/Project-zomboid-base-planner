@@ -34,7 +34,7 @@ function buildCommunityDesignCard(designRow, author_user_name) {
     cardEl.appendChild(infoEl);
 
     cardEl.addEventListener("click", () => {
-        showCommunityDesignPreview(designRow, author_user_name);
+        openCommunityDesignPreview(designRow, author_user_name);
     });
     return cardEl; 
 }
