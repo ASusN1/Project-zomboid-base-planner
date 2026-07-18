@@ -29,6 +29,7 @@ async function shareDesignToCommunity(privateDesignId) {
             .update({
                 name: privateRow.name, // copy name
                 design_data: privateRow.design_data, // copy lates design datat 
+                preview_url: privateRow.preview_url, // copy latest preview picture 
                 updated_at: new Date().toISOString(),
             })
             .eq("id", existingPublicRow.id);
@@ -49,6 +50,7 @@ async function shareDesignToCommunity(privateDesignId) {
             user_id : privateRow.user_id, // copy owner name
             name: privateRow.name, // copy name
             design_data: privateRow.design_data, // copy design data
+            preview_url: privateRow.preview_url, // copy preview picture
             is_public: true, 
             source_design_id: privateDesignId, // link to private design
         });

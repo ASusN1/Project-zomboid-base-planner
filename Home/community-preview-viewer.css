@@ -1,0 +1,9 @@
+/* basicly reuse the old logic from desin base */
+.community-view-iso-container {
+    position: absolute; 
+    left: 50;
+    top:50;
+    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg) scale(0.5);
+    display: grid; 
+    transform-style: preserve-3d;
+}

@@ -9,6 +9,13 @@ function buildCommunityDesignCard(designRow, author_user_name) {
     const previewEl = document.createElement("div");
     previewEl.className = "card-preview-picture";
 
+    if (designRow.preview_url){
+        const previewImg = document.createElement("img");
+        previewImg.src = designRow.preview_url;
+        previewImg.alt = "Preview Image";
+        previewEl.appendChild(previewImg);
+    }
+
     const infoEl = document.createElement("div");
     infoEl.className = "card-info-area";
 
@@ -36,7 +43,7 @@ async function loadCOmmunityDesignsFromSupabase() {
     //get the public desing + author name 
     const queryResult = await window.sb
         .from("designs")
-        .select("id, name, design_data, user_id, profiles(username)")
+        .select("id, name, design_data,preview_url, user_id, profiles(username)")
         .eq("is_public", true) // only community designs
         .order("updated_at", { ascending: false }); // newest first 
     
