@@ -6,6 +6,7 @@
         <title>Home</title>
         <link rel ="stylesheet" href ="Homestyle.css">
     </head>
+
     <body>
         <div class = "content-grid-layout">
 
@@ -77,10 +78,30 @@
             </main>
         </div>
 
+        <div class = "design-preview-for-community" id = "designPreviewForCommunity">
+            <div class = "design-preview-box">
+                <button id = "closePreviewBtn" class = "close-community-preview-btn ">X</button>
+                
+                <div class = "design-community-preview-left-column">
+
+                    <div class = "design-community-preview-content-main"></div>
+
+                    <div class = "design-community-preview-name-and-author">
+                        <h2 id = "designPreviewName">Design Name</h2>
+                        <p id = "designPreviewAuthor">Author: </p>
+                    </div>
+                </div>
+
+                <div class = "design-community-preview-right-column">
+                    <button id = "copyDesignBtn" class = "top-bar-btn">Make a copy of the design</button>
+                </div>
+            </div>
+        </div>
+
         <script type = "module" src = "../sb_stuff/supabase_client.js"></script>
         <script type = "module" src = "../login/updateUserAvatarAsSignIN.js"></script>
+        <script src = "community-design-preview-pop-up.js"></script>
 
-        <script src = "sidebar_switch_active.js"></script>
         
         <script src ="loadExistingBaseDesign.js"></script>
         <script src = "load_info_from_JSON_for_display_at_home_main_content.js"></script>
@@ -89,6 +110,7 @@
 
         <script src = "share_base_design_to_community.js"></script>
         <script src = "load_community_design_from_sb.js"></script>
+        <script src = "sidebar_switch_active.js"></script>
 
     
         </body>

@@ -27,10 +27,7 @@ function buildCommunityDesignCard(designRow, author_user_name) {
     cardEl.appendChild(infoEl);
 
     cardEl.addEventListener("click", () => {
-        const designDataWithId = {...designRow.design_data};
-        delete designDataWithId.projectId; 
-        localStorage.setItem("selectedDesignData", JSON.stringify(designDataWithId));
-        window.location.href = "../DesignBase/DesignBase.html";
+        showCommunityDesignPreview(designRow, author_user_name);
     });
     return cardEl; 
 }
