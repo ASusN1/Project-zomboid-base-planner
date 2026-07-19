@@ -85,6 +85,21 @@ function rebuildViewerLayer(savedLayerData) {
                 const t = getViewerTileAt(cubeInfo.x + dx, cubeInfo.y + dy);
                 if (!t) continue;
 
+                if (cubeInfo.z ===0 ) {
+                    let bottomSprite = null;
+
+                    if(window.getCubeSpritePath){
+                        bottomSprite = window.getCubeSpritePath(cubeInfo.name, "bottom");
+                    }
+                    if (bottomSprite) { // sprite found , use sprite image
+                        t.style.backgroundImage = `url(${bottomSprite})`;
+                        t.style.backgroundSize = "cover";
+                    } else { //srpite not found , use color 
+                        t.style.backgroundImage = "none";
+                        t.style.backgroundColor = viewerShadeColor(cubeInfo.color, -30);
+                    }
+                }
+
                 const top = document.createElement("div");
                 top.className = "cube-top";
                 top.style.cssText = `width:${VIEWER_TILESIZE}px;height:${VIEWER_TILESIZE}px;transform:translateZ(${wallH + baseOffsetpx}px);`;
