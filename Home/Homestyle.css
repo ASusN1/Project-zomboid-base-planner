@@ -359,6 +359,7 @@ css.side-bar-buttons-container {
     display: flex;
     align-items:center;
     justify-content:center;
+    cursor: grab;
 }
 .design-community-preview-content-bottom{
     display:flex;
