@@ -3,7 +3,6 @@ const heightOfObject = {
     '90px': 'medium',
     '120px': 'large'
 }
-
 // Reads every tiles and return the coordinate of the tiles have smt on them
 function extractTilesFromBaseDesign (containerEl, cubeOnTheTileMap) {
     const savedTiles = {}
@@ -110,7 +109,10 @@ function rebuildLayerOnGrid(savedLayerData) {
         const tile = document.querySelector(`.tile[data-x="${x}"][data-y="${y}"]`);
         if (!tile) continue;
 
-        if (tileContent.floor) tile.style.backgroundColor = tileContent.floor;
+        if (tileContent.floor) {
+            tile.style.backgroundImage = "none";
+            tile.style.backgroundColor = tileContent.floor;
+        }
 
         (tileContent.walls || []).forEach(wallInfo => { 
             placeWallTile(tile,wallInfo.color, wallInfo.direction, wallInfo.height, wallInfo.name);
@@ -126,10 +128,9 @@ function rebuildLayerOnGrid(savedLayerData) {
             x: cubeInfo.w, 
             y: cubeInfo.h, 
             z: cubeInfo.d, 
-            name: cubeInfo.name,
-            type: 'cube' 
+            type: 'cube'
         };
-        placeItemOnTile(tile, itemObject, cubeInfo.z);
+        placeCubeOnGrid(tile, itemObject, cubeInfo.z);
     });
 }
 

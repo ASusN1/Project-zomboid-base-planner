@@ -39,7 +39,10 @@ function rebuildViewerLayer(savedLayerData) {
         const tile = getViewerTileAt(x, y);
         if (!tile) continue;
 
-        if (tileContent.floor) tile.style.backgroundColor = tileContent.floor;
+        if (tileContent.floor) {
+            tile.style.backgroundImage = "none";
+            tile.style.backgroundColor = tileContent.floor;
+        }
 
         (tileContent.walls || []).forEach(wallInfo => {
             const wall = document.createElement("div");
