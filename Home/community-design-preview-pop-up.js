@@ -6,17 +6,24 @@ function openCommunityDesignPreview(designRow, author_user_name) {
     const authorEl = document.getElementById("designPreviewAuthor");
     const copyBtn = document.getElementById("copyDesignBtn");
 
-    previewMain.innerHTML = "";
-    if (designRow.preview_url) {
-        const img = document.createElement("img");
-        img.src = designRow.preview_url;
-        img.alt = "Design Preview";
-        img.style.width = "100%";
-        img.style.height = "100%";
-        img.style.objectFit = "cover";
-        previewMain.appendChild(img);
+    // if the preview fail --> use the preview_url to show the image instead 
+    try{ 
+        renderCommunityDesignViewer(designRow.design_data);
+    }catch(err){
+        console.log("failed to render design , fall back to preview image", err);
+        
+        previewMain.innerHTML = "";
+        if (designRow.preview_url) {
+            const img = document.createElement("img");
+            img.src = designRow.preview_url;
+            img.alt = "Design Preview";
+            img.style.width = "100%";
+            img.style.height = "100%";
+            img.style.objectFit = "cover";
+            previewMain.appendChild(img);
+        }
     }
-
+    
     titleEl.textContent = designRow.name || "My Base";
     authorEl.textContent = "Author: " + (author_user_name || "unknown");
 
