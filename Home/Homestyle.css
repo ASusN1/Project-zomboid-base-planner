@@ -333,7 +333,7 @@ css.side-bar-buttons-container {
     max-width: 1560px;
     height: 70%;
     display: flex; 
-    flex-direction: row;
+    flex-direction: column;
     position: relative;
     border: 1px solid black;
     padding: 20px;
@@ -360,7 +360,13 @@ css.side-bar-buttons-container {
     align-items:center;
     justify-content:center;
 }
-
+.design-community-preview-content-bottom{
+    display:flex;
+    flex-direction: row;
+    flex:1;
+    gap:30px;
+    min-height: 0;
+}
 .design-community-preview-right-column {
     flex: 1; 
     display: flex;
