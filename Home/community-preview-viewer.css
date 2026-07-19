@@ -7,3 +7,116 @@
     display: grid; 
     transform-style: preserve-3d;
 }
+/*readble only , not click able*/
+.community-viewer-tile {
+    width: 60px;
+    height: 60px;
+    background: url("../DesignBase/tiles_pictures/Gras_land_square.png") center/cover no-repeat;
+    outline: 1px solid #fff;
+    outline-offset: -1px;
+    transform-style: preserve-3d;
+    pointer-events: none; /*view only */
+}
+
+/* switch between layers */
+.community-viewer-floor-layer-changer {
+    background: #000;
+    border: 1px solid #fff;
+    padding: 10px;
+}
+
+.community-viewer-layer-list {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid black;
+}
+
+.community-viewer-layer-item.active{
+    background-color: lightblue;
+}
+
+/* cube + wall render */
+.wall-face {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events : none;
+    opacity: 0.9;
+}
+
+.wall-direction-N {
+    top: 0; left: 0; 
+    transform-origin: 50% 0;
+    transform: rotateX(90deg);
+    border-bottom: 2px solid #000;
+}
+.wall-direction-S {
+    top: 100%; left: 0; 
+    transform-origin: 50% 0;
+    transform: rotateX(90deg);
+    border-top: 2px solid #000;
+}
+
+.wall-direction-W {
+    left: auto; right: 0; top: 0;
+    transform-origin: 100% 50%;
+    transform: rotateY(90deg);
+    border-left: 2px solid #000;
+}
+
+.wall-direction-E {
+    left: 0; top:0; 
+    transform-origin: 0 50%;
+    transform: rotateY(-90deg);
+    border-right: 2px solid #000;
+}
+
+.cube {
+    position: absolute;
+    left: 50% ; 
+    top: 50%;
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.cube-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-style: preserve-3d;
+    pointer-events: none; 
+}
+
+.cube-face {
+    position: absolute;
+    opacity: 0.9;
+    border: 2px solid #000;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+
+}
+
+.cube-face-ns {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    opacity: 0.9;
+    pointer-events: none;
+    transform-origin: 50% 0;
+    box-sizing: border-box;
+    transform: translateZ(var(--baseZ,0px)) rotateX(90deg);
+    border-left: 2px solid #000;
+}
+
+.cube-face-ew {
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%;
+    pointer-events: none;
+    opacity: 0.9;
+    transform-origin: 0 50%;
+    transform: translateZ(var(--baseZ,0px)) rotateY(-90deg);
+    border-right: 2px solid #000;
+}

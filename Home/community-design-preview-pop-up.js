@@ -20,6 +20,8 @@ function openCommunityDesignPreview(designRow, author_user_name) {
     titleEl.textContent = designRow.name || "My Base";
     authorEl.textContent = "Author: " + (author_user_name || "unknown");
 
+    renderCommunityDesignViewer(designRow.design_data);
+
     copyBtn.onclick = () => {
         const designDataWithId = { ...designRow.design_data };
         delete designDataWithId.projectId;
