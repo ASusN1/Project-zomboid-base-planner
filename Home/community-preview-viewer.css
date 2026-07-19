@@ -1,9 +1,6 @@
 /* basicly reuse the old logic from desin base */
 .community-viewer-iso-container {
-    position: absolute; 
-    left: 50;
-    top:50;
-    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg) scale(0.5);
+    transform:rotateX(60deg) rotateZ(45deg) scale(0.5);
     display: grid; 
     transform-style: preserve-3d;
 }
@@ -11,7 +8,7 @@
 .community-viewer-tile {
     width: 60px;
     height: 60px;
-    background: url("../DesignBase/tiles_pictures/Gras_land_square.png") center/cover no-repeat;
+    background: url("../tiles_picture/Gras_land_square.png") center/cover no-repeat;
     outline: 1px solid #fff;
     outline-offset: -1px;
     transform-style: preserve-3d;

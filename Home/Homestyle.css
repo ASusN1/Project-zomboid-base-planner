@@ -348,11 +348,17 @@ css.side-bar-buttons-container {
     gap: 16px;
     height: 100%;
 }
+/*for the preview area ( the rectangle with the base design preview thingy*/
 .design-community-preview-content-main{ 
     height: 50%;
     max-height: 50%;
+    width: 100%;
     background-color:  #2C2D2D;
     overflow: hidden;
+    position:relative;
+    display: flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .design-community-preview-right-column {
