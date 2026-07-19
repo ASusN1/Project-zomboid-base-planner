@@ -1,6 +1,6 @@
 /* basicly reuse the old logic from desin base */
 .community-viewer-iso-container {
-    transform:rotateX(60deg) rotateZ(45deg) scale(0.5);
+    transform: rotateX(60deg) rotateZ(45deg) scale3d(0.5, 0.5, 0.5);
     display: grid; 
     transform-style: preserve-3d;
 }
