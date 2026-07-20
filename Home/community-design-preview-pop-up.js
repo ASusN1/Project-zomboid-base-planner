@@ -42,3 +42,7 @@ window.openCommunityDesignPreview = openCommunityDesignPreview;
 document.getElementById("closePreviewBtn").addEventListener("click", () => {
     document.getElementById("designPreviewForCommunity").style.display = "none";
 });
+
+document.getElementById("downloadPreviewCardPicBtn").addEventListener("click", () => {
+    capturePreviewCardImage();
+});
