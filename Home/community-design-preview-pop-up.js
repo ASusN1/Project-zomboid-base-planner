@@ -33,7 +33,7 @@ function openCommunityDesignPreview(designRow, author_user_name) {
         const designDataWithId = { ...designRow.design_data };
         delete designDataWithId.projectId;
         localStorage.setItem("pendingBaseDesign", JSON.stringify(designDataWithId));
-        window.location.href = "../designBase/index.html";
+        window.location.href = "../DesignBase/index.html";
     };
     previewBox.style.display = "flex"; // Show the preview box
 }
