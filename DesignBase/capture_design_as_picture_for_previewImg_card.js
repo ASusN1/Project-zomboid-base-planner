@@ -4,6 +4,16 @@ async function captureBaseDesingScreenShootForPreviewImgCard() {
     document.querySelector(".tools-bar").style.display = "none"; // hide tools bar
     document.querySelector(".base-design-name").style.display = "none"; // hide base design name
 
+    const previousZoom = zoom;
+    const previousOffsetX = offsetX;
+    const previousOffsetY = offsetY;
+
+    zoom = 1;
+    offsetX = 0;
+    offsetY = 0;
+    grid.style.left = "50%";
+    updateTransform();
+    
     await new Promise(r => requestAnimationFrame(r)); // wait for the next frame to ensure the UI is updated
 
     const stream = await navigator.mediaDevices.getDisplayMedia({
@@ -25,6 +35,12 @@ async function captureBaseDesingScreenShootForPreviewImgCard() {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
     stream.getTracks().forEach(track => track.stop()); // stop the stream
+
+    zoom = previousZoom;
+    offsetX = previousOffsetX;
+    offsetY = previousOffsetY;
+    grid.style.left = "";
+    updateTransform();
 
     document.querySelector(".sidebar").style.display = ""; // show sidebar
     document.querySelector(".tools-bar").style.display = ""; // show tools bar
