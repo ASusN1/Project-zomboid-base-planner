@@ -312,3 +312,102 @@ body {
     object-fit: cover;
     color: white; 
 }
+
+/* login -sign up - from home.html thing just copy */
+.login-signup-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 300;
+}
+
+.auth-modal-box{
+    background-color: white;
+    width: 400px;
+}
+
+.auth-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+#auth-modal-tile {
+    font-size: 18px;
+    color: darkgray;
+}
+
+.close-auth-modal-btn {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+}
+
+.auth-modal-form{
+    background-color: white;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+.auth-modal-form label {
+    font-size: 14px;
+    color: black;
+}
+
+.auth-modal-form input {
+    padding: 10px;
+    font-size: 14px;
+    background-color: white;
+}
+/* password label left, forgor pass right */
+.auth-modal-password-row-text{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#forgot-password-link {
+    font-size:12px;
+    color:  black;
+    cursor: default;
+}
+
+#auth-submit-btn{
+    margin-top:10px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#authMessage {
+    font-size: 14px;
+    color: red;
+    text-align: center;
+}
+
+/*swith to sign up */
+.auth-modal-swith-mode-text {
+    font-size: 14px;
+    color: black;
+    text-align: center;
+}
+
+#switch-to-signup-btn {
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
+}
