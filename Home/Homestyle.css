@@ -483,3 +483,49 @@ css.side-bar-buttons-container {
     cursor: pointer;
     text-decoration: underline;
 }
+
+/*about section */
+.about-section {
+    display:none;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.about-section.about-section-visible{
+    display:flex;   
+}
+
+.about-tab-container {
+    display:flex;
+    margin-bottom: 20px;
+}
+
+.about-tab-btn {
+    background-color: transparent;
+    color: black;
+    font-size: 15px;
+    padding: 12px 24px;
+    cursor : pointer;
+}
+
+.about-tab-btn:hover{
+    background-color: lightblue;
+    color: #1a73e8;
+}
+
+.about-tab-btn.active{
+    background-color: lightblue;
+    color: #1a73e8;
+    font-weight: bold;
+}
+
+.about-tab-content {
+    padding: 20px;
+    background-color: white;
+    flex-grow: 1;
+}
+
+.about-tab-hidden{
+    display:none;
+}
