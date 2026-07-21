@@ -32,14 +32,14 @@
                 </div>
 
                 <div class = "user-icon-container"> 
-                    <a href = "../login/login.html">
-                        <div class = "user-avatar">
-                            <svg id = "defaultAvatar"viewBox = "0 0 24 24" fill = "none" xmlns = "http://www.w3.org/2000/svg">
-                                <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="#555555"/>
-                            </svg>
-                            <img id = "UserAvatarIMG" alt = "Account" style = "display:none">
-                        </div>
-                    </a>
+                    <button id = "signUpBtn" class = "top-bar-btn">Sign Up</button>
+                    <button id = "LogInnBtn" class = "top-bar-btn">Log In</button>
+                    <div class = "user-avatar">
+                        <svg id = "defaultAvatar"viewBox = "0 0 24 24" fill = "none" xmlns = "http://www.w3.org/2000/svg">
+                            <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="#555555"/>
+                        </svg>
+                        <img id = "UserAvatarIMG" alt = "Account" style = "display:none">
+                    </div>
                 </div>
             </aside>
             
@@ -47,8 +47,8 @@
                 <div class = "main-content-row">
                     <h1>Welcome to the Home Page</h1>
                     <div class = "top-right-main-buttons">
-                        <button id = "toggleViewBtn">Toggle View</button>
-                        <button id = "deleteCardBtn">Delete Card</button>
+                        <button id = "toggleViewBtn" class = "top-bar-btn">Toggle View</button>
+                        <button id = "deleteCardBtn" class = "top-bar-btn">Delete Card</button>
                     </div>
                 </div>
 
@@ -75,6 +75,41 @@
                 </div>
 
             </main>
+        </div>
+
+        <div class = "login-signup-modal" id = "login-signup-modal">
+            <div class = "auth-modal-box">
+                <div class = "auth-modal-header">
+                    <h2 id = "auth-modal-title">Log In</h2>
+                    <button id = "close-auth-modal-btn" class = "close-auth-modal-btn">X</button>
+                </div>
+
+                <form id = "login-form" class = "auth-modal-form">
+
+                    <label for = "user-name-input">Username</label>
+                    <input type="text" id="user-name-input" placeholder="Enter your username" style = "display:none">
+
+                    <label for="email-input">Email</label>
+                    <input type="email" id="email-input" placeholder="you@example.com" required>
+
+                    <label for = "password-input">Password</label>
+                    <input type="password" id="password-input" placeholder="••••••••" required>
+
+                    <div class = "auth-modal-password-row-text">
+                        <label for = "password-input">Password</label>
+                        <span id = "forgot-password-link">Forgot Password?</span>
+                    </div>
+
+                    <button type = "submit" id = "auth-modal-submit-btn">Log In With Email</button>
+
+                    <p id = "authMessage"></p>
+                    <p class = "auth-modal-switch-mode-text">
+                        <span id = "switch-to-signup">Don't have an account?</span>
+                        <button type = "button" id = "switch-to-signup-btn">Sign Up</button>
+                    </p>
+
+                </form>
+            </div>
         </div>
 
         <div class = "design-preview-for-community" id = "designPreviewForCommunity">
@@ -108,6 +143,7 @@
 
         <script type = "module" src = "../sb_stuff/supabase_client.js"></script>
         <script type = "module" src = "../login/updateUserAvatarAsSignIN.js"></script>
+        <script src = "../login/auth-sign-log-toggle.js"></script>
 
         <script src = "../DesignBase/sprite_with_data/wall/Small_Wall_data_with_spirte.js"></script>
         <script src = "../DesignBase/sprite_with_data/wall/Meddium_Wall_data_with_spirte.js"></script>

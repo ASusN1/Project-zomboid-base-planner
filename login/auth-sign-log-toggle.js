@@ -1,0 +1,120 @@
+let current_auth_mode = "login"; 
+const login_signup_modal = document.getElementById("login-signup-modal");
+const auth_modal_title = document.getElementById("auth-modal-title");
+
+//const allowedCharacter = /^[a-zA-Z0-9_]{8,20}$/;// Allow A-Z, a-z, 0-9, _, lenght between 8,20
+
+const user_name_label = document.querySelector('label[for="user-name-input"]');
+const user_name_input = document.getElementById("user-name-input");
+
+
+const email_input = document.getElementById("email-input");
+const password_input = document.getElementById("password-input");
+
+const auth_modal_submit_btn = document.getElementById("auth-modal-submit-btn");
+
+const swith_to_signup_text = document.getElementById("switch-to-signup");
+const swith_to_signup_btn = document.getElementById("switch-to-signup-btn");
+
+const close_auth_modal_btn = document.getElementById("close-auth-modal-btn");
+
+const login_form = document.getElementById("login-form");
+const authMessage = document.getElementById("authMessage");
+
+const signUpBtn = document.getElementById("signUpBtn");
+const loginInBtn = document.getElementById("LogInnBtn");
+
+function updateAuthModeToSignUpORLogin(){
+    if (current_auth_mode === "signup") {
+        auth_modal_title.textContent = "Sign Up";
+        user_name_label.style.display = "";
+        user_name_input.style.display = "";
+        auth_modal_submit_btn.textContent = "Sign Up";
+        swith_to_signup_text.textContent = "Already have an account?";
+        swith_to_signup_btn.textContent = "Log In";
+    } else {
+        auth_modal_title.textContent = "Log In";
+        user_name_label.style.display = "none";
+        user_name_input.style.display = "none";
+        auth_modal_submit_btn.textContent = "Log In With Email";
+        swith_to_signup_text.textContent = "Don't have an account?";
+        swith_to_signup_btn.textContent = "Sign Up";
+    }
+}
+
+function openAuthModal(modeToOpen) {
+    current_auth_mode = modeToOpen;
+    authMessage.textContent = "";
+    updateAuthModeToSignUpORLogin();
+    login_signup_modal.style.display = "flex";
+}
+
+function closeAuthModal() {
+    login_signup_modal.style.display = "none";
+    authMessage.textContent = "";
+}
+
+signUpBtn.addEventListener("click", () => {
+    openAuthModal("signup");
+});
+
+loginInBtn.addEventListener("click", () => {
+    openAuthModal("login");
+});
+
+close_auth_modal_btn.addEventListener("click", () => {
+    closeAuthModal();
+});
+
+swith_to_signup_btn.addEventListener("click", () => {
+    if (current_auth_mode === "login") {
+        current_auth_mode = "signup";
+    } else {
+        current_auth_mode = "login";
+    }
+    updateAuthModeToSignUpORLogin();
+});
+
+login_form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const emailValue = email_input.value;
+    const passwordValue = password_input.value;
+
+    if (current_auth_mode === "signup") {
+        authMessage.textContent = "Creating account...";
+
+        const signUpResult = await window.sb.auth.signUp({
+            email: emailValue,
+            password: passwordValue
+        });
+
+        const signUpError = signUpResult.error;
+
+        if (signUpError) {
+            authMessage.textContent = signUpError.message;
+            return;
+        }
+
+        authMessage.textContent = "Account created successfully. Please check your email to confirm your account.";
+
+    } else {
+        authMessage.textContent = "Logging in...";
+
+        const loginResult = await window.sb.auth.signInWithPassword({
+            email: emailValue,
+            password: passwordValue
+        });
+
+        const loginError = loginResult.error;
+
+        if (loginError) {
+            authMessage.textContent = loginError.message;
+            return;
+        }
+
+        authMessage.textContent = "Login successful";
+        closeAuthModal();
+        location.reload();
+    }
+});
