@@ -18,7 +18,7 @@ function timeProjectUpdated(timestampString) {
     }
 }
 
-function buildCardFromDesignData(designRow) {
+function buildCardFromDesignData(designRow, isAlreadyShared) {
     const cardEl = document.createElement('div');
     cardEl.className = 'card-design';
     
@@ -47,13 +47,24 @@ function buildCardFromDesignData(designRow) {
 
     const shareBtn = document.createElement('button');
     shareBtn.className = 'top-bar-btn';
-    shareBtn.textContent = 'Share to Community';
-    shareBtn.addEventListener("click", (e) => {
+
+    // if design already has a public version, change text to "stop sharing" other wise share
+    if(isAlreadyShared) {
+        shareBtn.textContent = "Stop Sharing";
+    } else {
+        shareBtn.textContent = "Share to Community";
+    }
+    shareBtn.addEventListener("click",async (e) => {
         e.stopPropagation(); // prevent card click event
-        shareDesignToCommunity(designRow.id); // call the function to share the design
+
+        if (shareBtn.textContent ==="Share To Community") {
+            await shareDesignToCommunity(designRow.id); 
+            shareBtn.textContent = "Stop Sharing";
+        }else {
+            await unshareDesignFromCommunity(designRow.id); 
+            shareBtn.textContent = "Share To Community";
+        }
     });
-
-
 
     infoEl.appendChild(nameEl);
     infoEl.appendChild(updatedEl);
@@ -87,6 +98,8 @@ async function loadBaseDesignsFromSupabase() {
     .select("id, name, updated_at, design_data, preview_url")
 
     .eq('user_id', user.id) // only pull the base designs for the current user
+    .or("is_public.is.null, is_public.eq.false") // dont show the public version in "your design" only in community designs
+
     .order("updated_at", { ascending: false }); // order by most recently updated first
 
     const row = queryResult.data;
@@ -96,13 +109,27 @@ async function loadBaseDesignsFromSupabase() {
         console.error("Error fetching base designs from Supabase:", error.message);
         return;
     }
+    // check if any of the designs are already shared to community
+    const publicCopiesResult = await window.sb
+    .from('designs')
+    .select("source_design_id")
+    .eq("user_id", user.id)
+    .eq("is_public", true);
+
+    const publicCopiesRow = publicCopiesResult.data  || [];
+
+    const shareDesignIds = new Set();
+    publicCopiesRow.forEach(publicRow => {
+        shareDesignIds.add(publicRow.source_design_id);
+    })
 
     cardRowContainer.querySelectorAll('.card-design.cloud-card').forEach(el => el.remove()); // clear old cloud cards 
 
     const addNewCardEl = document.getElementById("addNewCardButton") ; 
 
     row.forEach(designRow => { 
-        const cardEl = buildCardFromDesignData(designRow);
+        const isAlreadyShared = shareDesignIds.has(designRow.id);//check if this desgin has public copy
+        const cardEl = buildCardFromDesignData(designRow, isAlreadyShared);
         cardEl.classList.add('cloud-card');
          cardRowContainer.insertBefore(cardEl, addNewCardEl);
     });

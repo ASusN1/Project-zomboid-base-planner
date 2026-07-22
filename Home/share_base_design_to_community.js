@@ -63,4 +63,39 @@ async function shareDesignToCommunity(privateDesignId) {
     alert("Design shared to community!");
 }
 
+async function unshareDesignFromCommunity(privateDesignId) {
+    const publicRowResult = await window.sb
+        .from("designs")
+        .select("id, preview_url")
+        .eq("source_design_id", privateDesignId)
+        .eq("is_public", true)
+        .maybeSingle();
+
+    const publicRow = publicRowResult.data;
+    const publicRowError = publicRowResult.error;
+
+    if (publicRowError) {
+        console.error("Error finding public design to remove:", publicRowError);
+        return;
+    }
+
+    if (!publicRow) {
+        console.log("No public copy found for this design, nothing to unshare");
+        return;
+    }
+
+    const deleteResult = await window.sb
+        .from("designs")
+        .delete()
+        .eq("id", publicRow.id);
+
+    if (deleteResult.error) {
+        console.error("Error deleting public design:", deleteResult.error);
+        return;
+    }
+
+    console.log("successfully removed public design:", publicRow.id);
+    alert("Design removed from community!");
+}
 window.shareDesignToCommunity = shareDesignToCommunity;
+window.unshareDesignFromCommunity = unshareDesignFromCommunity;
