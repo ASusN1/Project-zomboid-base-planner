@@ -2,6 +2,9 @@ const yourDesignsBtn = document.getElementById('yourDesignsBtn');
 const communityDesignsBtn = document.getElementById('communityDesignsBtn');
 const aboutBtn = document.getElementById('aboutBtn');
 
+const toggleViewBtn = document.getElementById('toggleViewBtn');
+const cardRow = document.getElementById('cardRow');
+
 const about_section = document.getElementById("about-section");
 
 const devlog_btn = document.getElementById("devlog-btn");
@@ -18,6 +21,8 @@ yourDesignsBtn.addEventListener("click", () => {
     aboutBtn.classList.remove("active");
     cardRow.style.display = "";
     communityCardRowContainer.style.display = "none";
+    toggleViewBtn.style.display = "";
+    deleteCardBtn.style.display = "";
     about_section.classList.remove("about-section-visible");
 });
 
@@ -27,6 +32,8 @@ communityDesignsBtn.addEventListener("click", () => {
     aboutBtn.classList.remove("active");
     communityCardRowContainer.style.display = "";
     cardRow.style.display = "none";
+    toggleViewBtn.style.display = "none";
+    deleteCardBtn.style.display = "none";
     about_section.classList.remove("about-section-visible");
     loadCOmmunityDesignsFromSupabase(); // load community designs when button clicked
 });
@@ -37,6 +44,8 @@ aboutBtn.addEventListener("click", () => {
     aboutBtn.classList.add("active");
 
     cardRow.style.display = "none";
+    toggleViewBtn.style.display = "none";
+    deleteCardBtn.style.display = "none";
     communityCardRowContainer.style.display = "none";
     about_section.classList.add("about-section-visible");
 
@@ -67,9 +76,6 @@ function showAboutTab(tabName){
 about_btn.addEventListener("click", () => showAboutTab("about"));
 devlog_btn.addEventListener("click", () => showAboutTab("devlog"));
 docs_btn.addEventListener("click", () => showAboutTab("docs"));
-
-const toggleViewBtn = document.getElementById('toggleViewBtn');
-const cardRow = document.getElementById('cardRow');
 
 toggleViewBtn.addEventListener("click", () => {
     cardRow.classList.toggle("list-view");
