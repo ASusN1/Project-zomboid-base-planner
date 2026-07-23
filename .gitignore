@@ -2,7 +2,6 @@ stuff.txt
 .env
 /sb_stuff
 
-
+/back_end_stuff/node_modules
 package-lock.json
-package.json
 /node_modules
