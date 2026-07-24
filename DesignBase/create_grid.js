@@ -94,22 +94,12 @@ function createGrid() {
 }
 
 gridSizeInput.addEventListener('change', () => { //( not complete fix yet, continue later) 
-    const savedTiles = extractTilesFromBaseDesign(grid, window.CubeOnTheTile); 
-    const savedCubes = readCubeDataFromBaseDesign(window.cubeRegistry); 
+    size = Math.max(parseInt(gridSizeInput.value) || 12);
+    gridSizeInput.value = size;
+    floorLayers[currentLayerIndex].gridSize = size;
 
-    console.log('savedCubes before resize:', savedCubes);
-    console.log('savedTiles before resize:', savedTiles);
-    
-    gridSizeInput.value = size; 
-    floorLayers[currentLayerIndex].gridSize = size; 
     window.undoListItem = [];
     window.redoListItem = [];
-
-    window.cubeRegistry.clear();
-    window.CubeOnTheTile.clear();
-
     createGrid();
-
-    rebuildLayerOnGrid({ tiles: savedTiles, cubes: savedCubes }); 
 });
 createGrid();
