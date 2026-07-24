@@ -1,6 +1,9 @@
 async function updateUserAvatarAsSignIN() {
     const defaultAvatar = document.getElementById('defaultAvatar');
     const UserAvatarIMG = document.getElementById('UserAvatarIMG');
+    const signUpButton = document.getElementById("signUpBtn");
+    const logInButton = document.getElementById("LogInnBtn");
+    const logOutButton = document.getElementById("logOutBtn");
 
     if (!defaultAvatar || !UserAvatarIMG) return; 
 
@@ -10,7 +13,32 @@ async function updateUserAvatarAsSignIN() {
         defaultAvatar.style.display = ''; 
         UserAvatarIMG.style.display = 'none';
         UserAvatarIMG.removeAttribute('title');
+
+        // if the user not logged in --> show sign up + log in 
+        if ( signUpButton){
+            signUpButton.style.display = "";
+        }
+        if ( logInButton){
+            logInButton.style.display = "";
+        }
+        
+        if ( logOutButton){
+            logOutButton.style.display = "none";
+        }
         return; 
+    }
+
+    // if user signed in --> hide sign up log in -> show log out
+    if ( signUpButton){
+        signUpButton.style.display = "none";
+    }
+
+    if ( logInButton){
+        logInButton.style.display = "none";
+    }
+
+    if ( logOutButton){
+        logOutButton.style.display = "";
     }
 
     const currentUser = data.user;
@@ -34,6 +62,31 @@ async function updateUserAvatarAsSignIN() {
     UserAvatarIMG.title = currentUser.email; 
 }
 updateUserAvatarAsSignIN();
+
+const logOutButtonForClick = document.getElementById("logOutBtn");
+if (logOutButtonForClick){
+    logOutButtonForClick.addEventListener('click', async () => {
+        const signOutResult = await window.sb.auth.signOut();
+        const signOutError = signOutResult.error;
+
+        if(signOutError){
+            console.error('Error signing out:', signOutError.message);
+            alert("Failed to log out. Please try again."+ signOutError.message);
+            return;
+        }
+
+        const checkResult = await window.sb.auth.getUser();
+        const stillLoggedIN = checkResult.data && checkResult.data.user;
+
+        if(stillLoggedIN){
+            console.error('Error: User is still logged in after sign out.');
+            alert("Failed to log out. Please try again.");
+            return;
+        }
+        console.log("user logged out successfully");
+        location.reload();
+    });
+}
 
 window.sb.auth.onAuthStateChange(() => {
     updateUserAvatarAsSignIN();
