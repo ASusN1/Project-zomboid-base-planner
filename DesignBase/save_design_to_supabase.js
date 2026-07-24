@@ -48,7 +48,7 @@ async function saveDesignToSupabase() {
 
     
     if (userError || !user) { // if user not logged in
-        alert("You must be logged in to save your design to the cloud.");
+        alert("You are browing as a guest. Sign up or log in to save your design online");
         return;
     }
     const saveData = await saveDesignToSupabase();

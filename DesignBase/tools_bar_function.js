@@ -88,4 +88,5 @@ document.addEventListener('keydown', (event) => {
         console.log("Place tool shortcut key pressed : p");
         placeButton.click(); // Trigger the place button click event
     }
+    else if (event.ctrlKey && key === "s") {};
 });

@@ -18,6 +18,8 @@ const swith_to_signup_btn = document.getElementById("switch-to-signup-btn");
 
 const close_auth_modal_btn = document.getElementById("close-auth-modal-btn");
 
+const continue_as_guest_btn = document.getElementById("continue-as-guest-btn");
+
 const login_form = document.getElementById("login-form");
 const authMessage = document.getElementById("authMessage");
 
@@ -63,6 +65,10 @@ loginInBtn.addEventListener("click", () => {
 });
 
 close_auth_modal_btn.addEventListener("click", () => {
+    closeAuthModal();
+});
+
+continue_as_guest_btn.addEventListener("click", () => {
     closeAuthModal();
 });
 
