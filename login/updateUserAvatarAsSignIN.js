@@ -4,6 +4,7 @@ async function updateUserAvatarAsSignIN() {
     const signUpButton = document.getElementById("signUpBtn");
     const logInButton = document.getElementById("LogInnBtn");
     const logOutButton = document.getElementById("logOutBtn");
+    const guestButtonTopBar = document.getElementById("continue-as-guest-btn-top-bar");
 
     if (!defaultAvatar || !UserAvatarIMG) return; 
 
@@ -25,6 +26,12 @@ async function updateUserAvatarAsSignIN() {
         if ( logOutButton){
             logOutButton.style.display = "none";
         }
+
+        // if not logged in and not in guest mode, show the guest button again
+        const isGuest = sessionStorage.getItem("isGuestMode") === "true";
+        if ( guestButtonTopBar){
+            guestButtonTopBar.style.display = isGuest ? "none" : "";
+        }
         return; 
     }
 
@@ -39,6 +46,12 @@ async function updateUserAvatarAsSignIN() {
 
     if ( logOutButton){
         logOutButton.style.display = "";
+    }
+
+    // user is actually logged in now, so guest mode no longer applies
+    sessionStorage.removeItem("isGuestMode");
+    if ( guestButtonTopBar){
+        guestButtonTopBar.style.display = "none";
     }
 
     const currentUser = data.user;
@@ -83,6 +96,9 @@ if (logOutButtonForClick){
             alert("Failed to log out. Please try again.");
             return;
         }
+
+        sessionStorage.removeItem("isGuestMode");
+
         console.log("user logged out successfully");
         location.reload();
     });

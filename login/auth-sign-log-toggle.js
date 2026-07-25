@@ -19,6 +19,8 @@ const swith_to_signup_btn = document.getElementById("switch-to-signup-btn");
 const close_auth_modal_btn = document.getElementById("close-auth-modal-btn");
 
 const continue_as_guest_btn = document.getElementById("continue-as-guest-btn");
+const continue_as_guest_btn_top_bar = document.getElementById("continue-as-guest-btn-top-bar");
+const log_out_btn = document.getElementById("logOutBtn");
 
 const login_form = document.getElementById("login-form");
 const authMessage = document.getElementById("authMessage");
@@ -56,6 +58,20 @@ function closeAuthModal() {
     authMessage.textContent = "";
 }
 
+function enterGuestMode() {
+    sessionStorage.setItem("isGuestMode", "true");
+    if (continue_as_guest_btn_top_bar) {
+        continue_as_guest_btn_top_bar.style.display = "none";
+    }
+}
+
+function updateTopBarButtonsForGuestMode() {
+    const isGuest = sessionStorage.getItem("isGuestMode") === "true";
+    if (isGuest && continue_as_guest_btn_top_bar) {
+        continue_as_guest_btn_top_bar.style.display = "none";
+    }
+}
+
 signUpBtn.addEventListener("click", () => {
     openAuthModal("signup");
 });
@@ -70,7 +86,16 @@ close_auth_modal_btn.addEventListener("click", () => {
 
 continue_as_guest_btn.addEventListener("click", () => {
     closeAuthModal();
+    enterGuestMode();
 });
+
+if (continue_as_guest_btn_top_bar) {
+    continue_as_guest_btn_top_bar.addEventListener("click", () => {
+        enterGuestMode();
+    });
+}
+
+updateTopBarButtonsForGuestMode();
 
 swith_to_signup_btn.addEventListener("click", () => {
     if (current_auth_mode === "login") {
