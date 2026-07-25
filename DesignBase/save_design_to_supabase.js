@@ -62,6 +62,11 @@ async function saveDesignToSupabase() {
     }
 
     const rawScreenshotBlob = await window.captureBaseDesingScreenShootForPreviewImgCard(); // capture screenshot of the design for preview image
+    
+    if(!rawScreenshotBlob){
+        alert("save stop: you must allow screen sharing to capture the design preview image. Please try again and allow screen sharing.");
+        return;
+    }
     const screenshotBlob = await window.compressImageForPreview(rawScreenshotBlob); // compress the screenshot for preview image
 
    const previewPath = user.id + "/" + projectId + ".jpg"  // path to save the preview image in Supabase storage

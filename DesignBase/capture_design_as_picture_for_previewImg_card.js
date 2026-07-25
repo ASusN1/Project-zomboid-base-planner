@@ -16,11 +16,29 @@ async function captureBaseDesingScreenShootForPreviewImgCard() {
     
     await new Promise(r => requestAnimationFrame(r)); // wait for the next frame to ensure the UI is updated
 
-    const stream = await navigator.mediaDevices.getDisplayMedia({
-        video: { displaySurface: "browser" },
-        preferCurrentTab: true
-    });
+    let stream;
+    try{
+        stream = await navigator.mediaDevices.getDisplayMedia({
+            video: {displaySurface: "browser"},
+            preferCurrentTab: true
+        });
+    }catch (error) {
+        console.log("User cannot capture the screen:", error);
+    }
 
+    if(!stream){
+        zoom = previousZoom;
+        offsetX = previousOffsetX;
+        offsetY = previousOffsetY;
+        grid.style.left = "";
+        updateTransform();
+
+        document.querySelector(".sidebar").style.display = ""; // show sidebar
+        document.querySelector(".tools-bar").style.display = ""; // show tools bar
+        document.querySelector(".base-design-name").style.display = ""; // show base design name
+
+        return null;
+    }
     const video = document.createElement("video");
     video.srcObject = stream;
     await video.play();
