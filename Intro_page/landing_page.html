@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Landing Page</title>
+        <link rel="stylesheet" href="../Intro_page/landing_page.css">
+    </head>
+    <body>
+        <div class = "top-bar-info-and-btn-stuff">
+            <span class = "site-logo-text">Project Zomboid Base Planner</span>
+
+            <div class = "top-bar-btns-about">
+                <button id = "aboutBtn" class = "top-bar-btn">About</button>
+            </div>
+            <div class = "top-bar-btns-sign-up-log-in">
+                <button id = "signUpBtn" class = "top-bar-btn">Sign Up</button>
+                <button id = "LogInnBtn" class = "top-bar-btn">Log In</button>
+            </div>
+
+            <div class = "try-out-project-zomboid-base-planner-btn">
+                <a href = "../DesignBase/index.html"><button id = "tryOutBtn" class = "top-bar-btn">Try Out Project Zomboid Base Planner</button></a>
+            </div>
+
+            <div class = "visit-community-design-btn">
+                <a href = "../Home/Home.html"><button id = "visitCommunityBtn" class = "top-bar-btn">Visit Community Design</button></a>
+            </div>
+        </div>
+        
+        <main>
+            <div class = "landing-page-container">
+
+                <div class = "landing-page-content">
+
+                    <!-- THREE.js container stuff -->
+                    <div class = "THREEjs-model-container">
+                        <canvas id = "THREEjs-model-canvas"></canvas>
+                    </div>
+
+                    <div class = "text-beside-THREE-model">
+                        <h1>Welcome to Project Zomboid Base Planner</h1>
+                        <p>stuff( pzbp).</p>
+                    </div>
+                </div>
+            
+                <!-- bottom section for github + support -->
+                <div class = "contact-info-and-project-github">
+                    <div class = "github-stuff">
+                        <label>Github</label>
+                        <p>Source code stuff here.</p>
+                    </div>
+
+                    <div class = "support-stuff">
+                        <label>Support</label>
+                        <p> Read the faq</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </body>
+    <script type = "importmap">{
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+        }
+    }</script>
+
+    <script type = "module" src = "3js_helper.js"></script>
+</html>
