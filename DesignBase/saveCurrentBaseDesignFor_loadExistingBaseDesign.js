@@ -14,7 +14,9 @@ function extractTilesFromBaseDesign (containerEl, cubeOnTheTileMap) {
 
         //Check for cube on the tiles ( at z = 0 )
         const cubeOccupiesTile = cubeOnTheTileMap && cubeOnTheTileMap.has(x + ',' + y + ', 0');
-        if (!cubeOccupiesTile && tile.style.backgroundColor) { 
+        if (!cubeOccupiesTile && tile.dataset.floorName) { 
+            savedTileContent.floorSpriteName = tile.dataset.floorName;
+        } else if (!cubeOccupiesTile && tile.style.backgroundColor) { 
             savedTileContent.floor = tile.style.backgroundColor; 
         }
 
@@ -109,7 +111,15 @@ function rebuildLayerOnGrid(savedLayerData) {
         const tile = document.querySelector(`.tile[data-x="${x}"][data-y="${y}"]`);
         if (!tile) continue;
 
-        if (tileContent.floor) {
+        if (tileContent.floorSpriteName) {
+            const floorSpritePath = window.getFloorSpritePath ? window.getFloorSpritePath(tileContent.floorSpriteName) : null;
+            tile.dataset.floorName = tileContent.floorSpriteName;
+            if (floorSpritePath) {
+                tile.style.backgroundImage = `url(${floorSpritePath})`;
+                tile.style.backgroundSize = 'cover';
+                tile.style.backgroundColor = "";
+            }
+        } else if (tileContent.floor) {
             tile.style.backgroundImage = "none";
             tile.style.backgroundColor = tileContent.floor;
         }

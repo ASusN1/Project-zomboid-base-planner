@@ -48,6 +48,7 @@ function attachTileClickListener(tile) {
                 placeCubeOnGrid(tile, selectedItem);
                 return;
             }else if (selectedItem.type === 'floor') {
+                tile.dataset.floorName = selectedItem.name;
                 const floorSpritePath = window.getFloorSpritePath ? window.getFloorSpritePath(selectedItem.name) : null;
                 if (floorSpritePath) {
                     // if sprite found
