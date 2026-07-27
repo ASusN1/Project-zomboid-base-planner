@@ -9,6 +9,13 @@ const { createClient } = require('@supabase/supabase-js');
 const rateLimit = require("express-rate-limit");
 const requireLoggedInUser = require("./requireLoggedInUser");
 
+const registerSignupRoute = require("./signup_route");
+const registerLoginRoute = require("./login_route");
+const registerGetCurrentUserRoute = require("./get_current_user_route");
+const registerSaveDesignRoute = require("./save_design_route");
+const {registerListDesignsRoute, registerDeleteDesignsRoute, registerShareDesignRoutes} = require("./designs_list_delete_share_routes");
+const registerListCommunityDesignsRoute = require("./list_community_designs_route");
+
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN;
@@ -42,7 +49,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 // rate limit rule
 const uploadRateLimiter = rateLimit({
     windowMs: 60 * 1000, // count requests inside a 1 minute window
-    max: 3, // allow at most 3 requests per ip address inside that window
+    max: 20, // allow at most 20 requests per ip address inside that window
     message: { error: 'Too many requests, please slow down and try again in a minute' }
 });
 
@@ -93,6 +100,15 @@ app.post('/upload-preview', requireLoggedInUser, upload.single('previewImage'), 
     // send the final url back to the frontend so it can save it in the designs table
     res.status(200).json({ previewUrl: finalPreviewUrl });
 });
+
+registerSignupRoute(app);
+registerLoginRoute(app);
+registerGetCurrentUserRoute(app);
+registerSaveDesignRoute(app);
+registerListDesignsRoute(app);
+registerDeleteDesignsRoute(app);
+registerShareDesignRoutes(app);
+registerListCommunityDesignsRoute(app);
 
 // start the server and listen for requests on the chosen port
 app.listen(PORT, () => {
