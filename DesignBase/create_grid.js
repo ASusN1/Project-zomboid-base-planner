@@ -47,6 +47,34 @@ function attachTileClickListener(tile) {
             } else if (selectedItem.type === 'cube') {
                 placeCubeOnGrid(tile, selectedItem);
                 return;
+            }else if (selectedItem.type === 'floor') {
+                const floorSpritePath = window.getFloorSpritePath ? window.getFloorSpritePath(selectedItem.name) : null;
+                if (floorSpritePath) {
+                    // if sprite found
+                    tile.style.backgroundImage = `url(${floorSpritePath})`;
+                    tile.style.backgroundSize = 'cover';
+                    tile.style.backgroundColor = "";
+                }else{
+                    tile.style.backgroundImage = "none";
+                    tile.style.backgroundColor = selectedItem.color;
+                }
+                window.undoListItem.push({
+                    undo(){
+                        tile.style.backgroundColor = previousColor;
+                        tile.style.backgroundImage = previousColor ? tile.style.backgroundImage : "";
+                    },
+                    redo(){
+                        if (floorSpritePath) {
+                            tile.style.backgroundImage = `url(${floorSpritePath})`;
+                            tile.style.backgroundSize = 'cover';
+                            tile.style.backgroundColor = "";
+                        } else {
+                            tile.style.backgroundImage = "none";
+                            tile.style.backgroundColor = selectedItem.color;
+                        }
+                    }
+                });
+                return;
             }
             newColor = selectedItem.color;
         } else {
