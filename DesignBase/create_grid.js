@@ -130,5 +130,7 @@ gridSizeInput.addEventListener('change', () => { //( not complete fix yet, conti
     window.undoListItem = [];
     window.redoListItem = [];
     createGrid();
+    prepareWallPlacement(); 
 });
 createGrid();
+prepareWallPlacement(); 
