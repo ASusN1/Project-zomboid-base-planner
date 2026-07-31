@@ -5,17 +5,19 @@ window.size = Math.max(parseInt(gridSizeInput.value) || 12);
 if (window.size > 100) window.size = 100; 
 
 window.selectedItem = null; 
-window.currentToolusing = 'place'; // default tool is place
+window.currentToolusing = "place"; // default tool is place
 
 window.undoListItem = [];
 window.redoListItem = [];
+
+window.hiddenCubeKeys = []; 
 
 function attachTileClickListener(tile) {
     tile.addEventListener('click', () => {
         const previousColor = tile.style.backgroundColor; // Store the previous color for undo
         let newColor = previousColor; // Default to previous color if no change
 
-        if (currentToolusing === 'delete') {
+        if (currentToolusing === "delete") {
             // remove the cube if exists , later must change so that it will remove the cube from highest (z = 3 ( max height)
             const tx = tile.dataset.x;
             const ty = tile.dataset.y;
@@ -41,13 +43,45 @@ function attachTileClickListener(tile) {
             const existingCube = tile.querySelector('.cube-object');
             if (existingCube) existingCube.remove();
             newColor = '';
-        } else if (currentToolusing === 'place' && selectedItem) {
-            if (selectedItem.type === 'wall') {
+        }else if (currentToolusing ==="hide"){
+
+            const cubesOnTile= []
+
+            window.cubeRegistry.forEach((cubeData)=>{
+                if(cubeData.tiles.includes(tile)){
+                    cubesOnTile.push(cubeData);
+                }
+            });
+            // if no cubes on the tiles, stop 
+            if (cubesOnTile.length === 0) return;
+
+
+            // hide from biggest z to lowest
+            cubesOnTile.sort((a,b)=> b.z - a.z);
+
+            let cubeToHide = null;
+            for (let i = 0; i < cubesOnTile.length; i++) {
+                if(!window.hiddenCubeKeys.includes(cubesOnTile[i].key)){
+                    cubeToHide = cubesOnTile[i];
+                    break;
+                }
+            }
+
+            // if cube is visible --> hide it 
+            if (cubeToHide) {
+                for(let i= 0;i< cubeToHide.elements.length; i++) { 
+                    const el = cubeToHide.elements[i].el;
+                    el.style.display = 'none'; 
+                }
+                window.hiddenCubeKeys.push(cubeToHide.key);
+            }
+        } else if (currentToolusing === "place" && selectedItem) {
+            if (selectedItem.type === "wall") {
                 return;
-            } else if (selectedItem.type === 'cube') {
+            } else if (selectedItem.type === "cube") {
                 placeCubeOnGrid(tile, selectedItem);
                 return;
-            }else if (selectedItem.type === 'floor') {
+            }else if (selectedItem.type === "floor") {
                 tile.dataset.floorName = selectedItem.name;
                 const floorSpritePath = window.getFloorSpritePath ? window.getFloorSpritePath(selectedItem.name) : null;
                 if (floorSpritePath) {
@@ -122,7 +156,7 @@ function createGrid() {
     updateTransform();
 }
 
-gridSizeInput.addEventListener('change', () => { //( not complete fix yet, continue later) 
+gridSizeInput.addEventListener('change', () => {
     size = Math.max(parseInt(gridSizeInput.value) || 12);
     gridSizeInput.value = size;
     floorLayers[currentLayerIndex].gridSize = size;
