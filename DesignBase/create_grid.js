@@ -11,6 +11,7 @@ window.undoListItem = [];
 window.redoListItem = [];
 
 window.hiddenCubeKeys = []; 
+window.hiddenWallElements = [];
 
 function attachTileClickListener(tile) {
     tile.addEventListener('click', () => {
@@ -43,6 +44,8 @@ function attachTileClickListener(tile) {
             const existingCube = tile.querySelector('.cube-object');
             if (existingCube) existingCube.remove();
             newColor = '';
+
+        //Hide object 
         }else if (currentToolusing ==="hide"){
 
             const cubesOnTile= []
@@ -52,10 +55,6 @@ function attachTileClickListener(tile) {
                     cubesOnTile.push(cubeData);
                 }
             });
-            // if no cubes on the tiles, stop 
-            if (cubesOnTile.length === 0) return;
-
-
             // hide from biggest z to lowest
             cubesOnTile.sort((a,b)=> b.z - a.z);
 
@@ -66,7 +65,6 @@ function attachTileClickListener(tile) {
                     break;
                 }
             }
-
             // if cube is visible --> hide it 
             if (cubeToHide) {
                 for(let i= 0;i< cubeToHide.elements.length; i++) { 
@@ -74,7 +72,22 @@ function attachTileClickListener(tile) {
                     el.style.display = 'none'; 
                 }
                 window.hiddenCubeKeys.push(cubeToHide.key);
+                return;
             }
+            const wallElementsOnTile = tile.querySelectorAll(".wall-face");
+
+            for (let i = 0; i< wallElementsOnTile.length; i++) {
+                const wallEl = wallElementsOnTile[i];
+
+                if(wallEl.style.display === "none") {
+                    continue; // already hidden, skip
+                }
+
+                wallEl.style.display = "none";
+                window.hiddenWallElements.push(wallEl);
+            }
+
+        // placement logic 
         } else if (currentToolusing === "place" && selectedItem) {
             if (selectedItem.type === "wall") {
                 return;

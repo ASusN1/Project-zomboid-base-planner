@@ -32,4 +32,10 @@ unhideObjectButton.addEventListener('click', () => {
         }
     }
     window.hiddenCubeKeys = []; 
+
+    for(let i = 0; i < window.hiddenWallElements.length; i++) {
+        const wallEl = window.hiddenWallElements[i];
+        wallEl.style.display = '';
+    }
+    window.hiddenWallElements = [];
 });
