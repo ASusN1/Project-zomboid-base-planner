@@ -136,6 +136,14 @@ function rebuildViewerLayer(savedLayerData) {
                 t.appendChild(top);
                 cubeElements.push(top);
 
+                top.style.pointerEvents = "auto";
+                top.addEventListener("click", () => {
+                    e.stopPropagation();
+                    if( window.handleViewerTileHideClick) {
+                        window.handleViewerTileHideClick(t);
+                    }
+                });
+
                 if (dx === 0 || dx === cubeInfo.w - 1) {
                     const ns = document.createElement("div");
                     ns.className = "cube-face-ns";
@@ -150,6 +158,14 @@ function rebuildViewerLayer(savedLayerData) {
                     }
                     t.appendChild(ns);
                     cubeElements.push(ns);
+
+                    ns.style.pointerEvents = "auto";
+                    ns.addEventListener("click", () => {
+                        e.stopPropagation();
+                        if( window.handleViewerTileHideClick) {
+                            window.handleViewerTileHideClick(t);
+                        }   
+                    });
                 }
 
                 if (dy === 0 || dy === cubeInfo.h - 1) {
@@ -165,6 +181,14 @@ function rebuildViewerLayer(savedLayerData) {
                     }
                     t.appendChild(ew);
                     cubeElements.push(ew);
+
+                    ew.style.pointerEvents = "auto";
+                    ew.addEventListener("click", () => {
+                        e.stopPropagation();
+                        if( window.handleViewerTileHideClick) {
+                            window.handleViewerTileHideClick(t);
+                        }   
+                    });
                 }
             }
         }

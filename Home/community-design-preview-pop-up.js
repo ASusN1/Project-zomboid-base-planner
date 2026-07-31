@@ -47,8 +47,16 @@ document.getElementById("downloadPreviewCardPicBtn").addEventListener("click", (
     capturePreviewCardImage();
 });
 
-document.getElementById("viewerHideObjectBtn").addEventListener("click", () => {});
+document.getElementById("viewerHiddenCubeBtn").addEventListener("click", () => {
+    window.viewerHideMoade = "cube";
+    console.log("Hide mode set to cube, click cube to hide cube");
+});
+
+document.getElementById("viewerHiddenWallBtn").addEventListener("click", () => {
+    window.viewerHideMode = "wall";
+    console.log("Hide mode set to wall, click wall to hide wall");
+});
 
 document.getElementById("viewerUnhideObjectBtn").addEventListener("click", () => {
-    unhideAllINViewer();
+    unhideAllInViewer()
 });
