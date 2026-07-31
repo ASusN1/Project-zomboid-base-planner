@@ -5,3 +5,4 @@ stuff.txt
 /back_end_stuff/node_modules
 package-lock.json
 /node_modules
+launch.json

@@ -46,3 +46,9 @@ document.getElementById("closePreviewBtn").addEventListener("click", () => {
 document.getElementById("downloadPreviewCardPicBtn").addEventListener("click", () => {
     capturePreviewCardImage();
 });
+
+document.getElementById("viewerHideObjectBtn").addEventListener("click", () => {});
+
+document.getElementById("viewerUnhideObjectBtn").addEventListener("click", () => {
+    unhideAllINViewer();
+});

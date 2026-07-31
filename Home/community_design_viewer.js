@@ -1,6 +1,8 @@
 window.communityViewerLayers = [];
 window.communityViewerCurrentIndex = 0;
 
+window.viewerCubeRegistry = [];
+
 const VIEWER_TILESIZE = 58;
 
 function viewerShadeColor(hex, amount) {
@@ -22,6 +24,15 @@ function buildViewerGrid(gridSize) {
             tile.className = "community-viewer-tile";
             tile.dataset.x = x;
             tile.dataset.y = y;
+
+            tile.style.pointerEvents = "auto"; 
+
+            tile.addEventListener("click", () => {
+                if (window.handleViewerTileHideClick) {
+                    window.handleViewerTileHideClick(tile);
+                }
+            });
+
             gridEl.appendChild(tile);
         }
     }
@@ -33,6 +44,12 @@ function getViewerTileAt(x, y) {
 
 function rebuildViewerLayer(savedLayerData) {
     buildViewerGrid(savedLayerData.gridSize);
+
+    window.viewerCubeRegistry = [];
+
+    if(window.resetViewerHiddenTracking) {
+        window.resetViewerHiddenTracking();
+    }
 
     for (const [tileCoords, tileContent] of Object.entries(savedLayerData.tiles || {})) {
         const [x, y] = tileCoords.split(",");
@@ -80,10 +97,15 @@ function rebuildViewerLayer(savedLayerData) {
         const colorNS = cubeInfo.color;
         const colorEW = viewerShadeColor(cubeInfo.color, -55);
 
+        const cubeTiles = [];
+        const cubeElements = [];
+
         for (let dx = 0; dx < cubeInfo.w; dx++) {
             for (let dy = 0; dy < cubeInfo.h; dy++) {
                 const t = getViewerTileAt(cubeInfo.x + dx, cubeInfo.y + dy);
                 if (!t) continue;
+
+                cubeTiles.push(t);
 
                 if (cubeInfo.z ===0 ) {
                     let bottomSprite = null;
@@ -112,6 +134,7 @@ function rebuildViewerLayer(savedLayerData) {
                     top.style.backgroundColor = colorTop;
                 }
                 t.appendChild(top);
+                cubeElements.push(top);
 
                 if (dx === 0 || dx === cubeInfo.w - 1) {
                     const ns = document.createElement("div");
@@ -126,6 +149,7 @@ function rebuildViewerLayer(savedLayerData) {
                         ns.style.background = colorNS;
                     }
                     t.appendChild(ns);
+                    cubeElements.push(ns);
                 }
 
                 if (dy === 0 || dy === cubeInfo.h - 1) {
@@ -140,9 +164,16 @@ function rebuildViewerLayer(savedLayerData) {
                         ew.style.background = colorEW;
                     }
                     t.appendChild(ew);
+                    cubeElements.push(ew);
                 }
             }
         }
+
+        window.viewerCubeRegistry.push({
+            z: cubeInfo.z,
+            tiles: cubeTiles,
+            elements: cubeElements
+        });
     });
 }
 
