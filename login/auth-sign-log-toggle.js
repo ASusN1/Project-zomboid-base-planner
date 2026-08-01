@@ -28,6 +28,8 @@ const authMessage = document.getElementById("authMessage");
 const signUpBtn = document.getElementById("signUpBtn");
 const loginInBtn = document.getElementById("LogInnBtn");
 
+
+
 function updateAuthModeToSignUpORLogin(){
     if (current_auth_mode === "signup") {
         auth_modal_title.textContent = "Sign Up";
