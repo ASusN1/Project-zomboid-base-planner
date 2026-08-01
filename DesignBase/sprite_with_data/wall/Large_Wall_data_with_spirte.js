@@ -15,9 +15,9 @@ const large_wall_sprite_data = [
         height: "large",
         Wall_sprite: {
             "N":"../tile/Wall/large_Wall/Metal_wall.png",
-            "E":"../tile/Wall/large_Wall/Metal_wall.png",
+            "E":"../tile/Wall/large_Wall/Metal_wall-EW.png",
             "S":"../tile/Wall/large_Wall/Metal_wall.png",
-            "W":"../tile/Wall/large_Wall/Metal_wall.png"
+            "W":"../tile/Wall/large_Wall/Metal_wall-EW.png"
         }
     }
 ];
