@@ -64,6 +64,15 @@ main {
 
 .Example-base-design{
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.example-base-design-container{
+    flex: 1;
+    max-width: 300px;
 }
 
 .example-base-design-image {
