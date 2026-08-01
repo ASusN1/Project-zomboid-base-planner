@@ -22,6 +22,7 @@ const itemDatabase = {
         { name: 'Dark Oak Floor', color: '#5C4033' , type: 'floor'},
         { name: 'Pine Wood Floor', color: '#CFA66B' , type: 'floor'},
         { name: "Hardwood_Floor", color: '#8B4513', type: "floor" },
+        { name: "Oakwood_Floor", color: '#A0522D', type: "floor" },
     ],
     Furniture: [
         { name: 'Chair', color: '#8B4513' },
