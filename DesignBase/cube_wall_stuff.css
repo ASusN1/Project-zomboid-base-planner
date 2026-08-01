@@ -124,3 +124,11 @@
     transform:translateZ(var(--baseZ,0px)) rotateY(-90deg);
     border-right:2px solid #000;
 }
+
+.hide-grid-number .tile{
+    color: transparent !important;
+}
+
+.hide-grid-number .cube-top{
+    color: transparent !important;
+}
