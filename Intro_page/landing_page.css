@@ -66,6 +66,20 @@ main {
     width: 100%;
 }
 
+.example-base-design-row{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    gap:20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.example-base-design-container{
+    flex: 1;
+    max-width: 300px;
+}
+
 .example-base-design-image {
     width:100%;
     height: auto;

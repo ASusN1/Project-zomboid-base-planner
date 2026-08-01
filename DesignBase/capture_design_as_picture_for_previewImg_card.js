@@ -4,6 +4,10 @@ async function captureBaseDesingScreenShootForPreviewImgCard() {
     document.querySelector(".tools-bar").style.display = "none"; // hide tools bar
     document.querySelector(".base-design-name").style.display = "none"; // hide base design name
 
+    const was_grid_number_hidden_before_capture = window.grid_number_hidden;
+    grid.classList.add("hide-grid-number");
+
+
     const previousZoom = zoom;
     const previousOffsetX = offsetX;
     const previousOffsetY = offsetY;
@@ -37,6 +41,11 @@ async function captureBaseDesingScreenShootForPreviewImgCard() {
         document.querySelector(".tools-bar").style.display = ""; // show tools bar
         document.querySelector(".base-design-name").style.display = ""; // show base design name
 
+
+        if(!was_grid_number_hidden_before_capture){
+            grid.classList.remove("hide-grid-number");
+        }
+
         return null;
     }
     const video = document.createElement("video");
@@ -63,6 +72,10 @@ async function captureBaseDesingScreenShootForPreviewImgCard() {
     document.querySelector(".sidebar").style.display = ""; // show sidebar
     document.querySelector(".tools-bar").style.display = ""; // show tools bar
     document.querySelector(".base-design-name").style.display = ""; // show base design name
+
+    if (!was_grid_number_hidden_before_capture) {
+        grid.classList.remove("hide-grid-number");
+    }
 
     return new Promise((resolve) => {
         canvas.toBlob(blob => { resolve(blob); }, "image/png");
