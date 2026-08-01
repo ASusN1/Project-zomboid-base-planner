@@ -83,7 +83,6 @@
     top: 0;
     left: 0;
     transform-style: preserve-3d;
-    pointer-events: none; 
 }
 
 .cube-face {

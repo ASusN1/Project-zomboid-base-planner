@@ -82,7 +82,8 @@ function placeCubeOnGrid(anchorTile, item, baseZ = 0 ) {
             // Top cap lifted by wallH so it appears above tile surface
             const top = document.createElement('div');
             top.className = 'cube-top';
-            top.style.cssText = `width:${TILESIZE}px;height:${TILESIZE}px;transform:translateZ(${wallH+ baseOffsetpx}px);`;
+            top.style.setProperty("--tileSize", TILESIZE +"px");
+            top.style.setProperty("--topOffSet", (wallH + baseOffsetpx) + "px");
             applyCubeSprite(top, item.name, 'top', colorTop);
             
             // the bottom cube's top will act like a grid place cube on top 
@@ -107,17 +108,20 @@ function placeCubeOnGrid(anchorTile, item, baseZ = 0 ) {
             if (dx === 0 || dx === CubeWidthX - 1) {
                 const ns = document.createElement('div');
                 ns.className = 'cube-face-ns';
-                ns.style.cssText = `--baseZ:${baseOffsetpx}px;height:${wallH}px;`;
-                applyCubeSprite(ns, item.name, 'S', colorNS);
+                ns.style.setProperty("--baseZ", baseOffsetpx + "px");
+                ns.style.setProperty("--wallH", wallH + "px");
+                applyCubeSprite(ns, item.name, "S", colorNS);
                 t.appendChild(ns);
-                elements.push({ el: ns, parent: t });
+                elements.push({el: ns, parent: t });
             }
 
             // EW walls: front face when dy === 0, back face when dy === CubeHeightY-1
             if (dy === 0 || dy === CubeHeightY - 1) {
                 const ew = document.createElement('div');
                 ew.className = 'cube-face-ew';
-                ew.style.cssText = `--baseZ:${baseOffsetpx}px;width: ${wallH}px;height:${TILESIZE}px;`;
+                ew.style.setProperty("--baseZ", baseOffsetpx + "px");
+                ew.style.setProperty("--wallH", wallH + "px");
+                ew.style.setProperty("--tileSize", TILESIZE + "px");
                 applyCubeSprite(ew, item.name, 'E', colorEW);
                 t.appendChild(ew);
                 elements.push({ el: ew, parent: t });

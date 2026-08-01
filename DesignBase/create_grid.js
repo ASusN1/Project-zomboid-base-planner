@@ -5,17 +5,20 @@ window.size = Math.max(parseInt(gridSizeInput.value) || 12);
 if (window.size > 100) window.size = 100; 
 
 window.selectedItem = null; 
-window.currentToolusing = 'place'; // default tool is place
+window.currentToolusing = "place"; // default tool is place
 
 window.undoListItem = [];
 window.redoListItem = [];
+
+window.hiddenCubeKeys = []; 
+window.hiddenWallElements = [];
 
 function attachTileClickListener(tile) {
     tile.addEventListener('click', () => {
         const previousColor = tile.style.backgroundColor; // Store the previous color for undo
         let newColor = previousColor; // Default to previous color if no change
 
-        if (currentToolusing === 'delete') {
+        if (currentToolusing === "delete") {
             // remove the cube if exists , later must change so that it will remove the cube from highest (z = 3 ( max height)
             const tx = tile.dataset.x;
             const ty = tile.dataset.y;
@@ -41,11 +44,84 @@ function attachTileClickListener(tile) {
             const existingCube = tile.querySelector('.cube-object');
             if (existingCube) existingCube.remove();
             newColor = '';
-        } else if (currentToolusing === 'place' && selectedItem) {
-            if (selectedItem.type === 'wall') {
+
+        //Hide object 
+        }else if (currentToolusing ==="hide"){
+
+            const cubesOnTile= []
+
+            window.cubeRegistry.forEach((cubeData)=>{
+                if(cubeData.tiles.includes(tile)){
+                    cubesOnTile.push(cubeData);
+                }
+            });
+            // hide from biggest z to lowest
+            cubesOnTile.sort((a,b)=> b.z - a.z);
+
+            let cubeToHide = null;
+            for (let i = 0; i < cubesOnTile.length; i++) {
+                if(!window.hiddenCubeKeys.includes(cubesOnTile[i].key)){
+                    cubeToHide = cubesOnTile[i];
+                    break;
+                }
+            }
+            // if cube is visible --> hide it 
+            if (cubeToHide) {
+                for(let i= 0;i< cubeToHide.elements.length; i++) { 
+                    const el = cubeToHide.elements[i].el;
+                    el.style.display = 'none'; 
+                }
+                window.hiddenCubeKeys.push(cubeToHide.key);
                 return;
-            } else if (selectedItem.type === 'cube') {
+            }
+            const wallElementsOnTile = tile.querySelectorAll(".wall-face");
+
+            for (let i = 0; i< wallElementsOnTile.length; i++) {
+                const wallEl = wallElementsOnTile[i];
+
+                if(wallEl.style.display === "none") {
+                    continue; // already hidden, skip
+                }
+
+                wallEl.style.display = "none";
+                window.hiddenWallElements.push(wallEl);
+            }
+
+        // placement logic 
+        } else if (currentToolusing === "place" && selectedItem) {
+            if (selectedItem.type === "wall") {
+                return;
+            } else if (selectedItem.type === "cube") {
                 placeCubeOnGrid(tile, selectedItem);
+                return;
+            }else if (selectedItem.type === "floor") {
+                tile.dataset.floorName = selectedItem.name;
+                const floorSpritePath = window.getFloorSpritePath ? window.getFloorSpritePath(selectedItem.name) : null;
+                if (floorSpritePath) {
+                    // if sprite found
+                    tile.style.backgroundImage = `url(${floorSpritePath})`;
+                    tile.style.backgroundSize = 'cover';
+                    tile.style.backgroundColor = "";
+                }else{
+                    tile.style.backgroundImage = "none";
+                    tile.style.backgroundColor = selectedItem.color;
+                }
+                window.undoListItem.push({
+                    undo(){
+                        tile.style.backgroundColor = previousColor;
+                        tile.style.backgroundImage = previousColor ? tile.style.backgroundImage : "";
+                    },
+                    redo(){
+                        if (floorSpritePath) {
+                            tile.style.backgroundImage = `url(${floorSpritePath})`;
+                            tile.style.backgroundSize = 'cover';
+                            tile.style.backgroundColor = "";
+                        } else {
+                            tile.style.backgroundImage = "none";
+                            tile.style.backgroundColor = selectedItem.color;
+                        }
+                    }
+                });
                 return;
             }
             newColor = selectedItem.color;
@@ -93,7 +169,7 @@ function createGrid() {
     updateTransform();
 }
 
-gridSizeInput.addEventListener('change', () => { //( not complete fix yet, continue later) 
+gridSizeInput.addEventListener('change', () => {
     size = Math.max(parseInt(gridSizeInput.value) || 12);
     gridSizeInput.value = size;
     floorLayers[currentLayerIndex].gridSize = size;
@@ -101,5 +177,7 @@ gridSizeInput.addEventListener('change', () => { //( not complete fix yet, conti
     window.undoListItem = [];
     window.redoListItem = [];
     createGrid();
+    prepareWallPlacement(); 
 });
 createGrid();
+prepareWallPlacement(); 

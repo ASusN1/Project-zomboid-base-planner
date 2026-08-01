@@ -5,6 +5,7 @@
         <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
         <title>Isometric grid - </title>
         <link rel ="stylesheet" href ="style.css"> 
+        <link rel = "stylesheet" href = "cube_wall_stuff.css">
     </head>
     <body>
         <aside class ="sidebar"> 
@@ -70,10 +71,18 @@
 
                 <div class = "save-design-as-json"> 
                     <button id = "saveDesignButton" onclick="downloadBaseDesignAsJson()">Save Design as JSON</button>
-                    <button id="loadDesignButton" onclick="loadBaseDesignFromJson()">Load Design from JSON</button>
+                    <button id="loadDesignButton" onclick="loadBaseDesignFromJson()">
+                        Load Design from JSON
+                    </button>
 
-                    <button id = "saveDesignToSupabaseButton" onclick="saveCurrentBaseDesignToSupabase()">Save Design Online</button>
-                    <button id = "exportAsPictureButton" onclick = "exportBaseDesignAsPicture()">Export as Image</button>
+                    <button id = "saveDesignToSupabaseButton" onclick="saveCurrentBaseDesignToSupabase()">
+                        <img src = "../HUD_ICON/Cassette3.png" alt = "Save Design to Supabase" class = "HUD-icon-for-home-docs-infront">
+                        Save Design Online
+                    </button>
+                    <button id = "exportAsPictureButton" onclick = "exportBaseDesignAsPicture()">
+                        <img src = "../HUD_icon/CameraExpensive.png" alt = "Export Design as Picture" class = "HUD-icon-for-home-docs-infront">
+                        Export as Image
+                    </button>
                 </div>
                 
             </nav>
@@ -111,6 +120,15 @@
                 </button>
 
                 <button id = "placeDirectionButton">Place Direction:</button>
+                
+                <button id="hideObjectBtn">
+                    <img src = "../HUD_icon/not_hide.png">
+                    <span class = "tool-text" style = "display: none;">Hide Object</span>
+                </button>
+                <button id = "unhideObjectBtn">
+                    <img src = "../HUD_icon/hidden.png">
+                    <span class = "tool-text" style = "display: none;">Unhide Object</span>
+                </button>
 
         </nav>
 
@@ -152,15 +170,17 @@
 
         <script src = "itemDatabase.js"></script>
         <script src = 'CameraView.js'></script>
-        <script src = "create_grid.js"></script>
         <script src = "Wall_placement.js"></script>
         <script src = 'btn_mouse_Ui_stuff.js'></script>
         <script src = "tools_bar_function.js"></script>
         <script src = "search_bar_items_list.js"></script>
         <script src = "cube.js"></script>
+        <script src = "hide_unhide_object.js"></script>
 
         <script src = "FloorControllLayer.js"></script>
         <script src = "saveCurrentBaseDesignFor_loadExistingBaseDesign.js"></script>
+
+        <script src = "sprite_with_data/floor/floorSpriteData.js"></script>
 
         <script src = "sprite_with_data/wall/Small_Wall_data_with_spirte.js"></script>
         <script src = "sprite_with_data/wall/Meddium_Wall_data_with_spirte.js"></script>
@@ -170,7 +190,9 @@
 
         <script src = "sprite_with_data/sprite_loader/wallSpriteLoader.js"></script>
         <script src = "sprite_with_data/sprite_loader/cubeSpriteLoader.js"></script>
+        <script src = "sprite_with_data/sprite_loader/floorSpriteLoader.js"></script>
         
+        <script src = "create_grid.js"></script>
 
         <script src = "download_base_design.js"></script>
         <script src = "capture_design_as_picture_for_previewImg_card.js"></script>

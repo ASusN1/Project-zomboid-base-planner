@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Landing Page</title>
+        <link rel="stylesheet" href="../Intro_page/landing_page.css">
+    </head>
+    <body>
+        <div class = "top-bar-info-and-btn-stuff">
+            <span class = "site-logo-text">Project Zomboid Base Planner</span>
+
+            <div class = "top-bar-btns-about">
+                <button id = "aboutBtn" class = "top-bar-btn">About</button>
+            </div>
+            <div class = "top-bar-btns-sign-up-log-in">
+                <button id = "signUpBtn" class = "top-bar-btn">Sign Up</button>
+                <button id = "LogInnBtn" class = "top-bar-btn">Log In</button>
+            </div>
+
+            <div class = "try-out-project-zomboid-base-planner-btn">
+                <a href = "../DesignBase/index.html"><button id = "tryOutBtn" class = "top-bar-btn">Try Out Project Zomboid Base Planner</button></a>
+            </div>
+
+            <div class = "visit-community-design-btn">
+                <a href = "../Home/Home.html"><button id = "visitCommunityBtn" class = "top-bar-btn">Visit Community Design</button></a>
+            </div>
+        </div>
+        
+        <main>
+            <div class = "landing-page-container">
+
+                <div class = "landing-page-content">
+
+                    <!-- THREE.js container stuff -->
+                    <div class = "THREEjs-model-container">
+                        <canvas id = "THREEjs-model-canvas"></canvas>
+                    </div>
+
+                    <div class = "text-beside-THREE-model">
+                        <h1>Welcome to Project Zomboid Base Planner</h1>
+                        <p>Build the blueprint of your dream base for the post-apocalyptic world.</p>
+                        <p>Plan your base design with our easy-to-use tools and share it with the community.</p>
+                        <a href = "../DesignBase/index.html"><button id = "tryOutBtn" class = "top-bar-btn">Try Out Project Zomboid Base Planner</button></a>
+                        <a href = "../Home/Home.html"><button id = "visitCommunityBtn" class = "top-bar-btn">View someo of Community Design</button></a>
+                    </div>
+                </div>
+                
+                <div class = "Example-base-design">
+                    <h2>Example Base Design</h2>
+                    <p>stuff</p>
+                    <div class = "example-base-design-container">
+                        <img src = "../image.png" alt = "Example Base Design" class = "example-base-design-image" class = "example-base-design-image"></img>
+                        <p class ="description">This is an example of a base design created with the Project Zomboid Base Planner.</p>
+                    </div>
+
+                    <div class = "example-base-design-container">
+                        <img src = "../image.png" alt = "Example Base Design" class = "example-base-design-image" class = "example-base-design-image"></img>
+                        <p class ="description">This is an example of a base design created with the Project Zomboid Base Planner.</p>
+                    </div>
+
+                    <div class = "example-base-design-container">
+                        <img src = "../image.png" alt = "Example Base Design" class = "example-base-design-image" class = "example-base-design-image"></img>
+                        <p class ="description">This is an example of a base design created with the Project Zomboid Base Planner.</p>
+                    </div>
+                </div>
+
+                <div class = "features-section">
+                    <h2>Features</h2>
+                    <ul>
+                        <li>Live Preview: See your base design in real-time as you build it.</li>
+                        <li>Export to PNG,JPG: Export your base design as a PNG or JPG image.</li>
+                        <li>Community Design Sharing: Share your base designs with the community and explore designs created by others.</li>
+                        <li>Free to use: No cost to use the Project Zomboid Base Planne.</li>
+                        <li>Open Source: The project is open source and contributions are welcome.</li>
+                    </ul>
+                </div>
+
+                <!-- bottom section for github + support -->
+                <div class = "contact-info-and-project-github">s
+                    <div class = "github-stuff">
+                        <label>Github</label>
+                        <p>Check out the source for for PZBP.</p>
+                    </div>
+
+                    <div class = "support-stuff">
+                        <label>Support</label>
+                        <p> Read the faq</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </body>
+    <script type = "importmap">{
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+        }
+    }</script>
+
+    <script type = "module" src = "3js_helper.js"></script>
+</html>

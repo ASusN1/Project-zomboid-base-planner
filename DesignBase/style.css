@@ -45,37 +45,6 @@ body {
     cursor: pointer;
 }
 
-.tile{
-    width:60px;
-    height:60px;
-    background: url("../tiles_picture/Gras_land_square.png") center/cover no-repeat;
-    border:none;
-    outline:2px solid #fff;
-    outline-offset:-1px;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    color:aqua;
-    font-weight:bold;
-    font-size:13px;
-
-    cursor:pointer;
-    user-select: none;    
-    transform-style: preserve-3d;
-    overflow: visible;
-
-}
-
-/* Hover effect - Red border  */
-.tile:hover {
-    outline-color: red; 
-    background-color:rgba(204, 255, 205, 0.2);
-    color: blue;
-    transform: scale(1.12);
-    z-index: 10; 
-    cursor:pointer
-}
-
 /*show what inside each category */
 .item-category-content {
     height: 400px;
@@ -150,90 +119,6 @@ body {
 .change-grid_size {
     width: 100%;
     font-size:14px;
-}
-.wall-face {
-    position: absolute;
-    top:0;
-    left:0;
-    width: 100%;
-    pointer-events: none;
-    opacity:0.9;
-}
-
-.wall-direction-N {
-    top: 0; left: 0; 
-    transform-origin: 50% 0;
-    transform: rotateX(90deg);
-    border-bottom: 2px solid #000;
-}
-.wall-direction-S {
-    top: 100%; left: 0; 
-    transform-origin: 50% 0;
-    transform: rotateX(90deg);
-    border-top: 2px solid #000;
-}
-
-.wall-direction-W {
-    left: auto; right: 0; top: 0;
-    transform-origin: 100% 50%;
-    transform: rotateY(90deg);
-    border-left: 2px solid #000;
-}
-
-.wall-direction-E {
-    left: 0; top:0; 
-    transform-origin: 0 50%;
-    transform: rotateY(-90deg);
-    border-right: 2px solid #000;
-}
-
-.cube {
-    position: absolute;
-    left: 50% ; 
-    top: 50%;
-    transform-style: preserve-3d;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
-.cube-face {
-    position: absolute;
-    opacity: 0.9;
-    border: 2px solid #000;
-    box-sizing: border-box;
-    backface-visibility: hidden;
-
-}
-
-/*top face of the cube - rember to make this cube placemetn placeable on top, the total z = 3 */
-.cube-top {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform-style: preserve-3d;
-    pointer-events: auto;
-}
-.cube-face-ns {
-    position:absolute;
-    top:0; left:0;
-    width: 100%;
-    opacity: 0.9;
-    pointer-events:none;
-    transform-origin: 50% 0;
-    box-sizing: border-box;
-    transform: translateZ(var(--baseZ,0px)) rotateX(90deg);
-    border-left: 2px solid #000;
-}
-
-.cube-face-ew {
-    position:absolute;
-    left:0; top:0;
-    width:100%; /* account for the tile width */
-    pointer-events:none;
-    opacity:0.9; 
-    transform-origin: 0 50%;
-    transform:translateZ(var(--baseZ,0px)) rotateY(-90deg);
-    border-right:2px solid #000;
 }
 
 .floor-layer-changer {
@@ -410,4 +295,18 @@ body {
     font-size: 14px;
     cursor: pointer;
     text-decoration: underline;
+}
+
+.HUD-icon-for-home-docs-infront {
+    width: 96px;
+    height: 96px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.HUD-icon-for-home-docs-inline {
+    width: 64px;
+    height: 64px;
+    vertical-align: middle;
+    margin: 0 4px;
 }
