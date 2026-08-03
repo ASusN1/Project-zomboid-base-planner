@@ -29,9 +29,13 @@ for (let i = 0; i < all_tool_btn_with_previews.length; i++) {
                 videoIframe.style.display = "";
                 videoIframe.allow = "autoplay; encrypted-media";
                 tool_tooltip_video_box.appendChild(videoIframe);
-
-                tool_tooltip_text_description_for_that_tool.textContent = "text text text text text texts stuff . add more later";
             }
+            
+            const tool_description = currentToolBtn.querySelector('.tool-description-text');
+            if (tool_description) {
+                tool_tooltip_text_description_for_that_tool.innerHTML = tool_description.innerHTML;
+            }
+            
 
             const buttonRect = currentToolBtn.getBoundingClientRect();
 
