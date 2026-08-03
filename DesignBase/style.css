@@ -99,7 +99,9 @@ body {
     display: flex; 
     flex-direction: column;
     gap: 10px; 
-    left: 90%;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
     position: fixed;
     background: transparent;
 }
