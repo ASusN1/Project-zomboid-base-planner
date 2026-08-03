@@ -36,8 +36,10 @@ for (let i = 0; i < all_tool_btn_with_previews.length; i++) {
             const buttonRect = currentToolBtn.getBoundingClientRect();
 
             tool_tooltip_box.style.left = (buttonRect.left -200)+ "px";
+            tool_tooltip_box.style.top = buttonRect.top + "px";
 
             tool_tooltip_box.style.display = "flex";
+
         }, HOVER_DELAY);
     });
 
