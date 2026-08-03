@@ -102,43 +102,62 @@
         </div>
 
         <nav class = "tools-bar">
-                <button id = "rotateButton">
+                <button id = "rotateButton" class = "tool-tooltip-hover-show-tooltip" data-tool-name = "Rotate Tool" >
                     <img src = "../HUD_icon/Object_rotate_128.png">
                     <span class = "tool-text" style = "display: none;">Rotate</span>
                 </button>
 
-                <button id = "deleteButton">
+                <button id = "deleteButton" class = "tool-tooltip-hover-show-tooltip" data-tool-name = "Delete Tool">
                     <img src = "../HUD_icon/Object_delete_128_96.png">
                     <span class = "tool-text" style = "display: none;">Delete</span>
                 </button>
+
+                <iframe class = "tool-video-yt-source" data-owner = "rotateButton" src = "https://www.youtube.com/embed/NKfRo4i8ts0" style = "display: none;"></iframe>
                 
-                <button id = "undoButton">
+                <button id = "undoButton" class = "tool-tooltip-hover-show-tooltip" data-tool-name = "Undo Tool">
                     Undos
                 </button>
-                <button id = "redoButton">Redo</button>
 
-                <button id = "placeButton">
+                <iframe class = "tool-video-yt-source" data-owner = "undoButton" src = "https://www.youtube.com/embed/NKfRo4i8ts0" style = "display: none;"></iframe>
+
+                <button id = "redoButton" class = "tool-tooltip-hover-show-tooltip" data-tool-name = "Redo Tool">Redo</button>
+
+                <iframe class = "tool-video-yt-source" data-owner = "redoButton" src = "https://www.youtube.com/embed/NKfRo4i8ts0" style = "display: none;"></iframe>
+
+                <button id = "placeButton" class = "tool-tooltip-hover-show-tooltip" data-tool-name = "Place Tool">
                     <img src = "../HUD_icon/Object_place_128.png">
                     <span class = "tool-text" style = "display: none;">Place</span>
                 </button>
 
-                <button id = "placeDirectionButton">Place Direction:</button>
-                
-                <button id="hideObjectBtn">
+                <iframe class = "tool-video-yt-source" data-owner = "placeButton" src = "https://www.youtube.com/embed/NKfRo4i8ts0" style = "display: none;"></iframe>
+
+                <button id = "placeDirectionButton" class = "tool-tooltip-hover-show-tooltip" data-tool-name = "Place Direction Tool">Place Direction:</button>
+                <iframe class = "tool-video-yt-source" data-owner = "placeDirectionButton" src = "https://www.youtube.com/embed/NKfRo4i8ts0" style = "display: none;"></iframe>
+
+                <button id="hideObjectBtn" class = "tool-tooltip-hover-show-tooltip" data-tool-name = "Hide Object Tool">
                     <img src = "../HUD_icon/not_hide.png">
                     <span class = "tool-text" style = "display: none;">Hide Object</span>
                 </button>
-                <button id = "unhideObjectBtn">
+                <iframe class = "tool-video-yt-source" data-owner = "hideObjectBtn" src = "https://www.youtube.com/embed/NKfRo4i8ts0" style = "display: none;"></iframe>
+                <button id = "unhideObjectBtn" class = "tool-tooltip-hover-show-tooltip" data-tool-name = "Unhide Object Tool">
                     <img src = "../HUD_icon/hidden.png">
                     <span class = "tool-text" style = "display: none;">Unhide Object</span>
                 </button>
+                <iframe class = "tool-video-yt-source" data-owner = "unhideObjectBtn" src = "https://www.youtube.com/embed/NKfRo4i8ts0" style = "display: none;"></iframe>
 
-                <button id = "hide_grid_number_btn">
+                <button id = "hide_grid_number_btn" class = "tool-tooltip-hover-show-tooltip" data-tool-name = "Hide Grid Numbers Tool">
                     <img src = "../HUD_icon/n.png">
                     <span class = "tool-text" style = "display: none;">Hide Grid Numbers</span>
                 </button>
+                <iframe class = "tool-video-yt-source" data-owner = "hide_grid_number_btn" src = "https://www.youtube.com/embed/NKfRo4i8ts0" style = "display: none;"></iframe>
 
         </nav>
+
+        <div id = "tool-tooltip-box" class = "tool-tooltip-box">
+            <p id = "tool-tooltip-name-text" class = "tool-tooltip-name-text"></p>
+            <div id = "tool-tooltip-video-box" class = "tool-tooltip-video-box"></div>
+            <p id = "tool-tooltip-text-description-for-that-tool" class = "tool-tooltip-text-description-for-that-tool"></p>
+        </div>
 
         <div class = "login-signup-modal" id = "login-signup-modal">
             <div class = "auth-modal-box">
@@ -215,5 +234,6 @@
 
         <script src = "compress_image_for_preview.js"></script>
         <script src = "save_design_to_supabase.js"></script>
+        <script src = "tool_tooltip-preview.js"></script>
     </body>
 </html>
