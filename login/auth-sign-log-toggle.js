@@ -28,11 +28,7 @@ const authMessage = document.getElementById("authMessage");
 const signUpBtn = document.getElementById("signUpBtn");
 const loginInBtn = document.getElementById("LogInnBtn");
 
-<<<<<<< HEAD
-
-=======
 const forgot_password_link = document.getElementById("forgot-password-link");
->>>>>>> main
 
 function updateAuthModeToSignUpORLogin(){
     if (current_auth_mode === "signup") {
