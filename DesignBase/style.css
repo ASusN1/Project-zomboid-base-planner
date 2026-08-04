@@ -348,7 +348,7 @@ body {
     overflow: hidden;
 }
 
-.tool-tooltip-video-box iframe {
+.tool-tooltip-video-box video {
     width: 100%;
     height: 100%;
     border: none;
