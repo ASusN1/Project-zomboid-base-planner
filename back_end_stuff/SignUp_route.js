@@ -1,9 +1,9 @@
 const { supabaseBase } = require('./supabaseHelpers');
  
 const allowedUsernameCharacters = /^[A-Za-z0-9_]{3,20}$/;
- 
+const allowedPasswordCharacters = /^[A-Za-z0-9_]{12,25}$/;
 function registerSignupRoute(app) {
-    app.post('/auth/signup', async (req, res) => {
+    app.post("/auth/signup", async (req, res) => {
         const emailValue = req.body.email;
         const passwordValue = req.body.password;
         const usernameValue = req.body.username;
@@ -14,6 +14,14 @@ function registerSignupRoute(app) {
         }
         if (!allowedUsernameCharacters.test(usernameValue)) {
             res.status(400).json({ error: "Invalid username. Use only letters, numbers, and underscores, 3-20 characters long." });
+            return;
+        }
+        if (!passwordValue){
+            res.status(400).json({ error: "password is required" });
+            return;
+        }
+        if (!allowedPasswordCharacters.test(passwordValue)) {
+            res.status(400).json({ error: "Invalid password. Use only letters, numbers, and underscores, 12-25 characters long." });
             return;
         }
  
