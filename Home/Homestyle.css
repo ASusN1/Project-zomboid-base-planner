@@ -451,7 +451,7 @@ css.side-bar-buttons-container {
 #forgot-password-link {
     font-size:12px;
     color:  black;
-    cursor: default;
+    cursor: pointer;
 }
 
 #auth-submit-btn{
