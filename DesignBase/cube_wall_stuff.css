@@ -102,7 +102,7 @@
 }
 .cube-face-ns {
     position:absolute;
-    top:0; left:0;
+    top:100%; left:0;
     width: 100%;
     height: var(--wallH);
     opacity: 0.9;
