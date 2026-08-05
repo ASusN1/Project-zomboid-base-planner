@@ -1,4 +1,4 @@
-const { supabaseBase } = require('./supabaseHelpers');
+const {supabaseBase} = require("./Supabasehelpers");
 
 function registerLoginRoute(app) {
     app.post('/auth/login', async (req, res) => {

@@ -1,6 +1,6 @@
 const requireLoggedInUser = require('./requireLoggedInUser');
-const { buildSupabaseClientForUser } = require('./supabaseHelpers');
-const upload = require('./multerHelper');
+const {buildSupabaseClientForUser} = require("./Supabasehelpers");
+const {upload} = require("./Multerhelper");
 
 function registerUploadPreviewRoute(app) {
     app.post('/upload-preview', requireLoggedInUser, upload.single('previewImage'), async (req, res) => {

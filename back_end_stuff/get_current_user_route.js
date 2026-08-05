@@ -1,10 +1,10 @@
 const requireLoggedINUser = require("./requireLoggedInUser");
-const {buildSupabaseCleintForUser} = require("./supabaseHelpers");
+const {buildSupabaseClientForUser} = require("./Supabasehelpers");
 
 function registerGetCurrentUserRoute(app) {
-    app.get("auth/me", requireLoggedINUser, async (req, res) => {
-        const user = req.vertifiedUser;
-        const supabaseForThisUser = buildSupabaseCleintForUser(req.userAccessToken);
+    app.get("/auth/me", requireLoggedINUser, async (req, res) => {
+        const user = req.verifiedUser;
+        const supabaseForThisUser = buildSupabaseClientForUser(req.userAccessToken);
 
         const profileResult = await supabaseForThisUser
             .from("profiles")

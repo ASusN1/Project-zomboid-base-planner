@@ -47,3 +47,5 @@ function registerSignupRoute(app) {
         res.status(200).json({ message: 'Account created successfully. Please check your email to confirm your account.' });
     });
 }
+
+module.exports = registerSignupRoute;

@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const requireLoggedInUser = require('./requireLoggedInUser');
-const { buildSupabaseClientForUser } = require('./supabaseHelpers');
-const upload = require('./multerHelper');
+const { buildSupabaseClientForUser } = require("./supabaseHelpers");
+const {upload} = require("./MulterHelper");
 
 function registerSaveDesignRoute(app) {
     app.post('/designs/save', requireLoggedInUser, upload.single('previewImage'), async (req, res) => {

@@ -1,9 +1,4 @@
-const { createClient } = require("./Supabasehelpers");
-
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
-const supabasePublic = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
+const {supabasebAse} = require("./Supabasehelpers");
 //checks that the request has a valid logged in user before letting it continue
 async function requireLoggedInUser(req, res, next) {
     // read the Authorization header sent from the frontend, example: "Bearer abc123"
@@ -23,7 +18,7 @@ async function requireLoggedInUser(req, res, next) {
     }
     const userToken = headerParts[1];
     // ask supabase who this token belongs to
-    const userResult = await supabasePublic.auth.getUser(userToken);
+    const userResult = await supabaseBase.auth.getUser(userToken);
     const user = userResult.data.user;
     const error = userResult.error;
 
@@ -33,11 +28,8 @@ async function requireLoggedInUser(req, res, next) {
         res.status(401).json({ error: 'Invalid or expired login token' });
         return;
     }
-    // attach the verified user onto the request object so later routes can use it
     req.verifiedUser = user;
-    // attach the raw token so routes can use it to act as this exact user
     req.userAccessToken = userToken;
-    // let the request continue on to the actual route
     next();
 }
 module.exports = requireLoggedInUser;
