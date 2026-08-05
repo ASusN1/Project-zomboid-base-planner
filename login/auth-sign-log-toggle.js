@@ -152,25 +152,7 @@ login_form.addEventListener("submit", async (event) => {
     }
 });
 
-forgot_password_link.addEventListener("click", async (event) => {
-    const emailValue = email_input.value;
-
-    if(!emailValue) {
-        authMessage.textContent = "Please enter your email address to reset your password.";
-        return;
-    }
-    authMessage.textContent = "sent rest email, please check your email inbox and spam folder.";
-
-
-    const resetResult = await window.sb.auth.resetPasswordForEmail(emailValue, {
-        redirectTo: window.location.origin + "/Project-zomboid-base-planner/ResetPassword/reset_password.html"
-    });
-
-    const resetError = resetResult.error;
-
-    if (resetError) {
-        authMessage.textContent = resetError.message;
-        return;
-    }
-    authMessage.textContent = "password reset email sent , check your inbox";
-});
+forgot_password_link.addEventListener("click", ()=>{
+    closeAuthModal();
+    window.location.href = "../resetPassword/reset_password.html";
+}) 
