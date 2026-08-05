@@ -19,6 +19,7 @@ console.log('Server will run on port ' + PORT);
 
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN;
 const app = express();
+const rateLimit = require("express-rate-limit");
 
 app.use(cors({origin: FRONTEND_ORIGIN, credentials: true})); // allow front end to connect with backend
 app.use(express.json({limit: "50kb"})); // allow json body in requests, limit to 50kb

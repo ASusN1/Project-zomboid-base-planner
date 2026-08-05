@@ -1,4 +1,4 @@
-const { supabaseBase } = require("../supabaseHelpers");
+const { supabaseBase } = require("./Supabasehelpers");
 
 function registerListCommunityDesignsRoute(app) {
     app.get("/community/list", async (req, res) => {
