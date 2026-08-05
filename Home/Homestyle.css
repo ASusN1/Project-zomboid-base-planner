@@ -558,3 +558,11 @@ css.side-bar-buttons-container {
     vertical-align: middle;
     margin-right: 8px;
 }
+
+.doc-tool-video {
+    width: 400px;
+    height: 250px;
+    display: block;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+}

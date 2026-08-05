@@ -102,7 +102,7 @@
 }
 .cube-face-ns {
     position:absolute;
-    top:0; left:0;
+    top:100%; left:0;
     width: 100%;
     height: var(--wallH);
     opacity: 0.9;
@@ -115,14 +115,14 @@
 
 .cube-face-ew {
     position:absolute;
-    left:0; top:0;
+    left:auto; right:0; top:0;
     width:var(--wallH);
     height:var(--tileSize);
     pointer-events:none;
     opacity:0.9; 
-    transform-origin: 0 50%;
-    transform:translateZ(var(--baseZ,0px)) rotateY(-90deg);
-    border-right:2px solid #000;
+    transform-origin: 100% 50%;
+    transform:translateZ(var(--baseZ,0px)) rotateY(90deg);
+    border-left:2px solid #000;
 }
 
 .hide-grid-number .tile{
