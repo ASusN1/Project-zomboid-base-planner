@@ -24,10 +24,10 @@ let currentWallDirection = direction_of_wall_tile.N; // default wall direction
 function createWallTile(color, direction_of_wall_tile,height, name) {
     const wall = document.createElement("div");
     wall.classList.add('wall-face', 'wall-direction-' + direction_of_wall_tile);
-    wall.style.backgroundColor = color; // still keep if no sprite yet
     wall.dataset.itemName = name;
 
     const spritePath = getWallSpritePath(height, name, direction_of_wall_tile);
+    wall.style.backgroundColor = spritePath ? "transparent" : color; // only set background color if no sprite is found
 
     if (spritePath) { 
         wall.style.backgroundImage = `url(${spritePath})`;
