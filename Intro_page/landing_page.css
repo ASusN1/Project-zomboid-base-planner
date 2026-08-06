@@ -11,6 +11,11 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    background-image: url("project-zomboid.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .top-bar-info-and-btn-stuff {
@@ -19,6 +24,7 @@ body {
     align-items: center;
     padding: 10px 40px; 
     border-bottom: 2px solid #000; 
+    background-color: white;
 }
 
 main {
@@ -48,6 +54,7 @@ main {
 .THREEjs-model-container {
     border: 2px solid #000; 
     flex: 2; 
+    background-color: white;
 }
 
 #THREEjs-model-canvas {
@@ -60,10 +67,13 @@ main {
     border: 2px solid #000;
     padding: 15px;
     flex: 1;
+    background-color: white;
 }
 
 .Example-base-design{
     width: 100%;
+    background-color: white;
+    padding: 20px;
 }
 
 .example-base-design-row{
@@ -92,4 +102,12 @@ main {
     gap: 40px;
     padding-top: 15px;
     border-top: 2px solid #000;
+
+    background-color: white;
+    padding: 20px;
+}
+
+.features-section {
+    background-color: white;
+    padding: 20px;
 }
