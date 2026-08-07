@@ -1,0 +1,1 @@
+window.BACKEND_URL = "https://project-zomboid-base-planner.vercel.app"; 
