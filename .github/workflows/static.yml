@@ -31,20 +31,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-
-      - name: Generate supabase_client.js from secrets 
-        run: |
-          mkdir -p sb_stuff
-          cat <<EOF > sb_stuff/supabase_client.js
-          import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
-            const SUPABASE_URL = '${{ secrets.SUPABASE_URL }}';
-            const SUPABASE_ANON_KEY = '${{ secrets.SUPABASE_ANON_KEY }}';
-            const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            window.sb = sb;
-          EOF
-
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
