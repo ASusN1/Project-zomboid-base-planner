@@ -1,4 +1,4 @@
-const {supabasebAse} = require("./Supabasehelpers");
+const { supabaseBase } = require("./Supabasehelpers")
 //checks that the request has a valid logged in user before letting it continue
 async function requireLoggedInUser(req, res, next) {
     // read the Authorization header sent from the frontend, example: "Bearer abc123"

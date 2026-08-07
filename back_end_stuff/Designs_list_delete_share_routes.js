@@ -5,13 +5,13 @@ const { buildSupabaseClientForUser } = require("./Supabasehelpers");
 //get the dsign list -> for user loggd in 
 function registerListDesignsRoute(app) {
     app.get("/designs/List", requireLoggedInUser, async (req, res) => {
-        const userId = req.vertifiedUser.id;
-        const supabaseForThisUser = buildSupabaseClientForUser(req.userAcesssToken);
+        const userId = req.verifiedUser.id;
+        const supabaseForThisUser = buildSupabaseClientForUser(req.userAccessToken);
         const queryResult = await supabaseForThisUser
             .from("designs")
             .select("id, name, updated_at, design_data, preview_url")
             .eq("user_id", userId)
-            .or("is_public.is.null, is_public.eq.false")
+            .or("is_public.is.null,is_public.eq.false")
         
         if(queryResult.error) {
             res.status(500).json({error: queryResult.error.message});
@@ -33,25 +33,25 @@ function registerListDesignsRoute(app) {
         for (let i = 0; i< publicCopiesResult.data.length; i++) {
             shareDesignIds.push(publicCopiesResult.data[i].source_design_id);
         }
-        res.status(200).json({designs: queryresult.data, sharedDesignIds: shareDesignIds});
+        res.status(200).json({designs: queryResult.data, sharedDesignIds: shareDesignIds});
     })
 }
 function registerDeleteDesignsRoute(app) {
-    app.post("designs/delete", requireLoggedInUser, async (req,res)=>{
-        const userId = req.vertifiedUser.id;
-        const idsTodDelete = red.body.designsIds;
+    app.post("/designs/delete", requireLoggedInUser, async (req,res)=>{
+        const userId = req.verifiedUser.id;
+        const idsToDelete = red.body.designsIds;
 
         if (!idsTodelete|| idsToDelete.length === 0) {
             res.status(400).json({error: "No design ids provided for deletion"});
             return;
         }
-        const supabaseForThisUSer = buildSupabaseClientForUser(req.userAcesssToken);
+        const supabaseForThisUSer = buildSupabaseClientForUser(req.userAccessToken);
         const previewPathsToDelete = [];
         for(let i =0; i < idsToDelete.length; i++){
             previewPathsToDelete.push(userId + "/" + idsToDelete[i] + ".jpg");
         }
 
-        const storageDeleteResult = await supabaseForThisUSer.storageDeleteResult
+        const storageDeleteResult = await await supabaseForThisUser.storage
             .from("design-preview-card-picture")
             .remove(previewPathsToDelete);
 

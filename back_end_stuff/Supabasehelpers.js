@@ -5,15 +5,15 @@ const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 
 const supabaseBase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-function buildSupabaseCleintForUser(userAccessToken) {
+function buildSupabaseClientForUser(userAccessToken) {
     const clientForThisUser = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
         global: {
             headers: {
-                Authorization: `Bearer ${userAccessToken}`,
+                Authorization: "Bearer " + userAccessToken,
             },
         },
     });
     return clientForThisUser;
 }
 
-module.exports = { supabaseBase, buildSupabaseCleintForUser };
+module.exports = { supabaseBase, buildSupabaseClientForUser };
