@@ -2,7 +2,7 @@
 
 <br/>
 <div align="center">
-    <img src="image.png" alt="Banner" width="100%">
+    <img src="banner.png" alt="Banner" width="100%">
     <h3 align="center">Project Zomboid Base Planner</h3>
     <p align="center">
         This is a fan-made, web-based base creator to create the blueprint of your future base
@@ -120,19 +120,19 @@ Other features:
 
 **Landing Page**
 
-<img src="image.png" alt="Landing page screenshot" width="100%">
+<img src="../Project-zomboid-base-planner/landing_page_preview.png" alt="Landing page screenshot" width="100%">
 
 **Base Builder**
 
-<img src="image.png" alt="Base builder screenshot" width="100%">
+<img src="../Project-zomboid-base-planner/baseDesign_preview.png" alt="Base builder screenshot" width="100%">
 
 **Home Page - Your Designs**
 
-<img src="image.png" alt="Home page your designs screenshot" width="100%">
+<img src="../Project-zomboid-base-planner/Home_preview.png" alt="Home page your designs screenshot" width="100%">
 
 **Home Page - Community Designs**
 
-<img src="image.png" alt="Home page community designs screenshot" width="100%">
+<img src="../Project-zomboid-base-planner/home_community_preview.png" alt="Home page community designs screenshot" width="100%">
 
 <p align="right">(<a href="#readme-top">top</a>)</p>
 
