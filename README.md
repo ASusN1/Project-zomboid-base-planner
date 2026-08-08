@@ -155,11 +155,36 @@ This is the part for whoever wants to contribute to this project.
 <p align="right">(<a href="#readme-top">top</a>)</p>
 
 ## Installation
+## Built Using
+
+* JavaScript (vanilla, no framework) - Grid editor and UI logic
+* HTML5 / CSS3 - Structure and isometric 3D transforms
+* [Node.js](https://nodejs.org/) / [Express](https://expressjs.com/) - Backend API
+* [Supabase](https://supabase.com/) - Auth, database, and storage
+* [Vercel](https://vercel.com/) - Backend hosting
+* [GitHub Pages](https://pages.github.com/) - Frontend hosting
+* [Three.js](https://threejs.org/) - 3D model viewer on the landing page
+
+<p align="right">(<a href="#readme-top">top</a>)</p>
+
+## Installation
 
 **Prerequisites:**
-- Any web browser
-- Node.js (for the backend)
-- Python (for local frontend testing)
+- Node.js v18 or higher
+- npm (comes with Node.js)
+- Python 3.x (only needed to serve the frontend locally)
+- A free [Supabase](https://supabase.com/) project (for your own database/auth during development)
+
+**Backend dependencies** (installed automatically via `npm install`, listed here for reference):
+
+| Package | Purpose |
+|---|---|
+| `express` | Web server / API routing |
+| `@supabase/supabase-js` | Supabase client for auth, database, and storage |
+| `cors` | Allows the frontend origin to call the backend |
+| `dotenv` | Loads environment variables from `.env` |
+| `multer` | Handles preview image uploads |
+| `express-rate-limit` | Rate limits incoming requests |
 
 **Run the front end**
 
@@ -176,6 +201,7 @@ This is the part for whoever wants to contribute to this project.
 ```
    http://localhost:8000
 ```
+Always use `http://`, not `file://` — Supabase calls and `fetch()` will not work otherwise.
 
 **Running the backend:**
 
@@ -188,6 +214,13 @@ This is the part for whoever wants to contribute to this project.
    npm install
 ```
 3. Create a `.env` file in `back_end_stuff/` with your own Supabase keys
+
+| Variable | Description |
+|---|---|
+| `SUPABASE_URL` | Your Supabase project URL |
+| `SUPABASE_ANON_KEY` | Your Supabase anon/public API key |
+| `FRONTEND_ORIGIN` | The origin allowed to call the backend (e.g. `http://localhost:8000`) |
+
 ```
    SUPABASE_URL=your_supabase_project_url
    SUPABASE_ANON_KEY=your_supabase_anon_key
@@ -197,6 +230,9 @@ This is the part for whoever wants to contribute to this project.
 ```sh
    node server.js
 ```
+5. Confirm it's running by opening `http://localhost:3000` in your browser — you should see `PZ base planner running`.
+
+**Running both together:** keep two terminals open — one serving the frontend on port 8000, one running the backend on port 3000. The frontend's `backend_config.js` should point at `http://localhost:3000` for local development.
 
 <p align="right">(<a href="#readme-top">top</a>)</p>
 
