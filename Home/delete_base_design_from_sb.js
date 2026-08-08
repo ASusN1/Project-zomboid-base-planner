@@ -69,35 +69,21 @@ cancelDeleteBtn.addEventListener('click', () => {
     deleteConfirmation.style.display = 'none';
 });
 
-confirmDeleteBtn.addEventListener('click', async () => {
+confirmDeleteBtn.addEventListener("click", async () => {
+    deleteConfirmation.style.display = "none";
 
-    deleteConfirmation.style.display = 'none';
+    const idsToDelete = Array.from(selectedDesignIds); // the ids the user checked off
 
-    const idsToDelete = Array.from(selectedDesignIds);
+    const deleteResponse = await fetch(window.BACKEND_URL + "/designs/delete", {
+        method: "POST",
+        headers: Object.assign({ "Content-Type": "application/json" }, getAuthHeader()), // json body plus the bearer token
+        body: JSON.stringify({ designsIds: idsToDelete }),
+    });
 
-    const userResult = await window.sb.auth.getUser(); //get cureernt user 
-    const user = userResult.data.user;
+    const deleteResult = await deleteResponse.json(); // read the backend's response
 
-    const previewPathsToDelete = idsToDelete.map(id => user.id + "/" + id + ".jpg");
-
-    const storageDeleteResult = await window.sb.storage
-        .from('design-preview-card-picture')
-        .remove(previewPathsToDelete);
-    
-
-    if (storageDeleteResult.error) {
-        console.error('Error deleting preview images:', storageDeleteResult.error.message);
-    }
-
-    const deleteResult = await window.sb
-        .from('designs')
-        .delete()
-        .in('id', idsToDelete);
-
-    const error = deleteResult.error;
-
-    if (error) {
-        console.error('Error deleting designs:', error.message);
+    if (!deleteResponse.ok) {
+        console.error("Error deleting designs: " + deleteResult.error);
         return;
     }
 
@@ -107,6 +93,7 @@ confirmDeleteBtn.addEventListener('click', async () => {
             cardToRemove.remove();
         }
     });
+
     resetSelectMode();
-    console.log("Delete flow complete"); 
+    console.log("Delete flow complete");
 });

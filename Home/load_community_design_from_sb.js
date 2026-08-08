@@ -40,26 +40,19 @@ function buildCommunityDesignCard(designRow, author_user_name) {
 }
 
 async function loadCOmmunityDesignsFromSupabase() {
-    //get the public desing + author name 
-    const queryResult = await window.sb
-        .from("designs")
-        .select("id, name, design_data,preview_url, user_id, profiles(username)")
-        .eq("is_public", true) // only community designs
-        .order("updated_at", { ascending: false }); // newest first 
-    
-    const rows= queryResult.data;
-    const error = queryResult.error;
+    const listResponse = await fetch(window.BACKEND_URL + "/community/list");
+    const listResult = await listResposnse.json();
 
-    if (error) {
-        console.error("Error loading community designs:", error);
-        return; 
+    if(!listResponse.ok) {
+        console.error("Error loading community designs: " + listResult.error);
+        return;
     }
 
-    communityCardRowContainer.innerHTML = ""; // clear previous content
-
-    for(let i = 0 ; i< rows.length; i++) {
-        const designRow = rows[i];
-        const author_user_name = designRow.profiles && designRow.profiles.username;
+    communityCardRowContainer.innerHTML = "";
+    
+    for (let i = 0; i < listResult.designs.length; i++) {
+        const designRow = listResult.designs[i];
+        const author_user_name =  designRow.profiles && designRow.profiles.username;
         const cardEl = buildCommunityDesignCard(designRow, author_user_name);
         communityCardRowContainer.appendChild(cardEl);
     }

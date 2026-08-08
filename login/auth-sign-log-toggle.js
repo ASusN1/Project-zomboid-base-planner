@@ -109,7 +109,7 @@ swith_to_signup_btn.addEventListener("click", () => {
 });
 
 login_form.addEventListener("submit", async (event) => {
-    event.preventDefault();
+    event.preventDefault(); 
 
     const emailValue = email_input.value;
     const passwordValue = password_input.value;
@@ -117,34 +117,40 @@ login_form.addEventListener("submit", async (event) => {
     if (current_auth_mode === "signup") {
         authMessage.textContent = "Creating account...";
 
-        const signUpResult = await window.sb.auth.signUp({
-            email: emailValue,
-            password: passwordValue
+        const usernameValue = user_name_input.value; 
+
+        const signUpResponse = await fetch(window.BACKEND_URL + "/auth/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" }, 
+            body: JSON.stringify({ email: emailValue, password: passwordValue, username: usernameValue }),
         });
 
-        const signUpError = signUpResult.error;
+        const signUpData = await signUpResponse.json(); 
 
-        if (signUpError) {
-            authMessage.textContent = signUpError.message;
+        if (!signUpResponse.ok) {
+            authMessage.textContent = signUpData.error; 
             return;
         }
 
-        authMessage.textContent = "Account created successfully. Please check your email to confirm your account.";
+        authMessage.textContent = signUpData.message; // "please check your email" message from the backend
 
     } else {
         authMessage.textContent = "Logging in...";
 
-        const loginResult = await window.sb.auth.signInWithPassword({
-            email: emailValue,
-            password: passwordValue
+        const loginResponse = await fetch(window.BACKEND_URL + "/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: emailValue, password: passwordValue }),
         });
 
-        const loginError = loginResult.error;
+        const loginData = await loginResponse.json();
 
-        if (loginError) {
-            authMessage.textContent = loginError.message;
+        if (!loginResponse.ok) { 
+            authMessage.textContent = loginData.error; 
             return;
         }
+
+        saveAuthTokens(loginData.access_token, loginData.refresh_token);
 
         authMessage.textContent = "Login successful";
         closeAuthModal();

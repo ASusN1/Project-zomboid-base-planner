@@ -41,76 +41,50 @@ async function saveDesignToSupabase() {
 
  //upload/udpate current base design to sp 
  async function saveCurrentBaseDesignToSupabase() { 
-    const userResult = await window.sb.auth.getUser();
-    const user = userResult.data.user;
-    const userError = userResult.error;
-    console.log(userResult);
-
+    const storedToken = getStoredAccessToken();
     
-    if (userError || !user) { // if user not logged in
-        alert("You are browing as a guest. Sign up or log in to save your design online");
+    if (!storedToken) {
+        alert("You must be logged in to save your base design to the cloud.");
         return;
     }
     const saveData = await saveDesignToSupabase();
-
     const NameForBase = document.getElementById("designBaseName");
     let projectId = NameForBase.dataset.projectId;
 
-    if (!projectId) { // if no projectId, create new design
-        projectId = crypto.randomUUID(); // generate new projectId
-        NameForBase.dataset.projectId = projectId; 
+    if (!projectId) {
+        projectId = crypto.randomUUID();
+        NameForBase.dataset.projectId = projectId;
     }
 
-    const rawScreenshotBlob = await window.captureBaseDesingScreenShootForPreviewImgCard(); // capture screenshot of the design for preview image
-    
-    if(!rawScreenshotBlob){
-        alert("save stop: you must allow screen sharing to capture the design preview image. Please try again and allow screen sharing.");
+    const rawScreenshotBlob = await window.captureBaseDesingScreenShootForPreviewImgCard();
+
+    if(!rawScreenshotBlob) {
+        alert("save process stopped, you myst allow screen sharing to capture the design preview image.");
         return;
     }
-    const screenshotBlob = await window.compressImageForPreview(rawScreenshotBlob); // compress the screenshot for preview image
 
-   const previewPath = user.id + "/" + projectId + ".jpg"  // path to save the preview image in Supabase storage
+    const screenshotBlob = await window.compressImageForPreview(rawScreenshotBlob);
 
-    const uploadResult = await window.sb.storage
-    .from('design-preview-card-picture')
-    .upload(previewPath, screenshotBlob, { upsert: true, contentType: 'image/jpeg' });
-    console.log("uploadResult:", uploadResult);
+    const formData = new FormData();
+    formData.append("previewImage", screenshotBlob, "preview.jpg");
+    formData.append("designName", saveData.designName);
+    formData.append("projectId", projectId);
+    formData.append("designData", JSON.stringify(saveData));
 
-    const uploadError = uploadResult.error; // pull error from result
+    const saveResponse = await fetch(window.BACKEND_URL + "/designs/save", {
+        method: "POST",
+        headers: getAuthHeader(),
+        body: formData
+    });
 
-    if ( uploadError ) {
-        alert("Error getting the image for preview: " + uploadError.message);
-        return; 
+    const saveResult = await saveResponse.json();
+
+    if(!saveResponse.ok) {
+        alert("Failed to save design: " + saveResult.error);
+        return;
     }
-
-    const publicUrlResult = window.sb.storage
-        .from('design-preview-card-picture')
-        .getPublicUrl(previewPath);
-
-    const timestampForNewPreviewImage = Date.now();
-    const previewUrl = publicUrlResult.data.publicUrl + "?t=" + timestampForNewPreviewImage; // get the public URL of the uploaded image
-
-    const rowToSave= { 
-        id: projectId,
-        user_id: user.id,
-        name: saveData.designName,
-        design_data: saveData,
-        preview_url: previewUrl
-    };
-
-    const upsetResult = await window.sb
-        .from('designs')
-        .upsert(rowToSave, { onConflict: 'id' });
-    
-    const data = upsetResult.data; // get retured data from result 
-    const error = upsetResult.error; // pull error from result
-
-    if (error) {
-        alert("Error saving design to the cloud: " + error.message);
-        return; 
-    } 
-
-    alert("Design saved to the cloud successfully!");
+    NameForBase.dataset.projectId  = saveResult.projectId;
+    alert("Design saved successfully!");
  }
 window.saveDesignToSupabase = saveDesignToSupabase;
 window.saveCurrentBaseDesignToSupabase = saveCurrentBaseDesignToSupabase;

@@ -85,54 +85,37 @@ function buildCardFromDesignData(designRow, isAlreadyShared) {
 }
 
 async function loadBaseDesignsFromSupabase() {
-    const userResult = await window.sb.auth.getUser();
+    const storedToken = getStoredAccessToken(); // check if logged in
 
-    const user = userResult.data.user;
-    if (!user) { 
-        console.error("User not authenticated. Please log in.");
-        return;
-
-    } 
-    const queryResult = await window.sb
-    .from('designs')
-    .select("id, name, updated_at, design_data, preview_url")
-
-    .eq('user_id', user.id) // only pull the base designs for the current user
-    .or("is_public.is.null, is_public.eq.false") // dont show the public version in "your design" only in community designs
-
-    .order("updated_at", { ascending: false }); // order by most recently updated first
-
-    const row = queryResult.data;
-    const error = queryResult.error;
-
-    if (error) {
-        console.error("Error fetching base designs from Supabase:", error.message);
+    if (!storedToken) {
+        console.log("User not authenticated. Please log in.");
         return;
     }
-    // check if any of the designs are already shared to community
-    const publicCopiesResult = await window.sb
-    .from('designs')
-    .select("source_design_id")
-    .eq("user_id", user.id)
-    .eq("is_public", true);
 
-    const publicCopiesRow = publicCopiesResult.data  || [];
-
-    const shareDesignIds = new Set();
-    publicCopiesRow.forEach(publicRow => {
-        shareDesignIds.add(publicRow.source_design_id);
-    })
-
-    cardRowContainer.querySelectorAll('.card-design.cloud-card').forEach(el => el.remove()); // clear old cloud cards 
-
-    const addNewCardEl = document.getElementById("addNewCardButton") ; 
-
-    row.forEach(designRow => { 
-        const isAlreadyShared = shareDesignIds.has(designRow.id);//check if this desgin has public copy
-        const cardEl = buildCardFromDesignData(designRow, isAlreadyShared);
-        cardEl.classList.add('cloud-card');
-         cardRowContainer.insertBefore(cardEl, addNewCardEl);
+    const listResponse = await fetch(window.BACKEND_URL + "/designs/List", {
+        headers: getAuthHeader(), // attach the bearer token
     });
-    console.log("Base designs loaded successfully from Supabase.");
+
+    const listResult = await listResponse.json(); // { designs, sharedDesignIds }
+
+    if (!listResponse.ok) {
+        console.error("Error fetching base designs: " + listResult.error);
+        return;
+    }
+
+    const shareDesignIds = new Set(listResult.sharedDesignIds); // quick lookup of which designs are already shared
+
+    cardRowContainer.querySelectorAll(".card-design.cloud-card").forEach(el => el.remove()); // clear old cards
+
+    const addNewCardEl = document.getElementById("addNewCardButton");
+
+    listResult.designs.forEach(designRow => {
+        const isAlreadyShared = shareDesignIds.has(designRow.id);
+        const cardEl = buildCardFromDesignData(designRow, isAlreadyShared);
+        cardEl.classList.add("cloud-card");
+        cardRowContainer.insertBefore(cardEl, addNewCardEl);
+    });
+
+    console.log("Base designs loaded successfully.");
 }
 window.addEventListener("load", loadBaseDesignsFromSupabase);
