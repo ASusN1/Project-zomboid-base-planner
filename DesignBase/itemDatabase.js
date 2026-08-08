@@ -6,6 +6,11 @@ const itemDatabase = {
         { name: 'Wood_Wall_level_3', color: '#8B4513' , type: 'wall', height: 'large'},
         { name: "Metal Wall", color: "gray", type: "wall", height: "large" },
         { name:"Metal_Wall_Frame", color: "darkgray", type: "wall", height: "large" },
+        { name: "Log_Wall", color: "#A0522D", type: "wall", height: "large" },
+        { name : "Metal_Window_Level_1", color: "lightgray", type: "wall", height: "Large" },
+        { name: "Metal_Window_Level_2", color: "lightgray", type: "wall", height: "Large" },
+        { name: "Wooden_Wall_Level_1", color: "#DEB887", type: "wall", height: "Large" },
+        { name: "Wooden_Window_Frame_Level_1", color: "#DEB887", type: "wall", height: "Large" },
     ],
     Floors: [
         { name: 'Wooden Floor', color: '#DEB887' , type: 'floor'},

@@ -19,6 +19,7 @@ const large_wall_sprite_data = [
             "S":"../tile/Wall/large_Wall/Metal_wall.png",
             "W":"../tile/Wall/large_Wall/Metal_wall-EW.png"
         },
+
         name: "Metal_Wall_Frame",
         type: "wall",
         height: "large",
