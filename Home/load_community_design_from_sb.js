@@ -41,7 +41,7 @@ function buildCommunityDesignCard(designRow, author_user_name) {
 
 async function loadCOmmunityDesignsFromSupabase() {
     const listResponse = await fetch(window.BACKEND_URL + "/community/list");
-    const listResult = await listResposnse.json();
+    const listResult = await listResponse.json();
 
     if(!listResponse.ok) {
         console.error("Error loading community designs: " + listResult.error);
