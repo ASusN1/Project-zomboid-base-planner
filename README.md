@@ -71,24 +71,24 @@ This section is a guide for anyone who just wants to use Project Zomboid Base Pl
    <img src="image.png">
 
 2. Upon opening the base builder, you will see the base creator. To actually build your own base, make sure the "Place Tool" is selected (shortcut is `P`) — it is on by default. Select an object from any of the item categories, then hover over the isometric grid and start placing objects.
-
-   - **Delete:** Hover over the object you want to delete, then click on it (shortcut is `D`)
-   <img src="image.png">
+- **Delete:** Hover over the object you want to delete, then click on it (shortcut is `D`)
+   <img src="HUD_icon/Object_delete_128_96.png" width="40" height="40">
    - **Hide:** Press the hide object button, or shortcut `H`.
-   <img src="image.png">
+   <img src="HUD_icon/not_hide.png" width="40" height="40">
    - **Unhide All:** Press `Alt + H`.
-   <img src="image.png">
+   <img src="HUD_icon/hidden.png" width="40" height="40">
    - **Rotate:** Press the rotate button, then hover over the object you want to rotate — it will rotate 90 degrees clockwise each time.
-   <img src="image.png">
+   <img src="HUD_icon/Object_rotate_128.png" width="40" height="40">
    - **Switch Floor:** Use the floor layer panel to add, delete, or switch between multiple floors.
    <img src="image.png">
    - **Capture Design:** Press the "capture base design as picture" button (camera icon). This will ask you to allow permission to share your screen for the download to work.
-   <img src="image.png">
-   - **Save Online:** You need to create an account or sign in with an existing account. If it's your first time, use the Sign Up button — this will show a modal walking you through account creation.
+   <img src="HUD_icon/CameraExpensive.png" width="40" height="40">
+   - **Save Online:** You need to create an account or sign in with an existing account. If it's your first time, use the Sign Up button this will show a modal walking you through account creation.
+   <img src = "HUD_icon\Cassette3.png" width="40" height="40"> 
    - **Share Online:** Requires an account. Press "Share to Community" to share your design with other people.
    <img src="image.png">
    - **Preview Community Designs:** Press "Community Design" and click on an item card. This shows a modal preview of that design, where you can hide and unhide objects but cannot edit it.
-   <img src="image.png">
+   <img src="home_community_preview.png">
 
 <p align="right">(<a href="#readme-top">top</a>)</p>
 
