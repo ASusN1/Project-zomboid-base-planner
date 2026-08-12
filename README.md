@@ -120,19 +120,19 @@ Other features:
 
 **Landing Page**
 
-<img src="../Project-zomboid-base-planner/landing_page_preview.png" alt="Landing page screenshot" width="100%">
+<img src="landing_page_preview.png" alt="Landing page screenshot" width="100%">
 
 **Base Builder**
 
-<img src="../Project-zomboid-base-planner/baseDesign_preview.png" alt="Base builder screenshot" width="100%">
+<img src="baseDesign_preview.png" alt="Base builder screenshot" width="100%">
 
 **Home Page - Your Designs**
 
-<img src="../Project-zomboid-base-planner/Home_preview.png" alt="Home page your designs screenshot" width="100%">
+<img src="Home_preview.png" alt="Home page your designs screenshot" width="100%">
 
 **Home Page - Community Designs**
 
-<img src="../Project-zomboid-base-planner/home_community_preview.png" alt="Home page community designs screenshot" width="100%">
+<img src="home_community_preview.png" alt="Home page community designs screenshot" width="100%">
 
 <p align="right">(<a href="#readme-top">top</a>)</p>
 
